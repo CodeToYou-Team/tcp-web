@@ -18,7 +18,7 @@ export default function AppNavbar() {
   const menuItems = [
     { text: "Inicio", route: "/" },
     { text: "Catálogo", route: "/catalogo" },
-    { text: "Vende tu auto", route: "/vende-tu-auto" },
+    { text: "Vende tu auto", route: "/venta" },
     { text: "Acerca de nosotros", route: "/acerca-de-nosotros" },
   ];
 
