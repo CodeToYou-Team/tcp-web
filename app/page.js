@@ -5,6 +5,15 @@ import Brands from "./layouts/Brands";
 import LastCars from "./layouts/LastCars";
 import Steps from "./layouts/Steps";
 
+export const getLastProducts = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/latest`);
+  const data_products = await res.json();
+
+  return data_products;
+};
+
+const lastProducts = await getLastProducts();
+
 export default function Home() {
   return (
     <>
@@ -12,7 +21,7 @@ export default function Home() {
       <Hero />
       <Brands />
       <Steps />
-      <LastCars />
+      <LastCars lastProducts={lastProducts} />
       <Footer />
     </>
   );
