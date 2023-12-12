@@ -15,9 +15,6 @@ export default function LastCars() {
           <CarCard />
           <CarCard />
           <CarCard />
-          <CarCard />
-          <CarCard />
-          <CarCard />
         </div>
       </div>
     </div>
