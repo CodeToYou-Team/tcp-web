@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  Navbar,
+  Navbar as NextUiNavbar,
   NavbarBrand,
   NavbarContent,
   NavbarMenuToggle,
@@ -12,7 +12,7 @@ import { Link } from "@nextui-org/link";
 import { useState } from "react";
 import Image from "next/image";
 
-export default function AppNavbar() {
+export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
@@ -23,7 +23,7 @@ export default function AppNavbar() {
   ];
 
   return (
-    <Navbar className="bg-zinc-900" onMenuOpenChange={setIsMenuOpen}>
+    <NextUiNavbar className="bg-zinc-900" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -71,6 +71,6 @@ export default function AppNavbar() {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
-    </Navbar>
+    </NextUiNavbar>
   );
 }

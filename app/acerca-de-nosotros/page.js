@@ -1,13 +1,15 @@
 "use-client";
 
-import AppNavbar from "@/components/ui/Navbar";
+import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import CTA from "../layouts/CTA";
+import Map from "../layouts/Map";
 
-export default function Catalogo() {
+export default function About() {
   return (
     <>
-      <AppNavbar />
+      <Navbar />
+      <Map />
       <CTA />
       <Footer />
     </>

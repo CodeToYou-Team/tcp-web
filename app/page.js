@@ -1,4 +1,4 @@
-import AppNavbar from "@/components/ui/Navbar";
+import Navbar from "@/components/ui/Navbar";
 import Hero from "./layouts/Hero";
 import Footer from "@/components/ui/Footer";
 import Brands from "./layouts/Brands";
@@ -17,7 +17,7 @@ const lastProducts = await getLastProducts();
 export default function Home() {
   return (
     <>
-      <AppNavbar />
+      <Navbar />
       <Hero />
       <Brands />
       <Steps />

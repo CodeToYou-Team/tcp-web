@@ -1,8 +1,10 @@
-import AppNavbar from "@/components/ui/Navbar";
+"use script";
+
+import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
-import FilterSidebar from "@/components/ui/FilterSidebar";
+import SidebarFilter from "@/components/ui/SidebarFilter";
 import { CarsCatalog } from "../layouts/CarsCatalog";
-import CatalogPagination from "@/components/ui/CatalogPagination";
+import Pagination from "@/components/ui/Pagination";
 
 export const getProducts = async () => {
   const query = new URLSearchParams();
@@ -27,19 +29,19 @@ export const getModels = async () => {
   return data_models;
 };
 const products = await getProducts();
-const brands = await getBrands();
-const models = await getModels();
+// const brands = await getBrands();
+// const models = await getModels();
 export default function Catalogo() {
   return (
     <>
-      <AppNavbar />
-      <FilterSidebar models={models} brands={brands} />
+      <Navbar />
+      <SidebarFilter />
       <CarsCatalog products={products} />
-      <CatalogPagination
+      <Pagination
         page={products?.currentPage || 1}
         numberOfPages={products?.numberOfPages || 1}
         count={products?.count || 0}
-        limit={products?.limit || 8}
+        limit={products?.limit || 9}
         visible={products?.data?.length === 0}
       />
       <Footer />

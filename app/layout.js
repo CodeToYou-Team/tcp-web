@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
-const combinedClasses = `bg-zinc-900 text-slate-100 ${inter.className}`;
+const combinedClasses = `bg-zinc-900 text-slate-100 scrollbar-thumb-gray-900 ${inter.className}`;
 
 export const metadata = {
   title: "TU CARRO PROPIO",

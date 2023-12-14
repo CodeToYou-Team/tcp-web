@@ -1,4 +1,4 @@
-import AppNavbar from "@/components/ui/Navbar";
+import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import Image from "next/image";
 
@@ -17,7 +17,7 @@ export default async function Product({ params }) {
 
   return (
     <>
-      <AppNavbar />
+      <Navbar />
       <h3>{product?.brand + " " + product?.model + " " + product?.version}</h3>
       <Image
         alt="latest-1"

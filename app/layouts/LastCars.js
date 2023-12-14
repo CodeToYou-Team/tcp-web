@@ -12,9 +12,10 @@ export default function LastCars({ lastProducts }) {
           </h2>
         </div>
         <div className="w-full mt-24 gap-2 grid grid-cols-12 px-8">
-          {lastProducts?.data?.map((lastProduct) => (
-            <CarCard product={lastProduct} />
-          ))}
+          {Array.isArray(lastProducts?.data) &&
+            lastProducts.data.map((lastProduct) => (
+              <CarCard key={lastProduct} product={lastProduct} />
+            ))}
         </div>
       </div>
     </div>

@@ -7,10 +7,11 @@ import Link from "next/link";
 const CarCard = ({ product }) => {
   return (
     <Card
+      key={product?._id}
       isPressable
       className="col-span-12 sm:col-span-4 h-[300px] bg-zinc-800 w-full"
     >
-      <Link key={product?._id} href={`/${product._id}`}>
+      <Link href={`/${product._id}`}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <h4 className="font-bold text-large text-zinc-100">
             {product?.brand + " " + product?.model + " " + product?.version}
