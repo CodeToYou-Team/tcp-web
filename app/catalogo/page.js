@@ -29,13 +29,26 @@ export const getModels = async () => {
   return data_models;
 };
 const products = await getProducts();
-// const brands = await getBrands();
-// const models = await getModels();
+const brands = await getBrands();
+//const models = await getModels();
+
+const vehicleType = [
+  { name: "Carro" },
+  { name: "Camioneta" },
+  { name: "Camion" },
+  { name: "Moto" },
+];
+
+const transmission = [{ name: "Automatica" }, { name: "Manual" }];
 export default function Catalogo() {
   return (
     <>
       <Navbar />
-      <SidebarFilter />
+      <SidebarFilter
+        brands={brands}
+        vehicleType={vehicleType}
+        transmission={transmission}
+      />
       <CarsCatalog products={products} />
       <Pagination
         page={products?.currentPage || 1}

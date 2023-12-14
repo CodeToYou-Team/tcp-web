@@ -1,45 +1,30 @@
 import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
 
-export default function Checkbox() {
+export default function Checkbox({ options, filterType }) {
   return (
     <CheckboxGroup
       classNames={{
         label: "text-zinc-400",
       }}
-      label="Selecciona una o varias marcas"
+      label={
+        filterType === "brands"
+          ? "Selecciona una o mas marcas"
+          : filterType === "vehicleType"
+          ? "Selecciona un tipo de vehiculo"
+          : ""
+      }
     >
-      <NextUiCheckbox
-        classNames={{
-          label: "text-zinc-100",
-        }}
-        value="Mitsubishi"
-      >
-        Mitsubishi
-      </NextUiCheckbox>
-      <NextUiCheckbox
-        classNames={{
-          label: "text-zinc-100",
-        }}
-        value="Honda"
-      >
-        Honda
-      </NextUiCheckbox>
-      <NextUiCheckbox
-        classNames={{
-          label: "text-zinc-100",
-        }}
-        value="Hyundai"
-      >
-        Hyundai
-      </NextUiCheckbox>
-      <NextUiCheckbox
-        classNames={{
-          label: "text-zinc-100",
-        }}
-        value="Toyota"
-      >
-        Toyota
-      </NextUiCheckbox>
+      {options.map((option, key) => (
+        <NextUiCheckbox
+          classNames={{
+            label: "text-zinc-100",
+          }}
+          value={option.name}
+          key={key}
+        >
+          {option.name}
+        </NextUiCheckbox>
+      ))}
     </CheckboxGroup>
   );
 }

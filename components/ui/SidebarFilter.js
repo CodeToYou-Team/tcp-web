@@ -14,7 +14,7 @@ import { Button } from "@nextui-org/react";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ brands, vehicleType, transmission }) => {
   return (
     <>
       <Sheet className="scrollbar-thumb-gray-900">
@@ -34,7 +34,11 @@ const SidebarFilter = () => {
             </SheetDescription>
           </SheetHeader>
           <div className="grid gap-4 py-4">
-            <Accordion />
+            <Accordion
+              brands={brands}
+              vehicleType={vehicleType}
+              transmission={transmission}
+            />
             <PriceRange />
           </div>
           <SheetFooter>
