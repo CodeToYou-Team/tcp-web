@@ -2,27 +2,27 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import Image from "next/image";
 
-export const getProduct = async (id) => {
+export const getVehicle = async (id) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/${id}`
   );
-  const product = await res.json();
+  const vehicle = await res.json();
 
-  return product;
+  return vehicle;
 };
 
 export default async function Product({ params }) {
   const { id } = params;
-  const product = await getProduct(id);
+  const vehicle = await getVehicle(id);
 
   return (
     <>
       <Navbar />
-      <h3>{product?.brand + " " + product?.model + " " + product?.version}</h3>
+      <h3>{vehicle?.brand + " " + vehicle?.model + " " + vehicle?.version}</h3>
       <Image
         alt="latest-1"
         className="mt-2 h-full"
-        src={product?.images[0]}
+        src={vehicle?.images[0]}
         width={231}
         height={132}
       />
