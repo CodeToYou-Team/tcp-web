@@ -5,17 +5,17 @@ import { useState } from "react";
 import { ChevronRight, ChevronLeft, Dot } from "lucide-react";
 import ImageZoom from "react-image-zooom";
 
-export const getProduct = async (id) => {
+export const getVehicle = async (id) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/${id}`
   );
-  const product = await res.json();
+  const vehicle = await res.json();
 
-  return product;
+  return vehicle;
 };
 
-const ImageSlider = ({ product }) => {
-  const slides = product?.images && [...product.images];
+const ImageSlider = ({ vehicle }) => {
+  const slides = vehicle?.images && [...vehicle.images];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {
@@ -37,10 +37,10 @@ const ImageSlider = ({ product }) => {
   return (
     <>
       <div className="px-4 rounded-lg">
-        <div className="lg:col-span-4  relative">
+        <div className="lg:col-span-4 overflow-hidden relative">
           {slides?.length > 0 ? (
             <ImageZoom
-              className="overflow-hidden rounded-lg"
+              className="rounded-lg"
               src={slides[currentIndex]}
               alt="car-img"
             />
@@ -82,9 +82,9 @@ const ImageSlider = ({ product }) => {
             />
           </div>
 
-          {product?.discount !== 0 ? (
-            <span className="bg-red-500 text-white text-sm tracking-wider font-semibold uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">
-              -{product?.discount}%
+          {vehicle?.discount !== 0 ? (
+            <span className="bg-red-500 text-white text-sm tracking-wider font-semibold uppercase rounded-br-lg rounded-tl-lg absolute left-0 top-0 px-3 py-1.5">
+              -{vehicle?.discount}%
             </span>
           ) : (
             <></>

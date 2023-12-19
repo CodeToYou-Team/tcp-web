@@ -1,26 +1,26 @@
-const CarInfo = ({ product }) => {
+const CarInfo = ({ vehicle }) => {
   return (
     <>
       <div className="px-4 md:py-8 text-center">
         <div className="mb-2 md:mb-3">
           <h2 className=" text-4xl lg:text-5xl font-bold gap-2 mb-4 md:mb-6">
-            {product.brand} {product.model} {product.version}
+            {vehicle.brand} {vehicle.model} {vehicle.version}
           </h2>
         </div>
         <div className="mb-4">
-          {product.discount !== 0 ? (
+          {vehicle.discount !== 0 ? (
             <div className="flex justify-center my-4">
               <span className="text-red-500 line-through text-xl px-1 pt-3 md:pt-3 mb-0.5">
-                ${product.price}
+                ${vehicle.price}
               </span>
               <span className=" text-5xl md:text-5xl font-bold">
-                ${product.finalPrice}
+                ${vehicle.finalPrice}
               </span>
             </div>
           ) : (
             <div className="">
               <span className=" text-5xl md:text-5xl font-bold">
-                ${product.price}
+                ${vehicle.price}
               </span>
             </div>
           )}
@@ -30,29 +30,29 @@ const CarInfo = ({ product }) => {
                 Procesador
               </span>
 
-              <span className=" font-semibold">{product.processor}</span>
+              <span className=" font-semibold">{vehicle.processor}</span>
             </p>
 
             <p className="flex items-center">
               <span className="text-md md:text-lg font-normal mr-3">Ram</span>
 
-              <span className=" font-semibold">{product.ram}</span>
+              <span className=" font-semibold">{vehicle.ram}</span>
             </p>
             <p className="flex items-center">
               <span className="text-md md:text-lg font-normal mr-3 ">
                 Disco duro
               </span>
 
-              <span className="font-semibold">{product.storage}</span>
+              <span className="font-semibold">{vehicle.storage}</span>
             </p>
 
             <p className="flex items-center">
-              {product.graphics != "" ? (
+              {vehicle.graphics != "" ? (
                 <>
                   <span className="text-md md:text-lg font-normal mr-3 ">
                     Tarjeta gráfica
                   </span>
-                  <span className="font-semibold">{product.graphics}</span>
+                  <span className="font-semibold">{vehicle.graphics}</span>
                 </>
               ) : (
                 <></>
@@ -62,7 +62,7 @@ const CarInfo = ({ product }) => {
         </div>
         <div className="py-4 text-start">
           <span className="text-gray-500 text-sm">
-            Disponible en: {product.location}
+            Disponible en: {vehicle.location}
           </span>
         </div>
         <div className="flex items-center text-gray-500 gap-2 mb-6">
