@@ -1,6 +1,6 @@
 "use-client";
 
-import Image from "next/image";
+import { Image } from "@nextui-org/react";
 import { Card, CardHeader } from "@nextui-org/react";
 import Link from "next/link";
 
@@ -25,7 +25,7 @@ const CarCard = ({ product }) => {
         <Image
           alt="latest-1"
           className="mt-2 h-full"
-          src={product?.mainImg}
+          src={product?.images[0]}
           width={2316}
           height={1322}
         />
