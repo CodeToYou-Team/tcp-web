@@ -8,7 +8,7 @@ import Pagination from "@/components/ui/Pagination";
 
 export const getVehicles = async () => {
   const query = new URLSearchParams();
-
+  console.log(query);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/search?${query}`
   );
