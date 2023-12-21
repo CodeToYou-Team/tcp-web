@@ -3,7 +3,6 @@
 import { Accordion as NextUiAccordion, AccordionItem } from "@nextui-org/react";
 import { Plus, Minus } from "lucide-react";
 import Checkbox from "./Checkbox";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function Accordion({
