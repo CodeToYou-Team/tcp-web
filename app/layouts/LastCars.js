@@ -14,7 +14,11 @@ export default function LastCars({ lastVehicles }) {
         <div className="w-full mt-24 gap-2 grid grid-cols-12 px-8">
           {Array.isArray(lastVehicles?.data) &&
             lastVehicles.data.map((lastVehicle) => (
+<<<<<<< HEAD
               <CarCard key={lastVehicle} product={lastVehicles} />
+=======
+              <CarCard key={lastVehicle} vehicle={lastVehicle} />
+>>>>>>> bf1966ae3d70c30c435999ec7c2a015e6c8b361c
             ))}
         </div>
       </div>
