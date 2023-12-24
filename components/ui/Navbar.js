@@ -11,16 +11,10 @@ import {
 import { Link } from "@nextui-org/link";
 import { useState } from "react";
 import Image from "next/image";
+import navbarItems from "@/lib/data";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = [
-    { text: "Inicio", route: "/" },
-    { text: "Catálogo", route: "/catalogo" },
-    { text: "Vende tu auto", route: "/venta" },
-    { text: "Acerca de nosotros", route: "/acerca-de-nosotros" },
-  ];
 
   return (
     <NextUiNavbar className="bg-zinc-900" onMenuOpenChange={setIsMenuOpen}>
@@ -44,7 +38,7 @@ export default function Navbar() {
       {/* desktop navbar items */}
 
       <NavbarContent className="hidden sm:flex gap-4 " justify="end">
-        {menuItems.map((item, index) => (
+        {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               className="whitespace-nowrap text-graffiti-500"
@@ -59,7 +53,7 @@ export default function Navbar() {
       {/* mobile navbar items */}
 
       <NavbarMenu className="bg-zinc-900">
-        {menuItems.map((item, index) => (
+        {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               className="w-full text-graffiti-500"

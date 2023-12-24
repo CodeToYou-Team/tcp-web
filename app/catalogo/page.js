@@ -3,18 +3,11 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
-import { CarsCatalog } from "../layouts/CarsCatalog";
+import CarCard from "@/components/CarCard";
 import Pagination from "@/components/ui/Pagination";
-
-export const getVehicles = async () => {
-  const query = new URLSearchParams();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/search?${query}`
-  );
-  const data_vehicles = await res.json();
-
-  return data_vehicles;
-};
+import { CarsLayout } from "../layouts/CarsCatalog";
+import { getVehicles } from "@/lib/services";
+import { Suspense } from "react";
 
 export const getBrands = async (context) => {
   const res_brands = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/brands`);
@@ -27,8 +20,8 @@ export const getModels = async () => {
   const data_models = await res_models.json();
   return data_models;
 };
-const vehicles = await getVehicles();
 
+const vehicles = await getVehicles();
 const brands = await getBrands();
 //const models = await getModels();
 
@@ -49,7 +42,11 @@ export default function Catalogo() {
         vehicleType={vehicleType}
         transmission={transmission}
       />
-      <CarsCatalog vehicles={vehicles} />
+      <CarsLayout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <CarCard />
+        </Suspense>
+      </CarsLayout>
       <Pagination
         page={vehicles?.currentPage || 1}
         numberOfPages={vehicles?.numberOfPages || 1}

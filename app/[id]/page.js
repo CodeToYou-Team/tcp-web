@@ -2,19 +2,10 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import ImageSlider from "@/components/ui/ImageSlider";
 import CarInfo from "../layouts/CarInfo";
+import { getVehicleById } from "@/lib/services";
 
-export const getVehicle = async (id) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/${id}`
-  );
-  const vehicle = await res.json();
-
-  return vehicle;
-};
-
-export default async function Product({ params }) {
-  const { id } = params;
-  const vehicle = await getVehicle(id);
+export default async function Product(id) {
+  const vehicle = await getVehicleById(id);
 
   return (
     <>

@@ -48,7 +48,7 @@ const ImageSlider = ({ vehicle }) => {
             []
           )}
 
-          <div className="flex absolute top-[75%] md:top-[90%] justify-center w-full z-10">
+          <div className="flex top-[75%] md:top-[95%] justify-center w-full z-10">
             {slides &&
               slides.map((slide, slideIndex) => (
                 <span
@@ -59,23 +59,23 @@ const ImageSlider = ({ vehicle }) => {
                   {slideIndex === currentIndex ? (
                     <Dot size={54} className="text-graffiti-500 " />
                   ) : (
-                    <Dot size={54} className="text-zinc-900 cursor-pointer" />
+                    <Dot size={54} className="text-zinc-100 cursor-pointer" />
                   )}
                 </span>
               ))}
           </div>
-          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-3 rounded-full p-2 bg-transparent cursor-pointer">
+          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-1 rounded-full p-1 bg-transparent cursor-pointer">
             <ChevronLeft
-              className="text-zinc-900 active:scale-125 "
+              className="text-graffiti-500 active:scale-125 "
               onClick={prevSlide}
-              size={50}
+              size={64}
             />
           </div>
-          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-3 rounded-full p-2 bg-transparent cursor-pointer">
+          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-1 rounded-full p-1 bg-transparent cursor-pointer">
             <ChevronRight
-              className="text-zinc-900 active:scale-125 "
+              className="text-graffiti-500 active:scale-125 "
               onClick={nextSlide}
-              size={50}
+              size={64}
             />
           </div>
 

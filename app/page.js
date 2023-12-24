@@ -2,17 +2,9 @@ import Navbar from "@/components/ui/Navbar";
 import Hero from "./layouts/Hero";
 import Footer from "@/components/ui/Footer";
 import Brands from "./layouts/Brands";
-import LastCars from "./layouts/LastCars";
+import LatestCars from "./layouts/LatestCars";
 import Steps from "./layouts/Steps";
-
-export const getLastVehicles = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/latest`);
-  const data_vehicles = await res.json();
-
-  return data_vehicles;
-};
-
-const lastVehicles = await getLastVehicles();
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -21,7 +13,9 @@ export default function Home() {
       <Hero />
       <Brands />
       <Steps />
-      <LastCars lastVehicles={lastVehicles} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LatestCars />
+      </Suspense>
       <Footer />
     </>
   );

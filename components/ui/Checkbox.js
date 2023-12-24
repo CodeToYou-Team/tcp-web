@@ -1,5 +1,4 @@
 import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
-import { useEffect } from "react";
 
 export default function Checkbox({ options, filterType, setValue }) {
   function handleFunction(e) {
