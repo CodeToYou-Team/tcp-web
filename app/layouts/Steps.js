@@ -29,7 +29,7 @@ export default function Steps() {
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
                 <p className="text-zinc-800 text-sm mx-1">
-                  Te proporcionamos una gran variedad de autos.
+                  Gran variedad de marcas y modelos.
                 </p>
               </div>
               <Button
@@ -93,11 +93,11 @@ export default function Steps() {
                 </p>
               </div>
               <Button
-                className="text-xs font-medium bg-graffiti-500 "
+                className="text-xs px-2 font-medium bg-graffiti-500 "
                 radius="sm"
                 size="lg"
               >
-                Más información
+                Más info
               </Button>
             </CardFooter>
           </Card>

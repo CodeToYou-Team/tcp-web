@@ -2,7 +2,7 @@
 
 import CarCard from "@/components/CarCard";
 
-export default function LastCars({ lastProducts }) {
+export default function LastCars({ lastVehicles }) {
   return (
     <div className="py-12 bg-zinc-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -12,9 +12,9 @@ export default function LastCars({ lastProducts }) {
           </h2>
         </div>
         <div className="w-full mt-24 gap-2 grid grid-cols-12 px-8">
-          {Array.isArray(lastProducts?.data) &&
-            lastProducts.data.map((lastProduct) => (
-              <CarCard key={lastProduct} product={lastProduct} />
+          {Array.isArray(lastVehicles?.data) &&
+            lastVehicles.data.map((lastVehicle) => (
+              <CarCard key={lastVehicle} product={lastVehicles} />
             ))}
         </div>
       </div>

@@ -24,7 +24,7 @@ const CarCard = ({ vehicle }) => {
 
         <Image
           alt="latest-1"
-          className="mt-2 h-full"
+          className="mt-2 h-full rounded-none"
           src={vehicle?.images[0]}
           width={2316}
           height={1322}

@@ -48,23 +48,20 @@ const ImageSlider = ({ vehicle }) => {
             []
           )}
 
-          <div className="flex absolute top-[90%] justify-center w-full z-10">
+          <div className="flex absolute top-[75%] md:top-[90%] justify-center w-full z-10">
             {slides &&
               slides.map((slide, slideIndex) => (
-                <button
+                <span
                   key={slideIndex}
                   onClick={() => goToSlide(slideIndex)}
                   value={slide}
                 >
                   {slideIndex === currentIndex ? (
-                    <Dot
-                      size={42}
-                      className="text-graffiti-500 cursor-pointer"
-                    />
+                    <Dot size={54} className="text-graffiti-500 " />
                   ) : (
-                    <Dot size={42} className="text-zinc-900 cursor-pointer" />
+                    <Dot size={54} className="text-zinc-900 cursor-pointer" />
                   )}
-                </button>
+                </span>
               ))}
           </div>
           <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-3 rounded-full p-2 bg-transparent cursor-pointer">
