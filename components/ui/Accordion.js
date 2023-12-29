@@ -3,19 +3,8 @@
 import { Accordion as NextUiAccordion, AccordionItem } from "@nextui-org/react";
 import { Plus, Minus } from "lucide-react";
 import Checkbox from "./Checkbox";
-import { useState, useEffect } from "react";
 
-export default function Accordion({
-  brands,
-  vehicleType,
-  transmission,
-  setOptions,
-}) {
-  const [value, setValue] = useState([]);
-  useEffect(() => {
-    setOptions(value);
-  }, [value]);
-
+export default function Accordion({ brands, vehicleType, transmission }) {
   return (
     <>
       <NextUiAccordion variant="light">
@@ -32,11 +21,7 @@ export default function Accordion({
           }
           title={<p className="text-graffiti-500">Tipo de vehículo</p>}
         >
-          <Checkbox
-            options={vehicleType}
-            filterType={"type"}
-            setValue={setValue}
-          />
+          <Checkbox options={vehicleType} filterType={"type"} />
         </AccordionItem>
       </NextUiAccordion>
       <NextUiAccordion variant="light">
@@ -53,7 +38,7 @@ export default function Accordion({
           }
           title={<p className="text-graffiti-500">Marcas</p>}
         >
-          <Checkbox options={brands} filterType={"brand"} setValue={setValue} />
+          <Checkbox options={brands} filterType={"brand"} />
         </AccordionItem>
       </NextUiAccordion>
       <NextUiAccordion variant="light">
@@ -70,11 +55,7 @@ export default function Accordion({
           }
           title={<p className="text-graffiti-500">Transmisión</p>}
         >
-          <Checkbox
-            options={transmission}
-            filterType={"transmission"}
-            setValue={setValue}
-          />
+          <Checkbox options={transmission} filterType={"transmission"} />
         </AccordionItem>
       </NextUiAccordion>
     </>

@@ -1,12 +1,19 @@
 import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export default function Checkbox({ options, filterType, setValue }) {
-  function handleFunction(e) {
-    const aux = {};
-    aux[filterType] = e.target.value;
+export default function Checkbox({ options, filterType }) {
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathName = usePathname();
+  const params = new URLSearchParams(searchParams);
 
-    setValue((prevValue) => [...prevValue, aux]);
-  }
+  const handleChange = (e) => {
+    params.set("page", "1");
+
+    params.set(`${filterType}`, `${e.target.value}`);
+
+    replace(`${pathName}?${params.toString()}`);
+  };
 
   return (
     <CheckboxGroup
@@ -28,7 +35,8 @@ export default function Checkbox({ options, filterType, setValue }) {
           }}
           value={option.name}
           key={key}
-          onChange={(e) => handleFunction(e)}
+          onChange={(e) => handleChange(e)}
+          defaultValue={searchParams.get(`${filterType}`)?.toString()}
         >
           {option.name}
         </NextUiCheckbox>

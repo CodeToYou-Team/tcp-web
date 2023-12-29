@@ -1,5 +1,3 @@
-"use script";
-
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
@@ -33,7 +31,13 @@ const vehicleType = [
 ];
 
 const transmission = [{ name: "Automatica" }, { name: "Manual" }];
-export default function Catalogo() {
+export default function Catalogo({ searchParams }) {
+  const keys = Object.keys(searchParams);
+  let query = "";
+
+  for (let i = 0; i < keys.length; i++) {
+    query = query + `${keys[i]}=${searchParams[keys[i]]}&`;
+  }
   return (
     <>
       <Navbar />
@@ -44,7 +48,7 @@ export default function Catalogo() {
       />
       <CarsLayout>
         <Suspense fallback={<div>Loading...</div>}>
-          <CarCard />
+          <CarCard query={query} />
         </Suspense>
       </CarsLayout>
       <Pagination
