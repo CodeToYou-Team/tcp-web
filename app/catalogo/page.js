@@ -8,11 +8,11 @@ import Pagination from "@/components/ui/Pagination";
 import { VehiclesLayout } from "../layouts/VehiclesCatalog";
 import { getVehicles, getBrands } from "@/lib/services";
 import { Suspense } from "react";
+import { vehicleType, transmission } from "@/lib/data";
 
 const vehicles = await getVehicles();
 const brands = await getBrands();
 
-const transmission = [{ name: "Automatica" }, { name: "Manual" }];
 export default function Catalogo() {
   return (
     <>
