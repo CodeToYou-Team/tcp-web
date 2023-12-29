@@ -11,7 +11,7 @@ import {
 import { Link } from "@nextui-org/link";
 import { useState } from "react";
 import Image from "next/image";
-import navbarItems from "@/lib/data";
+import { navbarItems } from "@/lib/data";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

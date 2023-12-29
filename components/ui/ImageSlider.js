@@ -1,19 +1,11 @@
 "use client";
 
 import { useState } from "react";
-
 import { ChevronRight, ChevronLeft, Dot } from "lucide-react";
 import ImageZoom from "react-image-zooom";
+import { getVehicles } from "@/lib/services";
 
-export const getVehicle = async (id) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/${id}`
-  );
-  const vehicle = await res.json();
-
-  return vehicle;
-};
-
+const vehicle = getVehicles();
 const ImageSlider = ({ vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,7 +28,7 @@ const ImageSlider = ({ vehicle }) => {
 
   return (
     <>
-      <div className="px-4 rounded-lg">
+      <div className="mx-auto rounded-lg w-11/12 md:w-full">
         <div className="lg:col-span-4 overflow-hidden relative">
           {slides?.length > 0 ? (
             <ImageZoom
@@ -48,7 +40,7 @@ const ImageSlider = ({ vehicle }) => {
             []
           )}
 
-          <div className="flex top-[75%] md:top-[95%] justify-center w-full z-10">
+          <div className="flex top-[95%] md:top-[95%] justify-center w-full z-10">
             {slides &&
               slides.map((slide, slideIndex) => (
                 <span
