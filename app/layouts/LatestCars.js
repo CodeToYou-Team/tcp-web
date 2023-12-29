@@ -5,7 +5,7 @@ import { getLatestVehicles } from "@/lib/services";
 
 const latestVehicles = await getLatestVehicles();
 
-export default async function LatestCars({ lastVehicles }) {
+export default async function LatestVehicles({ lastVehicles }) {
   return (
     <div className="py-12 bg-zinc-900">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">

@@ -3,34 +3,14 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
-import CarCard from "@/components/CarCard";
+import VehicleCard from "@/components/VehicleCard";
 import Pagination from "@/components/ui/Pagination";
-import { CarsLayout } from "../layouts/CarsCatalog";
-import { getVehicles } from "@/lib/services";
+import { VehiclesLayout } from "../layouts/VehiclesCatalog";
+import { getVehicles, getBrands } from "@/lib/services";
 import { Suspense } from "react";
-
-export const getBrands = async (context) => {
-  const res_brands = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/brands`);
-  const data_brands = await res_brands.json();
-  return data_brands;
-};
-
-export const getModels = async () => {
-  const res_models = await fetch(`${process.env.NEXT_PUBLIC_ENDPOINT}/models`);
-  const data_models = await res_models.json();
-  return data_models;
-};
 
 const vehicles = await getVehicles();
 const brands = await getBrands();
-//const models = await getModels();
-
-const vehicleType = [
-  { name: "Carro" },
-  { name: "Camioneta" },
-  { name: "Camion" },
-  { name: "Moto" },
-];
 
 const transmission = [{ name: "Automatica" }, { name: "Manual" }];
 export default function Catalogo() {
@@ -42,11 +22,11 @@ export default function Catalogo() {
         vehicleType={vehicleType}
         transmission={transmission}
       />
-      <CarsLayout>
-        <Suspense fallback={<div>Loading...</div>}>
-          <CarCard />
+      <VehiclesLayout>
+        <Suspense key={vehicles?.data} fallback={<div>Loading...</div>}>
+          <VehicleCard />
         </Suspense>
-      </CarsLayout>
+      </VehiclesLayout>
       <Pagination
         page={vehicles?.currentPage || 1}
         numberOfPages={vehicles?.numberOfPages || 1}

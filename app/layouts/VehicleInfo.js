@@ -1,20 +1,22 @@
-const CarInfo = ({ vehicle }) => {
+import { Button } from "@nextui-org/react";
+
+const VehicleInfo = ({ vehicle }) => {
   return (
     <>
-      <div className="px-4 md:py-8 text-center">
+      <div className="px-4 md:py-8 text-center items-center mx-auto">
         <div className="mb-2 md:mb-3">
           <h2 className=" text-4xl lg:text-5xl font-bold gap-2 mb-4 md:mb-6">
             {vehicle.brand} {vehicle.model} {vehicle.version}
           </h2>
         </div>
-        <div className="mb-4">
+        <div className="mb-4 w-full text-center justify-center">
           {vehicle.discount !== 0 ? (
             <div className="flex justify-center my-4">
               <span className="text-red-500 line-through text-xl px-1 pt-3 md:pt-3 mb-0.5">
                 ${vehicle.price}
               </span>
               <span className=" text-5xl md:text-5xl font-bold">
-                ${vehicle.finalPrice}
+                ${vehicle.price}
               </span>
             </div>
           ) : (
@@ -24,39 +26,26 @@ const CarInfo = ({ vehicle }) => {
               </span>
             </div>
           )}
-          <div className="justify-start">
+          <div className=" justify-center text-center">
             <p className="flex items-center mt-8">
               <span className="text-md md:text-lg font-normal mr-3">
-                Procesador
+                Kilometraje:
               </span>
 
-              <span className=" font-semibold">{vehicle.processor}</span>
+              <span className=" font-semibold">{vehicle.km}</span>
             </p>
 
             <p className="flex items-center">
-              <span className="text-md md:text-lg font-normal mr-3">Ram</span>
+              <span className="text-md md:text-lg font-normal mr-3">Año:</span>
 
-              <span className=" font-semibold">{vehicle.ram}</span>
+              <span className=" font-semibold">{vehicle.year}</span>
             </p>
             <p className="flex items-center">
               <span className="text-md md:text-lg font-normal mr-3 ">
-                Disco duro
+                Transmisión:
               </span>
 
-              <span className="font-semibold">{vehicle.storage}</span>
-            </p>
-
-            <p className="flex items-center">
-              {vehicle.graphics != "" ? (
-                <>
-                  <span className="text-md md:text-lg font-normal mr-3 ">
-                    Tarjeta gráfica
-                  </span>
-                  <span className="font-semibold">{vehicle.graphics}</span>
-                </>
-              ) : (
-                <></>
-              )}
+              <span className="font-semibold">{vehicle.transmission}</span>
             </p>
           </div>
         </div>
@@ -85,17 +74,13 @@ const CarInfo = ({ vehicle }) => {
           <span className="text-sm">2-4 días de envío.</span>
         </div>
         <div className="flex justify-center md:justify-start gap-2 mt-10">
-          <button className="inline-block sm:flex-none px-6 mx-1 text-gray-800 bg-emerald-500 hover:bg-emerald-600 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 py-3">
-            Agregar al carrito
-          </button>
-
-          <button className="inline-block bg-gray-200 hover:bg-gray-300 text-gray-800 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
-            Comprar
-          </button>
+          <Button className="sm:flex-none px-6 mx-1  bg-graffiti-500  text-center rounded-lg outline-none transition duration-100">
+            Consultar vía Whatsapp
+          </Button>
         </div>
       </div>
     </>
   );
 };
 
-export default CarInfo;
+export default VehicleInfo;
