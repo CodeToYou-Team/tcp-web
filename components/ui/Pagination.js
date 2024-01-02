@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Pagination } from "@nextui-org/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CatalogPagination({
   page,
@@ -10,19 +10,19 @@ export default function CatalogPagination({
   count,
   limit,
 }) {
-  const router = useRouter();
-  const location = usePathname();
-  const params = new URLSearchParams(router.query);
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathName = usePathname();
+  const params = new URLSearchParams(searchParams);
+
+  const handleChange = (e) => {
+    params.set("page", e);
+
+    replace(`${pathName}?${params.toString()}`);
+  };
 
   const startProd = 1 + (page * limit - limit);
   const endProd = page * limit > count ? count : page * limit;
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    params.set("page", currentPage);
-    router.push(location + "?" + params);
-  }, [currentPage]);
 
   return (
     <Pagination
@@ -35,7 +35,7 @@ export default function CatalogPagination({
       total={numberOfPages}
       initialPage={1}
       page={page}
-      onChange={setCurrentPage}
+      onChange={(e) => handleChange(e)}
     />
   );
 }
