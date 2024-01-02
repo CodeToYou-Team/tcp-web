@@ -3,9 +3,7 @@ import { Card, CardHeader } from "@nextui-org/react";
 import Link from "next/link";
 import { getVehicles } from "@/lib/services";
 
-export default async function VehicleCard({ query }) {
-  const vehicles = await getVehicles(query);
-
+export default async function VehicleCard({ vehicles }) {
   return (
     <>
       {vehicles?.data?.map((vehicle) => (

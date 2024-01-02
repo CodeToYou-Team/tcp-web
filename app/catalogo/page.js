@@ -1,14 +1,11 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
-import VehicleCard from "@/components/VehicleCard";
-import Pagination from "@/components/ui/Pagination";
-import { VehiclesLayout } from "../layouts/VehiclesCatalog";
-import { getVehicles, getBrands } from "@/lib/services";
-import { Suspense } from "react";
-import { vehicleType, transmission } from "@/lib/data";
+import { getBrands } from "@/lib/services";
 
-const vehicles = await getVehicles();
+import { vehicleType, transmission } from "@/lib/data";
+import Catalog from "@/components/Catalog";
+
 const brands = await getBrands();
 
 export default function Catalogo({ searchParams }) {
@@ -26,18 +23,8 @@ export default function Catalogo({ searchParams }) {
         vehicleType={vehicleType}
         transmission={transmission}
       />
-      <VehiclesLayout>
-        <Suspense key={vehicles?.data} fallback={<div>Loading...</div>}>
-          <VehicleCard query={query} />
-        </Suspense>
-      </VehiclesLayout>
-      <Pagination
-        page={vehicles?.currentPage || 1}
-        numberOfPages={vehicles?.numberOfPages || 1}
-        count={vehicles?.count || 0}
-        limit={vehicles?.limit || 9}
-        visible={vehicles?.data?.length === 0}
-      />
+      <Catalog query={query} />
+
       <Footer />
     </>
   );
