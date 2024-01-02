@@ -1,4 +1,5 @@
 import { Button } from "@nextui-org/react";
+import { formatNumber } from "@/lib/services";
 
 const VehicleInfo = ({ vehicle }) => {
   return (
@@ -13,16 +14,16 @@ const VehicleInfo = ({ vehicle }) => {
           {vehicle.discount !== 0 ? (
             <div className="flex justify-center my-4">
               <span className="text-red-500 line-through text-xl px-1 pt-3 md:pt-3 mb-0.5">
-                ${vehicle.price}
+                ${formatNumber(vehicle.price)}
               </span>
               <span className=" text-5xl md:text-5xl font-bold">
-                ${vehicle.price}
+                ${formatNumber(vehicle.price)}
               </span>
             </div>
           ) : (
             <div className="">
               <span className=" text-5xl md:text-5xl font-bold">
-                ${vehicle.price}
+                ${formatNumber(vehicle.price)}
               </span>
             </div>
           )}
@@ -32,7 +33,7 @@ const VehicleInfo = ({ vehicle }) => {
                 Kilometraje:
               </span>
 
-              <span className=" font-semibold">{vehicle.km}</span>
+              <span className="font-semibold">{formatNumber(vehicle.km)}</span>
             </p>
 
             <p className="flex items-center">
