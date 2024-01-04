@@ -4,7 +4,7 @@ import SidebarFilter from "@/components/ui/SidebarFilter";
 import { getBrands } from "@/lib/services";
 
 import { vehicleType, transmission } from "@/lib/data";
-import Catalog from "@/components/Catalog";
+import Catalog from "@/app/layouts/Catalog";
 
 const brands = await getBrands();
 
