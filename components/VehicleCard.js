@@ -1,7 +1,7 @@
 import { Image } from "@nextui-org/react";
 import { Card, CardHeader } from "@nextui-org/react";
 import Link from "next/link";
-import { getVehicles } from "@/lib/services";
+import { formatNumber } from "@/lib/services";
 
 export default async function VehicleCard({ vehicles }) {
   return (
@@ -19,7 +19,7 @@ export default async function VehicleCard({ vehicles }) {
               </h4>
               <p className="text-md text-zinc-100 font-bold">{vehicle?.year}</p>
               <h4 className="text-zinc-100 text-xl font-bold text-end">
-                ${vehicle?.price}
+                ${formatNumber(vehicle.price)}
               </h4>
             </CardHeader>
             <di className="">

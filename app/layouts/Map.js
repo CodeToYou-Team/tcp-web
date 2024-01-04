@@ -17,7 +17,7 @@ export default function Map() {
             className="w-full rounded-lg"
             height={400}
             loading="lazy"
-            frameborder="0"
+            frameBorder="0"
           ></iframe>
         </CardBody>
         <CardFooter>

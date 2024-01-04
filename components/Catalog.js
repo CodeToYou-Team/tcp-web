@@ -10,7 +10,7 @@ const Catalog = async ({ query }) => {
   return (
     <>
       <VehiclesLayout>
-        <Suspense key={vehicles?.data} fallback={<div>Loading...</div>}>
+        <Suspense key={query} fallback={<div>Loading...</div>}>
           <VehicleCard vehicles={vehicles} />
         </Suspense>
       </VehiclesLayout>

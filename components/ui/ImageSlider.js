@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { ChevronRight, ChevronLeft, Dot } from "lucide-react";
 import ImageZoom from "react-image-zooom";
-import { getVehicles } from "@/lib/services";
 
-const vehicle = getVehicles();
 const ImageSlider = ({ vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,7 +30,7 @@ const ImageSlider = ({ vehicle }) => {
         <div className="lg:col-span-4 overflow-hidden relative">
           {slides?.length > 0 ? (
             <ImageZoom
-              className="rounded-lg"
+              className="rounded-lg h-4/6"
               src={slides[currentIndex]}
               alt="car-img"
             />
@@ -40,32 +38,33 @@ const ImageSlider = ({ vehicle }) => {
             []
           )}
 
-          <div className="flex top-[95%] md:top-[95%] justify-center w-full z-10">
+          <div className="flex top-[95%] md:top-[95%] justify-center z-10 ">
             {slides &&
               slides.map((slide, slideIndex) => (
                 <span
                   key={slideIndex}
                   onClick={() => goToSlide(slideIndex)}
                   value={slide}
+                  className="cursor-pointer"
                 >
                   {slideIndex === currentIndex ? (
-                    <Dot size={54} className="text-graffiti-500 " />
+                    <Dot size={26} className="text-graffiti-500 " />
                   ) : (
-                    <Dot size={54} className="text-zinc-100 cursor-pointer" />
+                    <Dot size={26} className="text-zinc-100 " />
                   )}
                 </span>
               ))}
           </div>
-          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-1 rounded-full p-1 bg-transparent cursor-pointer">
+          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-1 rounded-full p-1 bg-transparent ">
             <ChevronLeft
-              className="text-graffiti-500 active:scale-125 "
+              className="text-graffiti-500 active:scale-125 cursor-pointer"
               onClick={prevSlide}
               size={64}
             />
           </div>
-          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-1 rounded-full p-1 bg-transparent cursor-pointer">
+          <div className="z-10 absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-1 rounded-full p-1 bg-transparent">
             <ChevronRight
-              className="text-graffiti-500 active:scale-125 "
+              className="text-graffiti-500 active:scale-125 cursor-pointer"
               onClick={nextSlide}
               size={64}
             />
