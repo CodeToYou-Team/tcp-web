@@ -7,7 +7,11 @@ import Checkbox from "./Checkbox";
 export default function Accordion({ brands, vehicleType, transmission }) {
   return (
     <>
-      <NextUiAccordion variant="light">
+      <NextUiAccordion
+        variant="light"
+        selectionMode="multiple"
+        keepContentMounted={true}
+      >
         <AccordionItem
           className="text-xs"
           key="1"
@@ -23,11 +27,9 @@ export default function Accordion({ brands, vehicleType, transmission }) {
         >
           <Checkbox options={vehicleType} filterType={"type"} />
         </AccordionItem>
-      </NextUiAccordion>
-      <NextUiAccordion variant="light">
         <AccordionItem
           className="text-xs"
-          key="1"
+          key="2"
           aria-label="Accordion 1"
           indicator={({ isOpen }) =>
             isOpen ? (
@@ -40,11 +42,9 @@ export default function Accordion({ brands, vehicleType, transmission }) {
         >
           <Checkbox options={brands} filterType={"brand"} />
         </AccordionItem>
-      </NextUiAccordion>
-      <NextUiAccordion variant="light">
         <AccordionItem
           className="text-xs"
-          key="1"
+          key="3"
           aria-label="Accordion 1"
           indicator={({ isOpen }) =>
             isOpen ? (

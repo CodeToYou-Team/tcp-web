@@ -1,3 +1,4 @@
+"use client";
 import {
   Sheet,
   SheetClose,
@@ -11,8 +12,15 @@ import {
 import { Button } from "@nextui-org/react";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
+import { usePathname, useRouter } from "next/navigation";
 
 const SidebarFilter = ({ brands, vehicleType, transmission }) => {
+  const { replace } = useRouter();
+  const pathName = usePathname();
+
+  const CleanFilter = () => {
+    replace(`${pathName}`);
+  };
   return (
     <>
       <Sheet className="scrollbar-thumb-gray-900">
@@ -40,7 +48,10 @@ const SidebarFilter = ({ brands, vehicleType, transmission }) => {
             <PriceRange />
           </div>
           <SheetFooter>
-            <Button className="bg-graffiti-500 text-zinc-800 font-medium my-6">
+            <Button
+              className="bg-graffiti-500 text-zinc-800 font-medium my-6"
+              onClick={CleanFilter}
+            >
               Limpiar búsqueda
             </Button>
             <SheetClose asChild></SheetClose>
