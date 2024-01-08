@@ -1,5 +1,6 @@
 import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
 
 export default function Checkbox({ options, filterType }) {
   const searchParams = useSearchParams();
@@ -10,37 +11,47 @@ export default function Checkbox({ options, filterType }) {
   const handleChange = (e) => {
     params.set("page", "1");
 
-    params.set(`${filterType}`, `${e.target.value}`);
+    const value = e.join(",");
 
+    if (value !== "") {
+      params.set(`${filterType}`, `${e.join(",")}`);
+    } else if (params.has(filterType)) {
+      params.delete(filterType)
+    }
+    
     replace(`${pathName}?${params.toString()}`);
   };
 
   return (
-    <CheckboxGroup
-      classNames={{
-        label: "text-zinc-400",
-      }}
-      label={
-        filterType === "brand"
-          ? "Selecciona una o mas marcas"
-          : filterType === "type"
-          ? "Selecciona un tipo de vehiculo"
-          : ""
-      }
-    >
-      {options.map((option, key) => (
-        <NextUiCheckbox
-          classNames={{
-            label: "text-zinc-100",
-          }}
-          value={option.name}
-          key={key}
-          onChange={(e) => handleChange(e)}
-          defaultValue={searchParams.get(`${filterType}`)?.toString()}
-        >
-          {option.name}
-        </NextUiCheckbox>
-      ))}
-    </CheckboxGroup>
-  );
+    <Suspense key={searchParams.toString()}>
+      <CheckboxGroup
+        classNames={{
+          label: "text-zinc-400",
+        }}
+        label={
+          filterType === "brand"
+            ? "Selecciona una o mas marcas"
+            : filterType === "type"
+            ? "Selecciona un tipo de vehiculo"
+            : ""
+        }
+        value={searchParams.get(filterType)?.split(",")}
+        onValueChange={(e) => handleChange(e)}
+        //disableAnimation={true}
+      >
+        {options.map((option, key) => (
+          <NextUiCheckbox
+            classNames={{
+              label: "text-zinc-100",
+            }}
+            value={option.name}
+            key={key}
+          >
+            {option.name}
+          </NextUiCheckbox>
+        ))}
+      </CheckboxGroup>
+    </Suspense>
+  )
+  
 }
