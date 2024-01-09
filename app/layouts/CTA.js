@@ -14,11 +14,11 @@ export default function CTA() {
               Si ya leíste los pasos para la venta de tu vehículo, sigue el
               enlace a whatsapp y coordina tu visita con nosotros.
             </p>
-            <div className="mt-10 flex">
+            <div className="mt-10 flex text-center">
               <Link
                 key={"logo-whatsapp"}
                 href={"/index"}
-                className="text-graffiti-500 flex gap-2 hover:animate-pulse cursor-pointer"
+                className="text-graffiti-500 flex gap-2 hover:animate-pulse cursor-pointer mx-auto"
               >
                 Ir a Whatsapp
                 <svg
