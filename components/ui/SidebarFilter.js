@@ -14,7 +14,7 @@ import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
 import { usePathname, useRouter } from "next/navigation";
 
-const SidebarFilter = ({ brands, vehicleType, transmission }) => {
+const SidebarFilter = ({ brands, vehicleType, transmission, models }) => {
   const { replace } = useRouter();
   const pathName = usePathname();
 
@@ -45,6 +45,7 @@ const SidebarFilter = ({ brands, vehicleType, transmission }) => {
               brands={brands}
               vehicleType={vehicleType}
               transmission={transmission}
+              models={models}
             />
             <PriceRange />
           </div>
