@@ -2,9 +2,9 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
 import { getBrands } from "@/lib/services";
-
 import { vehicleType, transmission } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
+import { Suspense } from "react";
 
 const brands = await getBrands();
 
@@ -18,13 +18,14 @@ export default function Catalogo({ searchParams }) {
   return (
     <>
       <Navbar />
-      <SidebarFilter
-        brands={brands}
-        vehicleType={vehicleType}
-        transmission={transmission}
-      />
-      <Catalog query={query} />
-
+      <Suspense key={query} fallback={<div>Loading...</div>}>
+        <SidebarFilter
+          brands={brands}
+          vehicleType={vehicleType}
+          transmission={transmission}
+        />
+        <Catalog query={query} />
+      </Suspense>
       <Footer />
     </>
   );
