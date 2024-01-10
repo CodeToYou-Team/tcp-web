@@ -3,6 +3,7 @@ import Footer from "@/components/ui/Footer";
 import ImageSlider from "@/components/ui/ImageSlider";
 import { getVehicleById } from "@/lib/services";
 import VehicleInfo from "../layouts/VehicleInfo";
+import RecommendedVehicles from "../layouts/RecommendedVehicles";
 
 export default async function Product({ params }) {
   const { id } = params;
@@ -16,6 +17,7 @@ export default async function Product({ params }) {
         <ImageSlider vehicle={vehicle} />
         <VehicleInfo vehicle={vehicle} />
       </div>
+      <RecommendedVehicles id={id} brand={vehicle.brand} />
 
       <Footer />
     </>
