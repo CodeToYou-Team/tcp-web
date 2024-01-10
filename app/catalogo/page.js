@@ -7,6 +7,8 @@ import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 
 const brands = await getBrands();
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default function Catalogo({ searchParams }) {
   const keys = Object.keys(searchParams);
