@@ -19,7 +19,7 @@ export default async function VehicleCard({ vehicles }) {
               </h4>
               <p className="text-md text-zinc-100 font-bold">{vehicle?.year}</p>
               <h4 className="text-zinc-100 text-xl font-bold text-end">
-                ${formatNumber(vehicle.price)}
+                {formatNumber(vehicle?.price)}
               </h4>
             </CardHeader>
             <di className="">
