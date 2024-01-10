@@ -21,7 +21,6 @@ export default async function Catalogo({ searchParams }) {
   for (let i = 0; i < keys.length; i++) {
     query = query + `${keys[i]}=${searchParams[keys[i]]}&`;
   }
-  console.log(query);
 
   return (
     <>

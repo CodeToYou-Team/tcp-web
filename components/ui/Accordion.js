@@ -50,7 +50,7 @@ export default function Accordion({
 
         <AccordionItem
           className="text-xs"
-          key="4"
+          key="3"
           aria-label="Accordion 1"
           indicator={({ isOpen }) =>
             isOpen ? (
@@ -60,13 +60,14 @@ export default function Accordion({
             )
           }
           title={<p className="text-graffiti-500">Modelos</p>}
+          isDisabled={models.length === 0}
         >
           <Checkbox options={models} filterType={"model"} />
         </AccordionItem>
 
         <AccordionItem
           className="text-xs"
-          key="3"
+          key="4"
           aria-label="Accordion 1"
           indicator={({ isOpen }) =>
             isOpen ? (
