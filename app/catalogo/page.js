@@ -8,8 +8,8 @@ import { Suspense } from "react";
 
 const brands = await getBrands();
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+//export const dynamic = "force-dynamic";
+//export const revalidate = 0;
 
 export default async function Catalogo({ searchParams }) {
   const keys = Object.keys(searchParams);
@@ -25,13 +25,13 @@ export default async function Catalogo({ searchParams }) {
   return (
     <>
       <Navbar />
-      <Suspense key={query} fallback={<div>Loading...</div>}>
-        <SidebarFilter
+      <SidebarFilter
           brands={brands}
           vehicleType={vehicleType}
           transmission={transmission}
           models={models}
         />
+      <Suspense key={query} fallback={<div>Loading...</div>}>
         <Catalog query={query} />
       </Suspense>
       <Footer />
