@@ -1,6 +1,5 @@
 import { VehiclesLayout } from "@/app/layouts/VehiclesCatalog";
 import VehicleCard from "../../components/VehicleCard";
-import { Suspense } from "react";
 import Pagination from "@/components/ui/Pagination";
 import { getVehicles } from "@/lib/services";
 import NoResults from "./NoResults";
@@ -11,9 +10,7 @@ const Catalog = async ({ query }) => {
     <>
       {vehicles?.data?.length > 0 ? (
         <VehiclesLayout>
-          <Suspense key={vehicles?.data} fallback={<div>Loading...</div>}>
-            <VehicleCard vehicles={vehicles} />
-          </Suspense>
+          <VehicleCard vehicles={vehicles} />
         </VehiclesLayout>
       ) : (
         <NoResults />
