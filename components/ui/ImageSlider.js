@@ -26,11 +26,11 @@ const ImageSlider = ({ vehicle }) => {
 
   return (
     <>
-      <div className="mx-auto rounded-lg w-11/12 md:w-full">
+      <div className="mx-auto rounded-lg w-11/12 md:w-10/12">
         <div className="lg:col-span-4 overflow-hidden relative">
           {slides?.length > 0 ? (
             <ImageZoom
-              className="rounded-lg h-4/6"
+              className="rounded-lg"
               src={slides[currentIndex]}
               alt="car-img"
             />

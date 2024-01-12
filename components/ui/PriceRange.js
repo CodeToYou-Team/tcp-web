@@ -14,11 +14,17 @@ export default function PriceRange() {
   const params = new URLSearchParams(searchParams);
 
   const handleChange = (e) => {
+    let adjustedValue = parseInt(e[1]); // Convierte a entero, ya que parece ser un valor numérico
+
+    if (adjustedValue === 80000) {
+      adjustedValue += 920000; // Suma 920,000 si el valor original es 80,000
+    }
+
     setValue(e);
     params.set("page", "1");
 
     params.set("minPrice", `${e[0]}`);
-    params.set("maxPrice", `${e[1]}`);
+    params.set("maxPrice", `${adjustedValue}`);
 
     replace(`${pathName}?${params.toString()}`);
   };
@@ -27,8 +33,9 @@ export default function PriceRange() {
     <div className="flex flex-col gap-2 w-full h-full my-2 max-w-md items-start justify-center">
       <Slider
         label="Rango de precios"
+        hideValue={true}
         formatOptions={{ style: "currency", currency: "USD" }}
-        step={10}
+        step={500}
         maxValue={80000}
         minValue={0}
         value={value}
@@ -37,7 +44,10 @@ export default function PriceRange() {
       />
       <p className="text-zinc-400 font-medium text-xs">
         Rango seleccionado:{" "}
-        {Array.isArray(value) && value.map((b) => `$${b}`).join(" – ")}
+        {Array.isArray(value) &&
+          value
+            .map((b) => (b === 80000 ? "$80.000 o más" : `$${b}`))
+            .join(" – ")}
       </p>
     </div>
   );

@@ -16,9 +16,9 @@ export default function Checkbox({ options, filterType }) {
     if (value !== "") {
       params.set(`${filterType}`, `${e.join(",")}`);
     } else if (params.has(filterType)) {
-      params.delete(filterType)
+      params.delete(filterType);
     }
-    
+
     replace(`${pathName}?${params.toString()}`);
   };
 
@@ -33,6 +33,10 @@ export default function Checkbox({ options, filterType }) {
             ? "Selecciona una o mas marcas"
             : filterType === "type"
             ? "Selecciona un tipo de vehiculo"
+            : filterType === "model"
+            ? "Selecciona un modelo"
+            : filterType === "transmission"
+            ? "Selecciona la transmisión"
             : ""
         }
         value={searchParams.get(filterType)?.split(",")}
@@ -52,6 +56,5 @@ export default function Checkbox({ options, filterType }) {
         ))}
       </CheckboxGroup>
     </Suspense>
-  )
-  
+  );
 }
