@@ -6,12 +6,15 @@ import { Slider } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function PriceRange() {
-  const [value, setValue] = useState([0, 80000]);
-
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
   const params = new URLSearchParams(searchParams);
+
+  const [value, setValue] = useState([
+    searchParams.get("minPrice") || 0,
+    searchParams.get("maxPrice") || 80000,
+  ]);
 
   const handleChange = (e) => {
     let adjustedValue = parseInt(e[1]); // Convierte a entero, ya que parece ser un valor numérico
@@ -46,7 +49,7 @@ export default function PriceRange() {
         Rango seleccionado:{" "}
         {Array.isArray(value) &&
           value
-            .map((b) => (b === 80000 ? "$80.000 o más" : `$${b}`))
+            .map((b) => (b >= 80000 ? "$80.000 o más" : `$${b}`))
             .join(" – ")}
       </p>
     </div>

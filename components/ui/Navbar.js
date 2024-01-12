@@ -25,19 +25,21 @@ export default function Navbar() {
         />
 
         <NavbarBrand>
-          <Image
-            className="w-auto h-16"
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
-            alt="tcp-logo"
-            width={2650}
-            height={590}
-          />
+          <Link href="/">
+            <Image
+              className="w-auto h-16"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
+              alt="tcp-logo"
+              width={2650}
+              height={590}
+            />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       {/* desktop navbar items */}
 
-      <NavbarContent className="hidden sm:flex gap-4 " justify="end">
+      <NavbarContent className="hidden sm:flex gap-6 " justify="end">
         {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
