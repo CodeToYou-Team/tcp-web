@@ -22,15 +22,14 @@ export default async function VehicleCard({ vehicles }) {
                 {formatNumber(vehicle?.price)}
               </h4>
             </CardHeader>
-            <di className="">
-              <Image
-                alt="latest-1"
-                className="absolute top-8 rounded-none"
-                src={vehicle?.images[0]}
-                width={2316}
-                height={1322}
-              />
-            </di>
+
+            <Image
+              alt="latest-1"
+              className="absolute top-8 rounded-none"
+              src={vehicle?.images[0]}
+              width={2316}
+              height={1322}
+            />
           </Link>
         </Card>
       ))}

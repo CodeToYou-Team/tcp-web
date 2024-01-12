@@ -1,4 +1,4 @@
-import { VehiclesLayout } from "@/app/layouts/VehiclesCatalog";
+import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleCard from "../../components/VehicleCard";
 import Pagination from "@/components/ui/Pagination";
 import { getVehicles } from "@/lib/services";

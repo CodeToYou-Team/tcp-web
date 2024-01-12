@@ -5,6 +5,7 @@ import { getBrands, getModels } from "@/lib/services";
 import { vehicleType, transmission } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
+import SkeletonLayout from "../layouts/SkeletonLayout";
 
 const brands = await getBrands();
 
@@ -26,14 +27,15 @@ export default async function Catalogo({ searchParams }) {
     <>
       <Navbar />
       <SidebarFilter
-          brands={brands}
-          vehicleType={vehicleType}
-          transmission={transmission}
-          models={models}
-        />
-      <Suspense key={query} fallback={<div>Loading...</div>}>
+        brands={brands}
+        vehicleType={vehicleType}
+        transmission={transmission}
+        models={models}
+      />
+      <Suspense key={query} fallback={<SkeletonLayout />}>
         <Catalog query={query} />
       </Suspense>
+
       <Footer />
     </>
   );
