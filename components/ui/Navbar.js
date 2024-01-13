@@ -39,7 +39,7 @@ export default function Navbar() {
 
       {/* desktop navbar items */}
 
-      <NavbarContent className="hidden sm:flex gap-4 " justify="end">
+      <NavbarContent className="hidden sm:flex gap-6 " justify="end">
         {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
