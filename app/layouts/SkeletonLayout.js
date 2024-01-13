@@ -11,10 +11,6 @@ const SkeletonLayout = () => {
         <SkeletonCard />
         <SkeletonCard />
         <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
-        <SkeletonCard />
       </VehiclesLayout>
     </>
   );

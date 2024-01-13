@@ -1,5 +1,6 @@
 import { Button } from "@nextui-org/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -33,19 +34,22 @@ const Hero = () => {
           </p>
 
           <div className=" mt-8 justify-center flex flex-wrap gap-4 text-center">
-            <Button
-              radius="sm"
-              className="block w-auto bg-graffiti-500 px-12  text-zinc-800"
-            >
-              Catálogo
-            </Button>
-
-            <Button
-              radius="sm"
-              className="block w-auto  bg-zinc-50 px-12 text-zinc-800 "
-            >
-              Vende tu auto
-            </Button>
+            <Link href="/catalogo">
+              <Button
+                radius="sm"
+                className="block w-auto bg-graffiti-500 px-12  text-zinc-800"
+              >
+                Catálogo
+              </Button>
+            </Link>
+            <Link href="/venta">
+              <Button
+                radius="sm"
+                className="block w-auto  bg-zinc-50 px-12 text-zinc-800 "
+              >
+                Vende tu auto
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

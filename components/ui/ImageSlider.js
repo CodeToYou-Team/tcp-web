@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { ChevronRight, ChevronLeft, Dot } from "lucide-react";
 import ImageZoom from "react-image-zooom";
 

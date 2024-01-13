@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Slider } from "@nextui-org/react";
-
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function PriceRange() {
@@ -14,10 +13,10 @@ export default function PriceRange() {
   const params = new URLSearchParams(searchParams);
 
   const handleChange = (e) => {
-    let adjustedValue = parseInt(e[1]); // Convierte a entero, ya que parece ser un valor numérico
+    let adjustedValue = parseInt(e[1]);
 
     if (adjustedValue === 80000) {
-      adjustedValue += 920000; // Suma 920,000 si el valor original es 80,000
+      adjustedValue += 920000;
     }
 
     setValue(e);

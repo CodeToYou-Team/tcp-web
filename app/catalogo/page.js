@@ -6,6 +6,7 @@ import { vehicleType, transmission } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
+import SkeletonCard from "@/components/ui/SkeletonCard";
 
 const brands = await getBrands();
 
@@ -35,7 +36,6 @@ export default async function Catalogo({ searchParams }) {
       <Suspense key={query} fallback={<SkeletonLayout />}>
         <Catalog query={query} />
       </Suspense>
-
       <Footer />
     </>
   );
