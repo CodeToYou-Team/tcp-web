@@ -2,7 +2,7 @@ import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
 import { getBrands, getModels } from "@/lib/services";
-import { vehicleType, transmission } from "@/lib/data";
+import { vehicleType, transmission, sort } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
@@ -32,6 +32,7 @@ export default async function Catalogo({ searchParams }) {
         vehicleType={vehicleType}
         transmission={transmission}
         models={models}
+        sort={sort}
       />
       <Suspense key={query} fallback={<SkeletonLayout />}>
         <Catalog query={query} />

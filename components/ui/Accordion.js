@@ -9,6 +9,7 @@ export default function Accordion({
   vehicleType,
   transmission,
   models,
+  sort,
 }) {
   return (
     <>
@@ -79,6 +80,21 @@ export default function Accordion({
           title={<p className="text-graffiti-500">Transmisión</p>}
         >
           <Checkbox options={transmission} filterType={"transmission"} />
+        </AccordionItem>
+        <AccordionItem
+          className="text-xs"
+          key="5"
+          aria-label="Accordion 1"
+          indicator={({ isOpen }) =>
+            isOpen ? (
+              <Minus className="text-graffiti-500 rotate-90" />
+            ) : (
+              <Plus className="text-graffiti-500" />
+            )
+          }
+          title={<p className="text-graffiti-500">Ordenar</p>}
+        >
+          <Checkbox options={sort} filterType={"sort"} onlyOne={true} />
         </AccordionItem>
       </NextUiAccordion>
     </>
