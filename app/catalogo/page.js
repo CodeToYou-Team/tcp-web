@@ -21,7 +21,15 @@ export default async function Catalogo({ searchParams }) {
   let query = "";
 
   for (let i = 0; i < keys.length; i++) {
-    query = query + `${keys[i]}=${searchParams[keys[i]]}&`;
+    if (searchParams[keys[i]] === "Agregado recientemente") {
+      query = query + `${keys[i]}=reciente&`;
+    } else if (searchParams[keys[i]] === "Precio ascendente") {
+      query = query + `${keys[i]}=ascendente&`;
+    } else if (searchParams[keys[i]] === "Precio descendente") {
+      query = query + `${keys[i]}=descendente&`;
+    } else {
+      query = query + `${keys[i]}=${searchParams[keys[i]]}&`;
+    }
   }
 
   return (
