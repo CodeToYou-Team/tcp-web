@@ -27,41 +27,56 @@ const VehicleInfo = ({ vehicle }) => {
             </div>
           )}
           <div className="flex flex-col justify-center items-center md:items-start">
-            <p>
-              <span className="text-md md:text-lg font-normal mr-3">Año:</span>
-              <span className=" font-semibold">{vehicle.year}</span>
-            </p>
-            <p>
-              <span className="text-md md:text-lg font-normal mr-3">
-                Kilometraje:
-              </span>
-
-              <span className="font-semibold">{formatNumber(vehicle.km)}</span>
-            </p>
-            <p>
-              <span className="text-md md:text-lg font-normal mr-3 ">
-                Transmisión:
-              </span>
-              <span className="font-semibold">{vehicle.transmission}</span>
-            </p>
-            <p>
-              <span className="text-md md:text-lg font-normal mr-3 ">
-                Motor:
-              </span>
-              <span className="font-semibold">{vehicle.motor}</span>
-            </p>
-            <p>
-              <span className="text-md md:text-lg font-normal mr-3 ">
-                Dueños:
-              </span>
-              <span className="font-semibold">{vehicle.owners}</span>
-            </p>
+            {vehicle.year && (
+              <p>
+                <span className="text-md md:text-lg font-normal mr-3">
+                  Año:
+                </span>
+                <span className="font-semibold">{vehicle.year}</span>
+              </p>
+            )}
+            {vehicle.km && (
+              <p>
+                <span className="text-md md:text-lg font-normal mr-3">
+                  Kilometraje:
+                </span>
+                <span className="font-semibold">
+                  {formatNumber(vehicle.km)}
+                </span>
+              </p>
+            )}
+            {vehicle.transmission && (
+              <p>
+                <span className="text-md md:text-lg font-normal mr-3 ">
+                  Transmisión:
+                </span>
+                <span className="font-semibold">{vehicle.transmission}</span>
+              </p>
+            )}
+            {vehicle.motor && (
+              <p>
+                <span className="text-md md:text-lg font-normal mr-3 ">
+                  Motor:
+                </span>
+                <span className="font-semibold">{vehicle.motor}</span>
+              </p>
+            )}
+            {vehicle.owners && (
+              <p>
+                <span className="text-md md:text-lg font-normal mr-3 ">
+                  Dueños:
+                </span>
+                <span className="font-semibold">{vehicle.owners}</span>
+              </p>
+            )}
           </div>
-        </div>
-        <div className="py-2">
-          <span className="text-gray-500 text-sm">
-            Disponible en: {vehicle.location}
-          </span>
+          <div className="py-2">
+            {vehicle.location && (
+              <span className="text-gray-500 text-sm">
+                Disponible en: {vehicle.location}
+              </span>
+            )}
+          </div>
         </div>
 
         <div className="flex justify-center gap-2 mt-6">

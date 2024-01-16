@@ -6,6 +6,7 @@ import VehicleInfo from "../layouts/VehicleInfo";
 import VehicleCard from "@/components/VehicleCard";
 import { getRecommendationCars } from "@/lib/services";
 import { VehiclesLayout } from "../layouts/VehiclesLayout";
+import VehicleDetails from "../layouts/VehicleDetails";
 
 export default async function Product({ params }) {
   const { id } = params;
@@ -23,7 +24,7 @@ export default async function Product({ params }) {
       </div>
 
       {/* Información adicional del vehículo */}
-
+      <VehicleDetails vehicle={vehicle} />
       {/* Autos recomendados */}
       <VehiclesLayout title="Otros autos que te pueden interesar">
         <VehicleCard vehicles={recommendedVehicles} />

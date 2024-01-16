@@ -34,9 +34,9 @@ export default function Checkbox({ options, filterType, onlyOne }) {
         }}
         label={
           filterType === "brand"
-            ? "Selecciona una o mas marcas"
+            ? "Selecciona una o más marcas"
             : filterType === "type"
-            ? "Selecciona un tipo de vehiculo"
+            ? "Selecciona un tipo de vehículo"
             : filterType === "model"
             ? "Selecciona un modelo"
             : filterType === "transmission"
