@@ -1,7 +1,11 @@
+"use client";
 import { Button } from "@nextui-org/react";
 import { formatNumber } from "@/lib/services";
+import { usePathname } from "next/navigation";
 
 const VehicleInfo = ({ vehicle }) => {
+  let route = window.location.href;
+
   return (
     <>
       <div className="px-4 text-center items-center md:mt-6">
@@ -26,7 +30,7 @@ const VehicleInfo = ({ vehicle }) => {
               </span>
             </div>
           )}
-          <div className="flex flex-col justify-center items-center md:items-start">
+          <div className="flex flex-col justify-center items-center md:items-start my-10">
             {vehicle.year && (
               <p>
                 <span className="text-md md:text-lg font-normal mr-3">
@@ -79,10 +83,15 @@ const VehicleInfo = ({ vehicle }) => {
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-6">
-          <Button className="sm:flex-none px-6 mx-1  bg-graffiti-500  text-center rounded-lg outline-none transition duration-100">
-            Consultar vía Whatsapp
-          </Button>
+        <div className="flex justify-center gap-2 mt-4">
+          <a
+            target="_blank"
+            href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20este%20vehículo%20${route}`}
+          >
+            <Button className="sm:flex-none px-6 mx-1  bg-graffiti-500  text-center rounded-lg outline-none transition duration-100">
+              Consultar vía Whatsapp
+            </Button>
+          </a>
         </div>
       </div>
     </>
