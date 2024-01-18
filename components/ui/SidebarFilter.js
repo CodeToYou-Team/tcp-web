@@ -20,7 +20,6 @@ const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
 
   const CleanFilter = () => {
     replace(`${pathName}`);
-    console.log(pathName);
   };
   return (
     <>

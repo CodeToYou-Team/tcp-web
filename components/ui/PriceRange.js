@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Slider } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 export default function PriceRange() {
   const searchParams = useSearchParams();
@@ -24,12 +25,17 @@ export default function PriceRange() {
 
     setValue(e);
     params.set("page", "1");
-
     params.set("minPrice", `${e[0]}`);
     params.set("maxPrice", `${adjustedValue}`);
 
-    replace(`${pathName}?${params.toString()}`);
+    // Solo aplica el debounce al reemplazo de la URL
+    debouncedReplace(`${pathName}?${params.toString()}`);
   };
+
+  // Aplica el debounce solo a la función de reemplazo
+  const debouncedReplace = useDebouncedCallback((url) => {
+    replace(url);
+  }, 1000);
 
   return (
     <div className="flex flex-col gap-2 w-full h-full my-2 max-w-md items-start justify-center">
