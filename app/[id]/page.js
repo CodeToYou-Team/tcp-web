@@ -27,6 +27,19 @@ export default async function Product({ params }) {
           name="description"
           content={`Descubre este increíble ${vehicle.brand} ${vehicle.model}. ¡Programa una cita para conocer más detalles!`}
         />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`/${vehicle?._id}`} />
+        <meta
+          property="og:title"
+          content={`${vehicle.brand} ${vehicle.model} - Tu Carro Propio`}
+        />
+        <meta
+          property="og:description"
+          content={`Descubre este increíble ${vehicle.brand} ${vehicle.model}. ¡Programa una cita para conocer más detalles!`}
+        />
+        <meta property="og:image" content={vehicle?.images[0]} />
       </Head>
       <Navbar />
       {/* Imagen y cabecera del vehículo */}
