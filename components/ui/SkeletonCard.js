@@ -1,7 +1,7 @@
 import ContentLoader from "react-content-loader";
 
 const SkeletonCard = (props) => (
-  <div className="col-span-12 sm:col-span-4 h-[350px]">
+  <div className="col-span-12 md:col-span-6 lg:col-span-4 h-[350px]">
     <ContentLoader
       speed={1}
       width={360}

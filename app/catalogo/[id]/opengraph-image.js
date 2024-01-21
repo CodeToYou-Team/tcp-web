@@ -3,8 +3,8 @@ import { getVehicleById } from "@/lib/services";
 
 export const runtime = "edge";
 export const size = {
-  width: 1200,
-  height: 630,
+  width: 1080,
+  height: 1080,
 };
 
 export const contentType = "image/png";
@@ -19,8 +19,8 @@ export default async function og({ params }) {
         {/* Background */}
         <div tw="absolute flex inset-0">
           <img
-            tw="flex flex-1"
-            src={vehicle?.image[0] + "&w=1200&h=630&auto=format&q=75"}
+            tw="flex rounded-lg"
+            src={vehicle?.images[0]}
             alt={vehicle?.brand + " " + vehicle?.model}
           />
           {/* Overlay */}
