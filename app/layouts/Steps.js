@@ -1,4 +1,4 @@
-import { Image } from "@nextui-org/react";
+import Image from "next/image";
 import { Card, CardHeader, CardFooter, Button } from "@nextui-org/react";
 
 export default function Steps() {
@@ -21,7 +21,8 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              removeWrapper
+              width={1158}
+              height={661}
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700872418/tcp-web/step1-bg_tt2llv.png"
@@ -51,7 +52,8 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              removeWrapper
+              width={1158}
+              height={661}
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700730640/tcp-web/step2-bg_b2j7fd.png"
@@ -81,7 +83,8 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              removeWrapper
+              width={1158}
+              height={661}
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700726897/tcp-web/fortuner-2023_xaeedy.png"

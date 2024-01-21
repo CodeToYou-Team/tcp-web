@@ -20,7 +20,7 @@ export default async function og({ params }) {
         <div tw="absolute flex inset-0">
           <img
             tw="flex rounded-lg"
-            src={vehicle?.images[0]}
+            src={vehicle?.images[0] + "&w=1080&h=1080&auto=format&q=75"}
             alt={vehicle?.brand + " " + vehicle?.model}
           />
           {/* Overlay */}
