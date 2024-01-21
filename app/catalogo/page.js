@@ -6,12 +6,8 @@ import { vehicleType, transmission, sort } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
-import SkeletonCard from "@/components/ui/SkeletonCard";
 
 const brands = await getBrands();
-
-//export const dynamic = "force-dynamic";
-//export const revalidate = 0;
 
 export default async function Catalogo({ searchParams }) {
   const keys = Object.keys(searchParams);
