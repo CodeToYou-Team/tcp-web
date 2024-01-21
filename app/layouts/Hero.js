@@ -11,8 +11,8 @@ const Hero = () => {
           <Image
             alt="Hero Background"
             priority
-            width={1772}
-            height={1181}
+            width={886}
+            height={591}
             src="https://res.cloudinary.com/dkokeszcd/image/upload/v1701079265/tcp-web/corolla-hero_ht6ect.jpg"
             className="absolute inset-0 w-full h-full object-cover"
           />

@@ -28,6 +28,8 @@ const Footer = () => {
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a
+            alt="whatsapp-link"
+            rel="noopener noreferrer"
             target="_blank"
             href={`https://wa.link/07ixay`}
             className="text-graffiti ml-3  hover:scale-125 hover:text-yellow-500 hover:animate-pulse cursor-pointer"
@@ -43,6 +45,8 @@ const Footer = () => {
             </svg>
           </a>
           <a
+            alt="tiktok-link"
+            rel="noreferrer"
             target="_blank"
             href="https://www.tiktok.com/@tucarropropio?lang=es"
             className="text-graffiti ml-3  hover:scale-125 hover:text-yellow-500 hover:animate-pulse cursor-pointer"
@@ -59,7 +63,8 @@ const Footer = () => {
             </svg>
           </a>
           <a
-            key={"logo-instagram"}
+            alt="instagram-link"
+            rel="noreferrer"
             target="_blank"
             href={"https://www.instagram.com/tucarropropio/?hl=es-la"}
             className="text-graffiti-500 ml-3  hover:scale-125  hover:animate-pulse cursor-pointer"
