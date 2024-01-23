@@ -7,13 +7,13 @@ import VehicleCard from "@/components/VehicleCard";
 import { getRecommendationCars } from "@/lib/services";
 import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
-import og from "./opengraph-image";
 
 // Función para generar metadatos de forma dinámica
 export async function generateMetadata({ params }) {
   const { id } = params;
   const vehicle = await getVehicleById(id);
-  const metadataImage = og({ params });
+  const metadataImage = vehicle.images[0];
+
   return {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} - Tu Carro Propio`,
     description: `Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`,
