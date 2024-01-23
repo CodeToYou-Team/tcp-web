@@ -8,7 +8,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Link } from "@nextui-org/link";
+import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import { navbarItems } from "@/lib/data";
@@ -30,8 +30,8 @@ export default function Navbar() {
               className="w-auto h-16"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
               alt="tcp-logo"
-              width={2650}
-              height={590}
+              width={1325}
+              height={295}
             />
           </Link>
         </NavbarBrand>
