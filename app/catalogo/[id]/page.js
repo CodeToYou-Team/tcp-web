@@ -12,14 +12,12 @@ import VehicleDetails from "@/app/layouts/VehicleDetails";
 export async function generateMetadata({ params }, parent) {
   const { id } = params;
   const vehicle = await getVehicleById(id);
-  const metadataImages = (await parent).openGraph?.images || [];
-  const vehicleImage = vehicle?.images[0];
 
   return {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} - Tu Carro Propio`,
     description: `Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`,
     openGraph: {
-      images: [vehicleImage, ...metadataImages],
+      images: { url: vehicle?.images[0] },
     },
   };
 }

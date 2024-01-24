@@ -3,8 +3,8 @@ import { getVehicleById } from "@/lib/services";
 
 export const runtime = "edge";
 export const size = {
-  width: 1080,
-  height: 1080,
+  width: 420,
+  height: 420,
 };
 
 export const contentType = "image/png";
