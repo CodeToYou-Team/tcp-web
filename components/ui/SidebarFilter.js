@@ -13,6 +13,8 @@ import { Button } from "@nextui-org/react";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
 import { usePathname, useRouter } from "next/navigation";
+import { ListFilter } from "lucide-react";
+import SectionBanner from "./SectionBanner";
 
 const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
   const { replace } = useRouter();
@@ -26,14 +28,19 @@ const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
       {" "}
       <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
         <Sheet className="scrollbar-thumb-gray-900">
-          <SheetTrigger className="w-fullflex" asChild>
-            <Button
-              radius="sm"
-              className="block w-auto mx-auto md:ml-16 mt-6 font-medium bg-graffiti-500 px-12  text-zinc-800"
-            >
-              Filtrar
-            </Button>
-          </SheetTrigger>
+          <SectionBanner>
+            <SheetTrigger className="w-fullflex" asChild>
+              <Button
+                disableAnimation={true}
+                radius="sm"
+                className="flex  w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
+              >
+                <ListFilter className="text-graffiti-500 scale-85" />
+                Filtrar
+              </Button>
+            </SheetTrigger>
+          </SectionBanner>
+
           <SheetContent className="bg-zinc-900 overflow-auto" side="left">
             <SheetHeader>
               <SheetTitle>Filtra tu búsqueda</SheetTitle>
