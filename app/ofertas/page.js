@@ -4,8 +4,8 @@ import { VehiclesLayout } from "../layouts/VehiclesLayout";
 import VehicleCard from "@/components/VehicleCard";
 import { getOffers } from "@/lib/services";
 
-const Ofertas = ({}) => {
-  const offersVehicles = getOffers();
+export default async function Ofertas() {
+  const offersVehicles = await getOffers();
   return (
     <>
       <Navbar />
@@ -17,6 +17,4 @@ const Ofertas = ({}) => {
       <Footer />
     </>
   );
-};
-
-export default Ofertas;
+}

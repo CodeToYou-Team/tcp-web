@@ -39,10 +39,10 @@ const VehicleInfo = ({ vehicle }) => {
             {vehicle.km && (
               <p>
                 <span className="text-md md:text-lg font-normal mr-3">
-                  Kilometraje:
+                  Recorrido:
                 </span>
                 <span className="font-semibold">
-                  {formatNumber(vehicle.km)}
+                  {formatNumber(vehicle.km)} {vehicle.km_unit}
                 </span>
               </p>
             )}
