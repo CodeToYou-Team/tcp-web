@@ -5,6 +5,7 @@ import VehicleCard from "@/components/VehicleCard";
 import { getOffers } from "@/lib/services";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
+import NoResults from "../layouts/NoResults";
 
 export default async function Ofertas() {
   const offersVehicles = await getOffers();
