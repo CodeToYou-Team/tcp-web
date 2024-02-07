@@ -13,8 +13,8 @@ const VehicleInfo = ({ vehicle }) => {
         <div className="mb-2 w-full text-center justify-center">
           {vehicle.discount !== 0 ? (
             <div className="flex justify-center my-2">
-              <span className="text-red-500 line-through text-xl px-2 pt-1.5 md:pt-3 mb-0.5">
-                ${formatNumber(vehicle.price)}
+              <span className="text-red-500 line-through text-xl px-2 mt-1.5 mb-0.5">
+                ${formatNumber(vehicle.discount)}
               </span>
               <span className=" text-3xl md:text-4xl font-bold">
                 ${formatNumber(vehicle.price)}
@@ -69,13 +69,6 @@ const VehicleInfo = ({ vehicle }) => {
                 </span>
                 <span className="font-semibold">{vehicle.owners}</span>
               </p>
-            )}
-          </div>
-          <div className="py-2">
-            {vehicle.location && (
-              <span className="text-gray-500 text-sm">
-                Disponible en: {vehicle.location}
-              </span>
             )}
           </div>
         </div>

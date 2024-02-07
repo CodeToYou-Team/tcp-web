@@ -5,8 +5,8 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className=" body-font bg-zinc-900">
-      <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col ">
+    <footer className="body-font bg-zinc-900">
+      <div className="container px-5 py-9 mx-auto flex items-center sm:flex-row flex-col ">
         <Link
           key={"logo-footer"}
           href={"/"}

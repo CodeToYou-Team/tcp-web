@@ -31,7 +31,7 @@ export default async function Product({ params }) {
   return (
     <>
       <Navbar />
-      {/* Imagen y cabecera del vehículo */}
+      {/* Imagen e información principal del vehículo */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         <ImageSlider vehicle={vehicle} />
         <VehicleInfo vehicle={vehicle} />

@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 export default function Map() {
   return (
     <>
-      <Card className="bg-zinc-800 m-8 text-zinc-100 w-1/2 mx-auto">
+      <Card className="bg-zinc-800 m-8 text-zinc-100 w-5/6 md:w-1/2 mx-auto">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <h2 className="title-font font-bold text- text-xs">DIRECCIÓN</h2>
           <p className="mt-1 break-words ">

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Card, CardHeader, CardFooter, Button } from "@nextui-org/react";
+import Link from "next/link";
 
 export default function Steps() {
   return (
@@ -33,13 +34,15 @@ export default function Steps() {
                   Gran variedad de marcas y modelos.
                 </p>
               </div>
-              <Button
-                className="text-xs font-medium bg-graffiti-500"
-                radius="sm"
-                size="lg"
-              >
-                Ver catálogo
-              </Button>
+              <Link href="/catalogo">
+                <Button
+                  className="text-xs font-medium bg-graffiti-500"
+                  radius="sm"
+                  size="lg"
+                >
+                  Ver catálogo
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
           <Card
@@ -64,13 +67,18 @@ export default function Steps() {
                   ¿Quieres programar una cita?
                 </p>
               </div>
-              <Button
-                className="text-xs font-medium bg-graffiti-500"
-                radius="sm"
-                size="lg"
+              <a
+                target="_blank"
+                href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20coordinar%20una%20cita%20`}
               >
-                Whatsapp
-              </Button>
+                <Button
+                  className="text-xs font-medium bg-graffiti-500"
+                  radius="sm"
+                  size="lg"
+                >
+                  Whatsapp
+                </Button>
+              </a>
             </CardFooter>
           </Card>
           <Card
@@ -95,13 +103,15 @@ export default function Steps() {
                   Realiza el papeleo y obtén tu nuevo vehículo.
                 </p>
               </div>
-              <Button
-                className="text-xs px-2 font-medium bg-graffiti-500 "
-                radius="sm"
-                size="lg"
-              >
-                Más info
-              </Button>
+              <Link href="/acerca-de-nosotros">
+                <Button
+                  className="text-xs px-2 font-medium bg-graffiti-500 "
+                  radius="sm"
+                  size="lg"
+                >
+                  Más info
+                </Button>
+              </Link>
             </CardFooter>
           </Card>
         </div>

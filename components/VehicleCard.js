@@ -14,13 +14,23 @@ export default async function VehicleCard({ vehicles }) {
         >
           <Link className="relative w-full" href={`/catalogo/${vehicle?._id}`}>
             <CardHeader className="py-2 px-4 flex-col items-start bg-zinc-800 w-full absolute z-20">
-              <h4 className="font-bold text-large text-zinc-100">
+              <h1 className="font-bold text-large text-zinc-100">
                 {vehicle?.brand + " " + vehicle?.model + " " + vehicle?.version}
-              </h4>
+              </h1>
               <p className="text-md text-zinc-100 font-bold">{vehicle?.year}</p>
-              <h4 className="text-zinc-100 text-xl font-bold text-end">
-                ${formatNumber(vehicle?.price)}
-              </h4>
+              <div className="flex gap-2">
+                <p className="text-zinc-100 text-xl font-bold text-end">
+                  ${formatNumber(vehicle?.price)}
+                </p>
+
+                {vehicle?.discount !== 0 ? (
+                  <p className="text-red-500 text-md mt-0.5 font-semibold text-end line-through">
+                    ${formatNumber(vehicle.discount)}
+                  </p>
+                ) : (
+                  <></>
+                )}
+              </div>
             </CardHeader>
 
             <Image

@@ -44,14 +44,6 @@ const ImageSlider = ({ vehicle }) => {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        {vehicle?.discount !== 0 ? (
-          <span className="bg-red-500 text-white text-sm tracking-wider font-semibold uppercase rounded-br-lg rounded-tl-lg absolute left-0 top-0 px-3 py-1.5">
-            -{vehicle?.discount}%
-          </span>
-        ) : (
-          <></>
-        )}
       </div>
     </>
   );
