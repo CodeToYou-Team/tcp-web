@@ -19,7 +19,7 @@ export default function Venta() {
         image={
           <Image
             className="flex mx-auto w-2/3 md:w-1/3 max-w-none my-4"
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1702273736/tcp-web/iphone-whatsapp-mockup_tjkyco.png"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1707316230/iphone-whatsapp-mockup_m06ztd.png"
             alt="App screenshot"
             width={1335}
             height={2000}
