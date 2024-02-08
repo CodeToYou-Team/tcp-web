@@ -63,7 +63,7 @@ export default function Accordion({
           title={<p className="text-graffiti-500">Modelos</p>}
           isDisabled={models.length === 0}
         >
-          <Checkbox options={models} filterType={"model"} />
+          <Checkbox options={models} filterType={"model"} dependency={true}/>
         </AccordionItem>
 
         <AccordionItem
