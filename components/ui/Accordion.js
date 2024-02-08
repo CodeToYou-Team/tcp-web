@@ -49,22 +49,24 @@ export default function Accordion({
           <Checkbox options={brands} filterType={"brand"} />
         </AccordionItem>
 
-        <AccordionItem
-          className="text-xs"
-          key="3"
-          aria-label="Accordion 1"
-          indicator={({ isOpen }) =>
-            isOpen ? (
-              <Minus className="text-graffiti-500 rotate-90" />
-            ) : (
-              <Plus className="text-graffiti-500" />
-            )
-          }
-          title={<p className="text-graffiti-500">Modelos</p>}
-          isDisabled={models.length === 0}
-        >
-          <Checkbox options={models} filterType={"model"} dependency={true}/>
-        </AccordionItem>
+        { models.length !== 0 ?
+          <AccordionItem
+            className="text-xs"
+            key="3"
+            aria-label="Accordion 1"
+            indicator={({ isOpen }) =>
+              isOpen ? (
+                <Minus className="text-graffiti-500 rotate-90" />
+              ) : (
+                <Plus className="text-graffiti-500" />
+              )
+            }
+            title={<p className="text-graffiti-500">Modelos</p>}
+            //isDisabled={models.length === 0}
+          >
+            <Checkbox options={models} filterType={"model"} dependency={true}/>
+          </AccordionItem>
+          : null }
 
         <AccordionItem
           className="text-xs"
