@@ -17,7 +17,7 @@ export const metadata = {
   },
   openGraph: {
     images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png",
+      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
   },
 };
 

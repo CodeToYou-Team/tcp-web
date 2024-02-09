@@ -7,6 +7,23 @@ import CTA from "../layouts/CTA";
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Tu Carro Propio - Venta",
+  description:
+    "Descubre como vender tu auto de manera rápida y sencilla con nuestro equipo de ventas",
+  metadataBase: new URL("https://tcp-web-iota.vercel.app"),
+  alternates: {
+    canonical: "/venta",
+    languages: {
+      "es-VE": "/es-VE",
+    },
+  },
+  openGraph: {
+    images:
+      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+  },
+};
+
 export default function Venta() {
   return (
     <>

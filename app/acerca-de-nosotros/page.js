@@ -5,8 +5,24 @@ import Footer from "@/components/ui/Footer";
 import CTA from "../layouts/CTA";
 import Map from "../layouts/Map";
 import Image from "next/image";
-import Link from "next/link";
 import { Instagram } from "lucide-react";
+
+export const metadata = {
+  title: "Tu Carro Propio - Acerca de nosotros",
+  description:
+    "Conoce un poco más sobre nuestra empresa, donde encontrarnos, nuestras redes y más.",
+  metadataBase: new URL("https://tcp-web-iota.vercel.app"),
+  alternates: {
+    canonical: "/acerca-de-nosotros",
+    languages: {
+      "es-VE": "/es-VE",
+    },
+  },
+  openGraph: {
+    images:
+      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+  },
+};
 
 export default function About() {
   return (
