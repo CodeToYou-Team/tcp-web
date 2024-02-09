@@ -8,7 +8,7 @@ const combinedClasses = `bg-zinc-900 text-slate-100 scrollbar-thumb-gray-900 ${i
 export const metadata = {
   title: "Tu Carro Propio",
   description: "Concesionario de autos en Caracas",
-  metadataBase: new URL("https://tcp-web-iota.vercel.app"),
+  metadataBase: new URL("https://www.tucarropropiove.com"),
   alternates: {
     canonical: "/",
     languages: {

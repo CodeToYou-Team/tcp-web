@@ -11,7 +11,7 @@ export const metadata = {
   title: "Tu Carro Propio - Venta",
   description:
     "Descubre como vender tu auto de manera rápida y sencilla con nuestro equipo de ventas",
-  metadataBase: new URL("https://tcp-web-iota.vercel.app"),
+  metadataBase: new URL("https://www.tucarropropiove.com"),
   alternates: {
     canonical: "/venta",
     languages: {
