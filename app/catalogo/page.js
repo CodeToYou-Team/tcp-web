@@ -7,22 +7,24 @@ import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
 
-export const metadata = {
-  title: "Tu Carro Propio - Catálogo",
-  description:
-    "Conoce nuestro amplio catálogo de vehículos, con las mejores marcas y modelos del mercado",
-  metadataBase: new URL("https://tucarropropiove.com"),
-  alternates: {
-    canonical: "/catalogo",
-    languages: {
-      "es-VE": "/es-VE",
+export async function metadata() {
+  return {
+    title: "Tu Carro Propio - Catálogo",
+    description:
+      "Conoce nuestro amplio catálogo de vehículos, con las mejores marcas y modelos del mercado",
+    metadataBase: new URL("https://www.tucarropropiove.com"),
+    alternates: {
+      canonical: "/catalogo",
+      languages: {
+        "es-VE": "/es-VE",
+      },
     },
-  },
-  openGraph: {
-    images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707454425/portada-catalogo-static_xywzaa.png",
-  },
-};
+    openGraph: {
+      images:
+        "https://res.cloudinary.com/dkokeszcd/image/upload/v1707454425/portada-catalogo-static_xywzaa.png",
+    },
+  };
+}
 
 const brands = await getBrands();
 
