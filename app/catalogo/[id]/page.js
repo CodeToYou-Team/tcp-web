@@ -9,7 +9,7 @@ import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
 
 // Función para generar metadatos de forma dinámica
-export async function generateMetadata({ params }, parent) {
+export async function generateMetadata({ params }) {
   const { id } = params;
   const vehicle = await getVehicleById(id);
 
@@ -47,35 +47,4 @@ export default async function Product({ params }) {
       <Footer />
     </>
   );
-}
-
-{
-  /* <Head>
-<title>{`${vehicle?.brand} ${vehicle?.model} - Tu Carro Propio`}</title>
-<meta
-  name="title"
-  content={`${vehicle?.brand} ${vehicle?.model} - Tu Carro Propio`}
-/>
-<meta
-  name="description"
-  content={`Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`}
-/> */
-}
-
-{
-  /* Open Graph / Facebook */
-}
-{
-  /* <meta property="og:type" content="website" />
-<meta property="og:url" content={`/${vehicle?._id}`} />
-<meta
-  property="og:title"
-  content={`${vehicle?.brand} ${vehicle?.model} - Tu Carro Propio`}
-/>
-<meta
-  property="og:description"
-  content={`Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`}
-/>
-<meta property="og:image" content={vehicle?.images[0]} />
-</Head> */
 }

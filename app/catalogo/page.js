@@ -11,7 +11,7 @@ export const metadata = {
   title: "Tu Carro Propio - Catálogo",
   description:
     "Conoce nuestro amplio catálogo de vehículos, con las mejores marcas y modelos del mercado",
-  metadataBase: new URL("https://tcp-web-iota.vercel.app"),
+  metadataBase: new URL("https://tucarropropiove.com"),
   alternates: {
     canonical: "/catalogo",
     languages: {
