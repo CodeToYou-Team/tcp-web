@@ -53,9 +53,7 @@ export default function PriceRange() {
       <p className="text-zinc-400 font-medium text-xs">
         Rango seleccionado:{" "}
         {Array.isArray(value) &&
-          value
-            .map((b) => (b >= 80000 ? "$80.000 o más" : `$${b}`))
-            .join(" – ")}
+          value.map((b) => (b >= 80000 ? "$80000 o más" : `$${b}`)).join(" – ")}
       </p>
     </div>
   );

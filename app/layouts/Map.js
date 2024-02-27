@@ -3,7 +3,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 export default function Map() {
   return (
     <>
-      <Card className="bg-zinc-800 m-8 text-zinc-100 w-5/6 md:w-1/2 mx-auto">
+      <Card className="bg-zinc-800 text-zinc-100 h-1/2 mx-auto w-5/6 mt-12 lg:mt-40">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <h2 className="title-font font-bold text- text-xs">DIRECCIÓN</h2>
           <p className="mt-1 break-words ">
@@ -21,19 +21,14 @@ export default function Map() {
           ></iframe>
         </CardBody>
         <CardFooter>
-          <div className="lg:w-1/2 pt-4 lg:mt-0">
-            <h2 className="title-font font-bold   text-xs">EMAIL</h2>
+          <div className="lg:w-1/2 lg:mt-0">
+            <h2 className="title-font font-bold text-xs">EMAIL</h2>
             <p className=" leading-relaxed">tucarropropiove@gmail.com</p>
-            <h2 className="title-font font-bold   text-xs mt-4">TELÉFONOS</h2>
+            <h2 className="title-font font-bold text-xs mt-4">TELÉFONOS</h2>
             <p className="leading-relaxed">+58 424-1504459</p>
           </div>
         </CardFooter>
       </Card>
-      <div className="w-full h-full">
-        <div>
-          <div className="lg:w-1/2 pl-4 text-sm pr-12 py-4"></div>
-        </div>
-      </div>
     </>
   );
 }

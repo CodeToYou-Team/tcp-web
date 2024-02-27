@@ -10,7 +10,9 @@ export default function CTA({ title, description, image, link }) {
             <p className="mt-6 text-lg leading-8 text-zinc-200">
               {description}
             </p>
-            <div className="mt-10 flex">{link}</div>
+            <div className="mt-10 flex justify-center lg:justify-start">
+              {link}
+            </div>
           </div>
           {image}
         </div>

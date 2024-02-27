@@ -46,7 +46,7 @@ export default function Venta() {
           <Link
             key={"logo-whatsapp"}
             href={"/index"}
-            className="text-graffiti-500 flex gap-2 hover:animate-pulse cursor-pointer"
+            className="text-graffiti-500 flex gap-2  hover:animate-pulse cursor-pointer"
           >
             Ir a Whatsapp
             <svg
