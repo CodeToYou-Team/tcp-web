@@ -37,8 +37,8 @@ export default async function VehicleCard({ vehicles }) {
               alt="latest-1"
               className="absolute top-8 rounded-none group-hover:scale-110 transition-all"
               src={vehicle?.images[0]}
-              width={1080}
-              height={1080}
+              width={700}
+              height={700}
             />
           </Link>
         </Card>

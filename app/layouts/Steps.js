@@ -22,11 +22,11 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              width={1158}
-              height={661}
+              width={800}
+              height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700872418/tcp-web/step1-bg_tt2llv.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089558/tcp-web/step1-bg_s4blpr.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
@@ -55,11 +55,11 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              width={1158}
-              height={661}
+              width={800}
+              height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700730640/tcp-web/step2-bg_b2j7fd.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089556/tcp-web/step2-bg_slt7no.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
@@ -91,11 +91,11 @@ export default function Steps() {
               </h4>
             </CardHeader>
             <Image
-              width={1158}
-              height={661}
+              width={800}
+              height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700726897/tcp-web/fortuner-2023_xaeedy.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089558/tcp-web/step3-bg_zwkmis.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
