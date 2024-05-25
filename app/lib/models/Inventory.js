@@ -1,0 +1,55 @@
+import mongoose from "mongoose";
+
+const inventorySchema = mongoose.Schema({
+  brand: String,
+  model: String,
+  version: String,
+  type: String,
+  year: Number,
+  km: Number,
+  km_unit: String,
+  motor: String,
+  owners: String,
+  price: Number,
+  discount: Number,
+  transmission: String,
+  //fuel: String,
+  tapizado: String,
+  //location: [String],
+  t4x4: {
+    type: Boolean,
+    default: false,
+  },
+  //armor: { type: Boolean, default: false, },
+  power: String,
+  //accel: String,
+  fuelConsumption: String,
+  fuelCapacity: String,
+  details: String,
+  ac: { 
+    type: Boolean, 
+    default: true 
+  },
+  extras: String,
+  folder: String,
+  images: [String],
+//  mainImg: String,
+//  othersImg: [String],
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  updatedAt: {
+    type: Date,
+    default: new Date(),
+  },  
+  enabled: { 
+    type: Boolean, 
+    default: true 
+  },
+},
+{
+  collection: 'inventory'
+})
+
+export default mongoose.models?.Inventory || mongoose.model("Inventory", inventorySchema);

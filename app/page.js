@@ -5,11 +5,11 @@ import Brands from "./layouts/Brands";
 import Steps from "./layouts/Steps";
 import { Suspense } from "react";
 import VehicleCard from "@/components/VehicleCard";
-import { getLatestVehicles } from "@/lib/services";
+import { getLatestCars } from "@/app/lib/actions";
 import { VehiclesLayout } from "./layouts/VehiclesLayout";
 
 export default async function Home() {
-  const latestVehicles = await getLatestVehicles();
+  const latestVehicles = await getLatestCars();
   return (
     <>
       <Navbar />

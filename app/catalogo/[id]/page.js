@@ -1,17 +1,16 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import ImageSlider from "@/components/ui/ImageSlider";
-import { getVehicleById } from "@/lib/services";
+import { getCar, getRecommendationCars } from "@/app/lib/actions";
 import VehicleInfo from "@/app/layouts/VehicleInfo";
 import VehicleCard from "@/components/VehicleCard";
-import { getRecommendationCars } from "@/lib/services";
 import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
 
 // Función para generar metadatos de forma dinámica
 export async function generateMetadata({ params }) {
   const { id } = params;
-  const vehicle = await getVehicleById(id);
+  const vehicle = ( await getCar(id) ).item;
 
   return {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
@@ -24,9 +23,9 @@ export async function generateMetadata({ params }) {
 
 export default async function Product({ params }) {
   const { id } = params;
-  const vehicle = await getVehicleById(id);
+  const vehicle = ( await getCar(id) ).item;
 
-  const recommendedVehicles = await getRecommendationCars(id, vehicle.brand);
+  const recommendedVehicles = await getRecommendationCars(id, {brand: vehicle.brand});
 
   return (
     <>

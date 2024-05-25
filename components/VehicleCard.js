@@ -6,7 +6,7 @@ import { formatNumber } from "@/lib/services";
 export default async function VehicleCard({ vehicles }) {
   return (
     <>
-      {vehicles?.data?.map((vehicle) => (
+      {vehicles?.items?.map((vehicle) => (
         <Card
           key={vehicle?._id}
           isPressable

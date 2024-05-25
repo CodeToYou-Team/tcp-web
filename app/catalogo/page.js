@@ -1,7 +1,7 @@
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
-import { getBrands, getModels } from "@/lib/services";
+import { getBrands, getModels } from "@/app/lib/actions";
 import { vehicleType, transmission, sort } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
@@ -24,24 +24,24 @@ export const metadata = {
   },
 };
 
-const brands = await getBrands();
+const brands = ( await getBrands() ).items;
 
 export default async function Catalogo({ searchParams }) {
   const keys = Object.keys(searchParams);
 
-  const models = await getModels(searchParams["brand"]);
+  const models = ( await getModels({brand: searchParams["brand"]}) ).items;
 
-  let query = "";
+  let query = {};
 
   for (let i = 0; i < keys.length; i++) {
     if (searchParams[keys[i]] === "Agregado recientemente") {
-      query = query + `${keys[i]}=reciente&`;
+      query[keys[i]] = "reciente";
     } else if (searchParams[keys[i]] === "Precio ascendente") {
-      query = query + `${keys[i]}=ascendente&`;
+      query[keys[i]] = "ascendente";
     } else if (searchParams[keys[i]] === "Precio descendente") {
-      query = query + `${keys[i]}=descendente&`;
+      query[keys[i]] = "descendente";
     } else {
-      query = query + `${keys[i]}=${searchParams[keys[i]]}&`;
+      query[keys[i]] = searchParams[keys[i]];
     }
   }
 
