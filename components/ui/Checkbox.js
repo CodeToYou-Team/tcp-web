@@ -1,8 +1,13 @@
 import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
-export default function Checkbox({ options, filterType, onlyOne, dependency = false }) {
+export default function Checkbox({
+  options,
+  filterType,
+  onlyOne,
+  dependency = false,
+}) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
@@ -29,7 +34,10 @@ export default function Checkbox({ options, filterType, onlyOne, dependency = fa
   if (dependency) {
     if (params.has(filterType)) {
       const values = options.map((x) => x.name);
-      const newItems = params.get(filterType).split(",").filter((x) => values.includes(x));
+      const newItems = params
+        .get(filterType)
+        .split(",")
+        .filter((x) => values.includes(x));
       if (newItems.length > 0) {
         params.set(filterType, newItems.join(","));
       } else {
@@ -42,9 +50,6 @@ export default function Checkbox({ options, filterType, onlyOne, dependency = fa
   return (
     <Suspense key={searchParams.toString()}>
       <CheckboxGroup
-        classNames={{
-          label: "text-zinc-400",
-        }}
         label={
           filterType === "brand"
             ? "Selecciona una o más marcas"
@@ -62,9 +67,7 @@ export default function Checkbox({ options, filterType, onlyOne, dependency = fa
       >
         {options.map((option, key) => (
           <NextUiCheckbox
-            classNames={{
-              label: "text-zinc-100",
-            }}
+            className="text-background"
             value={option.name}
             key={key}
           >

@@ -1,5 +1,3 @@
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import SidebarFilter from "@/components/ui/SidebarFilter";
 import { getBrands, getModels } from "@/app/lib/actions";
 import { vehicleType, transmission, sort } from "@/lib/data";
@@ -24,12 +22,12 @@ export const metadata = {
   },
 };
 
-const brands = ( await getBrands() ).items;
+const brands = await getBrands();
 
 export default async function Catalogo({ searchParams }) {
   const keys = Object.keys(searchParams);
 
-  const models = ( await getModels({brand: searchParams["brand"]}) ).items;
+  const models = await getModels({ brand: searchParams["brand"] });
 
   let query = {};
 
@@ -47,18 +45,16 @@ export default async function Catalogo({ searchParams }) {
 
   return (
     <>
-      <Navbar />
       <SidebarFilter
-        brands={brands}
+        brands={brands.items}
         vehicleType={vehicleType}
         transmission={transmission}
-        models={models}
+        models={models.items}
         sort={sort}
       />
-      <Suspense key={query} fallback={<SkeletonLayout />}>
+      <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
         <Catalog query={query} />
       </Suspense>
-      <Footer />
     </>
   );
 }

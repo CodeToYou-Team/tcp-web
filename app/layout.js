@@ -1,9 +1,13 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import Navbar from "@/components/ui/Navbar";
+import Footer from "@/components/ui/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
-const combinedClasses = `bg-zinc-900 text-slate-100 scrollbar-thumb-gray-900 ${inter.className}`;
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Tu Carro Propio",
@@ -24,8 +28,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={combinedClasses}>
+      <body className={poppins.className} antialised="true">
+        <Navbar />
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );

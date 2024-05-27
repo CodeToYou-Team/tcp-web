@@ -49,7 +49,7 @@ export default function Accordion({
           <Checkbox options={brands} filterType={"brand"} />
         </AccordionItem>
 
-        { models.length !== 0 ?
+        {models.length !== 0 ? (
           <AccordionItem
             className="text-xs"
             key="3"
@@ -64,9 +64,9 @@ export default function Accordion({
             title={<p className="text-graffiti-500">Modelos</p>}
             //isDisabled={models.length === 0}
           >
-            <Checkbox options={models} filterType={"model"} dependency={true}/>
+            <Checkbox options={models} filterType={"model"} dependency={true} />
           </AccordionItem>
-          : null }
+        ) : null}
 
         <AccordionItem
           className="text-xs"

@@ -13,10 +13,10 @@ const Hero = () => {
             priority
             width={1080}
             height={720}
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709090693/corolla-hero_i9hays.jpg"
-            className="absolute inset-0 w-full h-full object-cover"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1716838388/hero-background2_jrdkoy.png"
+            className="absolute inset-0 hidden md:block w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0"></div>
         </div>
 
         {/* Content container */}

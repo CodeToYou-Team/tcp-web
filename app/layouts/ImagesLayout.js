@@ -3,7 +3,7 @@ import Image from "next/image";
 const ImagesLayout = () => {
   return (
     <>
-      <div className="w-5/6 lg:w-4/6 mt-6 lg:mt-24 h-1/3 grid grid-cols-2 grid-rows-2 gap-4 mx-auto">
+      <div className="w-11/12 md:w-8/12 mt-6 md:mt-24 h-1/4 grid grid-cols-2 grid-rows-2 gap-4 mx-auto">
         <Image
           alt="office-1"
           className="rounded-lg h-full"

@@ -79,7 +79,7 @@ const VehicleInfo = ({ vehicle }) => {
             href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20este%20vehículo%20
             https://www.tucarropropiove.com/catalogo/${vehicle._id}`}
           >
-            <Button className="sm:flex-none px-6 mx-1  bg-graffiti-500  text-center rounded-lg outline-none transition duration-100">
+            <Button className="sm:flex-none px-6 mx-1 bg-graffiti-500 text-center rounded-lg outline-none transition duration-100 text-background">
               Consultar vía Whatsapp
             </Button>
           </a>

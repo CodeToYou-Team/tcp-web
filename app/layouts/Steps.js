@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Steps() {
   return (
-    <div className="py-12 bg-zinc-900">
+    <div className="py-12 ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-center text-3xl font-semibold leading-8">
@@ -17,7 +17,7 @@ export default function Steps() {
             className="cursor-default col-span-12 sm:col-span-4 h-[300px]"
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
-              <h4 className="text-zinc-800 font-medium text-lg sm:text-xl">
+              <h4 className="text-background font-medium text-lg sm:text-xl">
                 Revisa nuestro catálogo
               </h4>
             </CardHeader>
@@ -30,13 +30,13 @@ export default function Steps() {
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-zinc-800 text-sm mx-1">
+                <p className="text-background text-sm mx-1">
                   Gran variedad de marcas y modelos.
                 </p>
               </div>
               <Link href="/catalogo">
                 <Button
-                  className="text-xs font-medium bg-graffiti-500"
+                  className="text-xs font-medium bg-graffiti-500 text-background"
                   radius="sm"
                   size="lg"
                 >
@@ -72,7 +72,7 @@ export default function Steps() {
                 href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20coordinar%20una%20cita%20`}
               >
                 <Button
-                  className="text-xs font-medium bg-graffiti-500"
+                  className="text-xs font-medium bg-graffiti-500 text-background"
                   radius="sm"
                   size="lg"
                 >
@@ -105,7 +105,7 @@ export default function Steps() {
               </div>
               <Link href="/acerca-de-nosotros">
                 <Button
-                  className="text-xs px-2 font-medium bg-graffiti-500 "
+                  className="text-xs px-2 font-medium bg-graffiti-500 text-background"
                   radius="sm"
                   size="lg"
                 >

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Brands() {
   return (
-    <div className="py-24 sm:py-26 bg-zinc-900">
+    <div className="py-24 sm:py-26 ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-center text-3xl font-semibold leading-8">

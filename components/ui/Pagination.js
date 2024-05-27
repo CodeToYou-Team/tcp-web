@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Pagination } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

@@ -1,5 +1,3 @@
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import { VehiclesLayout } from "../layouts/VehiclesLayout";
 import VehicleCard from "@/components/VehicleCard";
 import { getOfferCars } from "@/app/lib/actions";
@@ -27,8 +25,6 @@ export default async function Ofertas() {
   const offersVehicles = await getOfferCars();
   return (
     <>
-      <Navbar />
-
       {offersVehicles?.items?.length > 0 ? (
         <VehiclesLayout>
           <Suspense key={offersVehicles} fallback={<SkeletonLayout />}>
@@ -38,7 +34,6 @@ export default async function Ofertas() {
       ) : (
         <NoResults />
       )}
-      <Footer />
     </>
   );
 }

@@ -1,7 +1,5 @@
 "use-client";
 
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import CTA from "../layouts/CTA";
 import Map from "../layouts/Map";
 import Image from "next/image";
@@ -28,11 +26,10 @@ export const metadata = {
 export default function About() {
   return (
     <>
-      <Navbar />
-      <div className="flex flex-col lg:flex-row gap-8 mx-8">
+      <div className="flex flex-col">
         <Map />
-        <ImagesLayout />
       </div>
+      <ImagesLayout />
       <CTA
         title="Contáctanos en nuestras redes sociales"
         description="Visita nuestros enlaces para resolver tus dudas, programar tu cita de venta o compra y más."
@@ -46,7 +43,7 @@ export default function About() {
           />
         }
         link={
-          <div className="flex gap-2">
+          <div className="grid md:flex gap-4">
             <a
               key={"logo-whatsapp"}
               href={`https://wa.link/07ixay`}
@@ -74,7 +71,6 @@ export default function About() {
           </div>
         }
       />
-      <Footer />
     </>
   );
 }

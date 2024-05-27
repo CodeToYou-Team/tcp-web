@@ -1,7 +1,5 @@
 "use-client";
 
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import SellSteps from "../layouts/SellSteps";
 import CTA from "../layouts/CTA";
 import Image from "next/image";
@@ -27,7 +25,6 @@ export const metadata = {
 export default function Venta() {
   return (
     <>
-      <Navbar />
       <SellSteps />
       <CTA
         title="Comunícate con nuestro equipo de ventas"
@@ -61,7 +58,6 @@ export default function Venta() {
           </Link>
         }
       />
-      <Footer />
     </>
   );
 }

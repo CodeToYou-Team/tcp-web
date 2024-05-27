@@ -1,5 +1,3 @@
-import React from "react";
-
 export const VehiclesLayout = ({ children, title }) => {
   return (
     <div className="mx-auto max-w-7xl px-6 lg:px-8 my-16">
@@ -10,7 +8,7 @@ export const VehiclesLayout = ({ children, title }) => {
           </h2>
         </div>
       )}
-      <div className="w-full mt-12 gap-6 grid grid-cols-12 justify-center">
+      <div className="w-full h-fit mt-12 gap-6 grid grid-cols-12 justify-center">
         {children}
       </div>
     </div>
