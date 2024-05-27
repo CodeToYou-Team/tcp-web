@@ -5,7 +5,7 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <>
-      <div className="relative px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8 ">
+      <div className="relative px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
         {/* Image component as background */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -13,43 +13,43 @@ const Hero = () => {
             priority
             width={1080}
             height={720}
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1716838388/hero-background2_jrdkoy.png"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1716851496/tcp-web/hero-background2_makrq4.png"
             className="absolute inset-0 hidden md:block w-full h-full object-cover"
           />
           <div className="absolute inset-0"></div>
         </div>
 
         {/* Content container */}
-        <div className="relative z-10 text-center ltr:sm:text-left rtl:sm:text-right ">
-          <h1 className="text-3xl font-extrabold sm:text-5xl">
-            Los mejores precios
-            <strong className="block font-extrabold text-graffiti">
-              en autos.
-            </strong>
-          </h1>
+        <div className="relative z-10 w-full md:w-1/2">
+          <div className="flex flex-col items-center text-center w-full md:items-start md:text-left">
+            <h1 className="text-3xl font-extrabold sm:text-5xl w-full md:w-2/3">
+              Los mejores precios en{" "}
+              <strong className="text-graffiti-500">autos.</strong>
+            </h1>
 
-          <p className="mt-4 max-w-lg sm:text-xl/relaxed">
-            Te ofrecemos la mejor experiencia de compra y venta de autos en
-            Caracas.
-          </p>
+            <p className="mt-4 sm:text-xl/relaxed w-full md:w-2/3">
+              Te ofrecemos la mejor experiencia de compra y venta de autos en
+              Caracas.
+            </p>
 
-          <div className=" mt-8 justify-center flex flex-wrap gap-4 text-center">
-            <Link href="/catalogo">
-              <Button
-                radius="sm"
-                className="block w-auto bg-graffiti-500 px-12  text-zinc-800"
-              >
-                Catálogo
-              </Button>
-            </Link>
-            <Link href="/venta">
-              <Button
-                radius="sm"
-                className="block w-auto  bg-zinc-50 px-12 text-zinc-800 "
-              >
-                Vende tu auto
-              </Button>
-            </Link>
+            <div className="mt-8 flex gap-4 w-full justify-center md:justify-start">
+              <Link href="/catalogo">
+                <Button
+                  radius="sm"
+                  className="block w-auto px-10 bg-graffiti-500 text-zinc-800"
+                >
+                  Catálogo
+                </Button>
+              </Link>
+              <Link href="/venta">
+                <Button
+                  radius="sm"
+                  className="block w-auto px-6 bg-zinc-50 text-background"
+                >
+                  Vende tu auto
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
