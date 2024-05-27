@@ -31,7 +31,6 @@ export default async function Product({ params }) {
 
   return (
     <>
-      <Navbar />
       {/* Imagen e información principal del vehículo */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         <ImageSlider vehicle={vehicle} />
@@ -46,8 +45,6 @@ export default async function Product({ params }) {
       <VehiclesLayout title="Otros autos que te pueden interesar">
         <VehicleCard vehicles={recommendedVehicles} />
       </VehiclesLayout>
-
-      <Footer />
     </>
   );
 }
