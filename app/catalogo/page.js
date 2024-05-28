@@ -46,10 +46,10 @@ export default async function Catalogo({ searchParams }) {
   return (
     <>
       <SidebarFilter
-        brands={brands.items}
+        brands={brands?.items || []}
         vehicleType={vehicleType}
         transmission={transmission}
-        models={models.items}
+        models={models?.items || []}
         sort={sort}
       />
       <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
