@@ -10,7 +10,7 @@ export default async function VehicleCard({ vehicles }) {
         <Card
           key={vehicle?._id}
           isPressable
-          className="col-span-12 md:col-span-6 lg:col-span-4 h-fit bg-zinc-800 w-full active:shadow-graffiti-500 active:shadow-md"
+          className="col-span-12 min-[500px]:col-span-6 sm:col-span-6  lg:col-span-4 h-fit bg-zinc-800 active:shadow-graffiti-500 active:shadow-md"
         >
           <Link className="relative w-full" href={`/catalogo/${vehicle?._id}`}>
             <CardHeader className="py-2 px-4 flex-col items-start bg-zinc-800 w-full absolute z-20 ">
@@ -36,9 +36,9 @@ export default async function VehicleCard({ vehicles }) {
             <Image
               alt="latest-1"
               className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
-              src={vehicle?.images[0]}
-              width={700}
-              height={700}
+              src={`${vehicle?.images[0]}?tr=w-466,h-466`}
+              width={466}
+              height={466}
             />
           </Link>
         </Card>

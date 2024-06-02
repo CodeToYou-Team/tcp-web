@@ -11,10 +11,10 @@ export default function Steps() {
             ¿Cómo comprar un auto en 3 simples pasos?
           </h2>
         </div>
-        <div className=" w-full mt-24 gap-2 grid grid-cols-12  px-8">
+        <div className=" w-full mt-24 gap-8 grid grid-cols-12">
           <Card
             isFooterBlurred
-            className="cursor-default col-span-12 sm:col-span-4 h-[300px]"
+            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
               <h4 className="text-background font-medium text-lg sm:text-xl">
@@ -26,7 +26,7 @@ export default function Steps() {
               height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089558/tcp-web/step1-bg_s4blpr.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step1-bg_s4blpr.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
@@ -47,10 +47,10 @@ export default function Steps() {
           </Card>
           <Card
             isFooterBlurred
-            className="cursor-default col-span-12 sm:col-span-4 h-[300px]"
+            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
-              <h4 className="text-zinc-800 font-medium text-lg sm:text-xl leading-4">
+              <h4 className="text-background font-medium text-lg sm:text-xl leading-4">
                 Pauta la fecha de inspección
               </h4>
             </CardHeader>
@@ -59,11 +59,11 @@ export default function Steps() {
               height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089556/tcp-web/step2-bg_slt7no.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089556/tcp-web/step2-bg_slt7no.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-zinc-800 text-sm mx-1">
+                <p className="text-background text-sm mx-1">
                   ¿Quieres programar una cita?
                 </p>
               </div>
@@ -83,10 +83,10 @@ export default function Steps() {
           </Card>
           <Card
             isFooterBlurred
-            className="cursor-default col-span-12 sm:col-span-4 h-[300px]"
+            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
-              <h4 className="text-zinc-800 font-medium text-lg sm:text-xl">
+              <h4 className="text-background font-medium text-lg sm:text-xl">
                 Concreta tu compra
               </h4>
             </CardHeader>
@@ -95,11 +95,11 @@ export default function Steps() {
               height={457}
               alt="Card example background"
               className="z-0 h-full object-cover"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709089558/tcp-web/step3-bg_zwkmis.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step3-bg_zwkmis.png"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-zinc-800 text-sm mx-1">
+                <p className="text-background text-sm mx-1">
                   Realiza el papeleo y obtén tu nuevo vehículo.
                 </p>
               </div>

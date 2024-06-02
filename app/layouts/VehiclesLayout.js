@@ -8,7 +8,7 @@ export const VehiclesLayout = ({ children, title }) => {
           </h2>
         </div>
       )}
-      <div className="w-full h-fit mt-12 gap-6 grid grid-cols-12 justify-center">
+      <div className="w-full h-fit mt-12 gap-6 grid grid-cols-12">
         {children}
       </div>
     </div>

@@ -10,11 +10,12 @@ import { Image } from "@nextui-org/react";
 
 const ImageSlider = ({ vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
+  console.log(vehicle.images[0]);
   const swiperRef = useRef(null);
 
   return (
     <>
-      <div className="mx-auto w-11/12 md:w-10/12 relative text-graffiti-500">
+      <div className="mx-auto w-full md:w-10/12 relative text-graffiti-500">
         <Swiper
           style={{
             "--swiper-pagination-color": "#fcf744",
@@ -36,7 +37,7 @@ const ImageSlider = ({ vehicle }) => {
             <SwiperSlide className="px-2 cursor-grab" key={slideIndex}>
               <div className="swiper-zoom-container">
                 <Image
-                  src={slide}
+                  src={`${slide}?tr=w-500,h-500`}
                   alt={`car-img-${slideIndex}`}
                   className="gap-4"
                 />

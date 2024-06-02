@@ -36,7 +36,7 @@ export default function About() {
         image={
           <Image
             className="flex mx-auto w-2/3 md:w-1/3 max-w-none my-4"
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1707319734/iphone-whatsapp-ig-mockup_qbrpr1.png"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/w_280,h_500/v1707319734/iphone-whatsapp-ig-mockup_qbrpr1.png"
             alt="App screenshot"
             width={1335}
             height={2000}

@@ -29,6 +29,7 @@ const Footer = () => {
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a
             alt="whatsapp-link"
+            aria-label="Enlace directo al whatsapp de tu carro propio"
             rel="noopener noreferrer"
             target="_blank"
             href={`https://wa.link/07ixay`}
@@ -46,6 +47,7 @@ const Footer = () => {
           </a>
           <a
             alt="tiktok-link"
+            aria-label="Enlace directo a la cuenta de tiktok de tu carro propio"
             rel="noreferrer"
             target="_blank"
             href="https://www.tiktok.com/@tucarropropio?lang=es"
@@ -64,6 +66,7 @@ const Footer = () => {
           </a>
           <a
             alt="instagram-link"
+            aria-label="Enlace directo a la cuenta de instagram de tu carro propio"
             rel="noreferrer"
             target="_blank"
             href={"https://www.instagram.com/tucarropropio/?hl=es-la"}
