@@ -9,10 +9,10 @@ import Image from "next/image";
 
 export default function Brands() {
   return (
-    <div className="py-24 sm:py-20 ">
+    <div className="py-12 md:py-20 ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
-          <h2 className="text-center text-3xl font-semibold leading-8">
+          <h2 className="text-center text-2xl md:text-3xl font-semibold leading-8">
             Trabajamos con las mejores marcas del mercado
           </h2>
           <p className="mt-6 text-md leading-6 text-center">

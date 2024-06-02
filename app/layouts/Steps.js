@@ -7,7 +7,7 @@ export default function Steps() {
     <div className="py-12 ">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
-          <h2 className="text-center text-3xl font-semibold leading-8">
+          <h2 className="text-center text-2xl md:text-3xl font-semibold leading-8">
             ¿Cómo comprar un auto en 3 simples pasos?
           </h2>
         </div>
@@ -17,9 +17,9 @@ export default function Steps() {
             className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
-              <h4 className="text-background font-medium text-lg sm:text-xl">
+              <span className="text-background font-medium text-lg sm:text-xl">
                 Revisa nuestro catálogo
-              </h4>
+              </span>
             </CardHeader>
             <Image
               width={800}
@@ -30,9 +30,9 @@ export default function Steps() {
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-background text-sm mx-1">
+                <span className="text-background text-sm mx-1">
                   Gran variedad de marcas y modelos.
-                </p>
+                </span>
               </div>
               <Link href="/catalogo">
                 <Button
@@ -50,9 +50,9 @@ export default function Steps() {
             className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
-              <h4 className="text-background font-medium text-lg sm:text-xl leading-4">
+              <span className="text-background font-medium text-lg sm:text-xl leading-4">
                 Pauta la fecha de inspección
-              </h4>
+              </span>
             </CardHeader>
             <Image
               width={800}
@@ -63,9 +63,9 @@ export default function Steps() {
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-background text-sm mx-1">
+                <span className="text-background text-sm mx-1">
                   ¿Quieres programar una cita?
-                </p>
+                </span>
               </div>
               <a
                 target="_blank"
@@ -86,9 +86,9 @@ export default function Steps() {
             className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
           >
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
-              <h4 className="text-background font-medium text-lg sm:text-xl">
+              <span className="text-background font-medium text-lg sm:text-xl">
                 Concreta tu compra
-              </h4>
+              </span>
             </CardHeader>
             <Image
               width={800}
@@ -99,9 +99,9 @@ export default function Steps() {
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
-                <p className="text-background text-sm mx-1">
+                <span className="text-background text-sm mx-1">
                   Realiza el papeleo y obtén tu nuevo vehículo.
-                </p>
+                </span>
               </div>
               <Link href="/acerca-de-nosotros">
                 <Button
