@@ -36,9 +36,9 @@ export default async function VehicleCard({ vehicles }) {
             <Image
               alt="latest-1"
               className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
-              src={`${vehicle?.images[0]}?tr=w-466,h-466`}
-              width={466}
-              height={466}
+              src={`${vehicle?.images[0]}?tr=w-600,h-600`}
+              width={1080}
+              height={1080}
             />
           </Link>
         </Card>
