@@ -1,5 +1,3 @@
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 import ImageSlider from "@/components/ui/ImageSlider";
 import { getCar, getRecommendationCars } from "@/app/lib/actions";
 import VehicleInfo from "@/app/layouts/VehicleInfo";

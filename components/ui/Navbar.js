@@ -28,10 +28,10 @@ export default function Navbar() {
           <Link href="/">
             <Image
               className="w-auto h-16"
-              src="https://res.cloudinary.com/dkokeszcd/image/upload/w_auto,h_64/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
+              src="https://res.cloudinary.com/dkokeszcd/image/upload/w_662,h_148/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
               alt="tcp-logo"
-              width={1325}
-              height={295}
+              width={2650}
+              height={590}
             />
           </Link>
         </NavbarBrand>

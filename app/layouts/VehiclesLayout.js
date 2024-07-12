@@ -1,6 +1,6 @@
 export const VehiclesLayout = ({ children, title }) => {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 my-16">
+    <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-16 mb-32">
       {title && (
         <div className="mx-auto max-w-2xl">
           <h2 className="text-center text-2xl md:text-3xl font-semibold leading-8">
