@@ -16,8 +16,22 @@ import { navbarItems } from "@/lib/data";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLinkClick = () => {
+    setTimeout(() => {
+      setIsMenuOpen(false);
+    }, 400);
+  };
+
   return (
-    <NextUiNavbar className="bg-zinc-900" onMenuOpenChange={setIsMenuOpen}>
+    <NextUiNavbar
+      className="bg-zinc-900"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={handleMenuToggle}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -60,6 +74,7 @@ export default function Navbar() {
             <Link
               className="w-full text-graffiti-500"
               href={item.route}
+              onClick={handleLinkClick}
               size="lg"
             >
               {item.text}
