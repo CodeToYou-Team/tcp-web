@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Slider } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
@@ -16,6 +16,15 @@ export default function PriceRange() {
     searchParams.get("maxPrice") || 80000,
   ]);
 
+  useEffect(() => {
+    if (!searchParams.get("minPrice")) {
+      setValue([
+        searchParams.get("minPrice") || 0,
+        searchParams.get("maxPrice") || 80000,
+      ])
+    }
+  }, [searchParams])
+  
   const handleChange = (e) => {
     let adjustedValue = parseInt(e[1]);
 
