@@ -5,7 +5,6 @@ import {
   MitsubishiIcon,
   ToyotaIcon,
 } from "@/lib/svgs";
-import Image from "next/image";
 
 export default function Brands() {
   return (
