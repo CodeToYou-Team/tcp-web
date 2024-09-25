@@ -55,7 +55,7 @@ const VehicleDetails = ({ vehicle }) => {
 
         {/* Extras */}
         {vehicle.extras && (
-          <div className="max-w-xs md:max-w-sm ">
+          <div className="max-w-xs md:max-w-sm whitespace-pre-line">
             <h2 className="font-bold text-2xl text-center my-12">Extras</h2>
 
             <p className="text-center md:text-left">
