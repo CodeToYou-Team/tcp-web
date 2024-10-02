@@ -45,7 +45,9 @@ export default function About() {
         link={
           <div className="grid md:flex gap-4">
             <a
-              key={"logo-whatsapp"}
+              aria-label="Enlace al whatsapp de tu carro propio"
+              rel="noopener noreferrer"
+              target="_blank"
               href={`https://wa.link/07ixay`}
               className="text-graffiti-500 flex gap-2 hover:animate-pulse cursor-pointer"
             >
@@ -62,6 +64,8 @@ export default function About() {
             </a>
             <a
               key={"logo-ig"}
+              rel="noopener noreferrer"
+              target="_blank"
               href={"https://www.instagram.com/tucarropropio/?hl=es-la"}
               className="text-graffiti-500 flex gap-2 flex-row hover:animate-pulse cursor-pointer"
             >

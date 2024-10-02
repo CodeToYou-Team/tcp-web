@@ -68,6 +68,8 @@ export default function Steps() {
                 </span>
               </div>
               <a
+                aria-label="Enlace al whatsapp de tu carro propio"
+                rel="noreferrer"
                 target="_blank"
                 href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20coordinar%20una%20cita%20`}
               >
