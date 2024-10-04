@@ -18,6 +18,7 @@ export default function CatalogPagination({
     params.set("page", e);
 
     replace(`${pathName}?${params.toString()}`);
+    window.scrollTo(0, 0);
   };
 
   const startProd = 1 + (page * limit - limit);
