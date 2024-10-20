@@ -43,6 +43,10 @@ const inventorySchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },  
+  condition: { 
+    type: Boolean, 
+    default: false 
+  },
   enabled: { 
     type: Boolean, 
     default: true 
