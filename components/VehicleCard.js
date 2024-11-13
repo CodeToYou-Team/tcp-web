@@ -1,5 +1,5 @@
 import { Image } from "@nextui-org/react";
-import { Card, CardHeader } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 import Link from "next/link";
 import { formatNumber } from "@/lib/services";
 
@@ -10,28 +10,45 @@ export default async function VehicleCard({ vehicles }) {
         <Card
           key={vehicle?._id}
           isPressable
-          className="col-span-12 min-[500px]:col-span-6 sm:col-span-6  lg:col-span-4 h-fit bg-zinc-800 active:shadow-graffiti-500 active:shadow-md"
+          className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit bg-zinc-800 active:shadow-graffiti-500 active:shadow-md"
         >
           <Link className="relative w-full" href={`/catalogo/${vehicle?._id}`}>
-            <CardHeader className="py-2 px-4 flex-col items-start bg-zinc-800 w-full absolute z-20 ">
-              <h1 className="font-bold text-large text-zinc-100">
-                {vehicle?.brand + " " + vehicle?.model + " " + vehicle?.version}
-              </h1>
-              <p className="text-md text-zinc-100 font-bold">{vehicle?.year}</p>
-              <div className="flex gap-2">
-                <p className="text-zinc-100 text-xl font-bold text-end">
-                  ${formatNumber(vehicle?.price)}
-                </p>
-
-                {vehicle?.discount !== 0 ? (
-                  <p className="text-red-500 text-md mt-0.5 font-semibold text-end line-through">
-                    ${formatNumber(vehicle.discount)}
-                  </p>
-                ) : (
-                  <></>
-                )}
+            <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
+              {/* Contenedor izquierdo para la información principal del vehículo */}
+              <div className="flex flex-col items-start">
+                <h1 className="font-bold text-large text-zinc-100">
+                  {vehicle?.brand +
+                    " " +
+                    vehicle?.model +
+                    " " +
+                    vehicle?.version}
+                </h1>
+                <span className="text-md text-zinc-100 font-bold">
+                  {vehicle?.year}
+                </span>
+                <div className="flex gap-2">
+                  <span className="text-zinc-100 text-xl font-bold">
+                    ${formatNumber(vehicle?.price)}
+                  </span>
+                  {vehicle?.discount !== 0 && (
+                    <span className="text-red-500 text-md mt-0.5 font-semibold line-through">
+                      ${formatNumber(vehicle.discount)}
+                    </span>
+                  )}
+                </div>
               </div>
-            </CardHeader>
+
+              {/* Contenedor derecho para la condición del vehículo */}
+              <div className="flex flex-col font-bold items-end">
+                <span className="text-primary mt-1">
+                  {vehicle?.condition ? "Nuevo" : ""}
+                </span>
+                <span className={vehicle?.condition ? "" : "mt-7"}>
+                  {formatNumber(vehicle.km)} {vehicle.km_unit}
+                </span>
+                <span>{vehicle.transmission}</span>
+              </div>
+            </div>
 
             <Image
               alt="latest-1"

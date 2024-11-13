@@ -20,7 +20,7 @@ const Footer = () => {
             height={50}
           />
         </Link>
-        <p className="text-sm flex text-center sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+        <span className="text-sm flex text-center sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
           © Tu Carro Propio C.A 2023 —
           <div className="flex">
             <span className=" ml-1" rel="noopener noreferrer" target="_blank">
@@ -47,7 +47,7 @@ const Footer = () => {
               </span>
             </a>
           </div>
-        </p>
+        </span>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a
             aria-label="Enlace al whatsapp de tu carro propio"
