@@ -39,7 +39,7 @@ export default async function VehicleCard({ vehicles }) {
               </div>
 
               {/* Contenedor derecho para la condición del vehículo */}
-              <div className="flex flex-col font-bold items-end">
+              <div className="flex flex-col font-bold items-end w-4">
                 <span className="text-primary mt-1">
                   {vehicle?.condition ? "Nuevo" : ""}
                 </span>
