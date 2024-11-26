@@ -16,7 +16,7 @@ export default async function VehicleCard({ vehicles }) {
             <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
               {/* Contenedor izquierdo para la información principal del vehículo */}
               <div className="flex flex-col items-start">
-                <h1 className="font-bold text-large text-zinc-100">
+                <h1 className="font-bold text-base text-zinc-100">
                   {vehicle?.brand +
                     " " +
                     vehicle?.model +
@@ -39,8 +39,8 @@ export default async function VehicleCard({ vehicles }) {
               </div>
 
               {/* Contenedor derecho para la condición del vehículo */}
-              <div className="flex flex-col font-bold items-end w-4">
-                <span className="text-primary mt-1">
+              <div className="flex flex-col font-bold items-end">
+                <span className="text-primary">
                   {vehicle?.condition ? "Nuevo" : ""}
                 </span>
                 <span className={vehicle?.condition ? "" : "mt-7"}>
