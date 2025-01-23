@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={poppins.className} antialised="true">
-        <GoogleAnalytics gaId="90WFRVETJB" />
+        <GoogleAnalytics />
         <Navbar />
         <Providers>{children}</Providers>
         <Footer />
