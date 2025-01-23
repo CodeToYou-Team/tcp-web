@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
-import GoogleAnalytics from "@/components/GoogleAnalytics";
+import { GoogleTagManager } from "@next/third-parties/google";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/Footer";
 
@@ -29,8 +29,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
+      <GoogleTagManager gtmId="G-94VZ2D32LC" />
       <body className={poppins.className} antialised="true">
-        <GoogleAnalytics />
         <Navbar />
         <Providers>{children}</Providers>
         <Footer />
