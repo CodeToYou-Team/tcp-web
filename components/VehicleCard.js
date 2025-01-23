@@ -16,7 +16,7 @@ export default async function VehicleCard({ vehicles }) {
             <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
               {/* Contenedor izquierdo para la información principal del vehículo */}
               <div className="flex flex-col items-start">
-                <h1 className="font-bold text-base text-zinc-100">
+                <h1 className="font-bold text-base text-zinc-100 text-left">
                   {vehicle?.brand +
                     " " +
                     vehicle?.model +
