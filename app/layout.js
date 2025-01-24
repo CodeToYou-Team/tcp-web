@@ -32,13 +32,13 @@ export default function RootLayout({ children }) {
       <head>
         <Script
           async
-          src="https://www.googletagmanager.com/gtag/js?id=G-94VZ2D32LC"
+          src="https://www.googletagmanager.com/gtag/js?id=G-90WFRVETJB"
         ></Script>
         <Script id="google-analytics">
-          {` window.dataLayer = window.dataLayer || [];
-             function gtag(){dataLayer.push(arguments);}
-             gtag('js', new Date());
-             gtag('config', 'G-94VZ2D32LC');
+          {`   window.dataLayer = window.dataLayer || [];
+               function gtag(){dataLayer.push(arguments);}
+               gtag('js', new Date());
+               gtag('config', 'G-90WFRVETJB');
           `}
         </Script>
       </head>
