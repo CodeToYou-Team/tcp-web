@@ -10,7 +10,7 @@ export async function GET(req, res) {
 
     await connectMongo();
 
-    const items = await InventoryDB.find({ enabled: true });
+    const items = await InventoryDB.find({ enabled: true }).select("-mainImg -othersImg");
 
     return NextResponse.json({ cars: JSON.parse(JSON.stringify(items)) }, { status: 200 });
 
