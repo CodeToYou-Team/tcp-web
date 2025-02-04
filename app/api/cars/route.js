@@ -8,7 +8,9 @@ export async function GET(req, res) {
   if (req.method === "GET") {
     await connectMongo();
 
-    const items = await InventoryDB.find({ enabled: true }).select("-mainImg -othersImg");
+    const items = await InventoryDB.find({ enabled: true }).select(
+      "-mainImg -othersImg"
+    );
 
     return NextResponse.json(
       { cars: JSON.parse(JSON.stringify(items)) },
