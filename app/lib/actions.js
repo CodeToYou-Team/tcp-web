@@ -251,7 +251,7 @@ export const getLatestCars = async () => {
     await connectMongo();
 
     const LIMIT = 3;
-    const items = await InventoryDB.find({ enabled: true }).sort("-createdAt -_id").limit(LIMIT);
+    const items = await InventoryDB.find({ enabled: true, updatedAt: { $lte: (new Date).toISOString() } }).sort("-createdAt -_id").limit(LIMIT);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
   } catch (error) {
@@ -320,7 +320,7 @@ export const getOfferCars = async (query) => {
 
     const sort = query?.sort || "reciente";
 
-    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true }).sort(
+    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true, updatedAt: { $lte: (new Date).toISOString() } }).sort(
       SORT_CASES[sort]
     );
 
@@ -344,7 +344,7 @@ export const getLatestOfferCars = async () => {
     await connectMongo();
 
     const LIMIT = 3;
-    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true })
+    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true, updatedAt: { $lte: (new Date).toISOString() } })
       .sort("-updatedAt -_id")
       .limit(LIMIT);
 
