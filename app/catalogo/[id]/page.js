@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
     description: `Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`,
     openGraph: {
-      images: { url: vehicle?.images[0] },
+      images: [{ url: vehicle?.images[0] }],
     },
   };
 }
