@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
     description: `Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`,
     openGraph: {
-      images: [{ url: vehicle?.images[0] }],
+      images: [{ url: vehicle.images[0] }],
     },
   };
 }
@@ -24,6 +24,7 @@ export async function generateMetadata({ params }) {
 export default async function Product({ params }) {
   const { id } = params;
   const vehicle = (await getCar(id)).item;
+  console.log("og image:", vehicle?.images[0]);
 
   const recommendedVehicles = await getRecommendationCars(id, {
     brand: vehicle.brand,
