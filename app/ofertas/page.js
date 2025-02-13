@@ -5,6 +5,8 @@ import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
 import NoResults from "../layouts/NoResults";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Tu Carro Propio - Ofertas",
   description:

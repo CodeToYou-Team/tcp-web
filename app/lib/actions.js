@@ -6,8 +6,6 @@ import BrandDB from "@/app/lib/models/Brand.js";
 import ModelDB from "@/app/lib/models/Model.js";
 import LocationDB from "@/app/lib/models/Location.js";
 
-export const dynamic = "force-dynamic";
-
 export const getBrands = async () => {
   try {
     await connectMongo();

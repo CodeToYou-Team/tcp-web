@@ -5,6 +5,8 @@ import VehicleCard from "@/components/VehicleCard";
 import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
 
+export const dynamic = "force-dynamic";
+
 // Función para generar metadatos de forma dinámica
 export async function generateMetadata({ params }) {
   const { id } = params;

@@ -6,6 +6,8 @@ import VehicleCard from "@/components/VehicleCard";
 import { getLatestCars } from "@/app/lib/actions";
 import { VehiclesLayout } from "./layouts/VehiclesLayout";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const latestVehicles = await getLatestCars();
   return (
