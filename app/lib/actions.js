@@ -6,6 +6,8 @@ import BrandDB from "@/app/lib/models/Brand.js";
 import ModelDB from "@/app/lib/models/Model.js";
 import LocationDB from "@/app/lib/models/Location.js";
 
+export const dynamic = "force-dynamic";
+
 export const getBrands = async () => {
   try {
     await connectMongo();
@@ -251,7 +253,12 @@ export const getLatestCars = async () => {
     await connectMongo();
 
     const LIMIT = 3;
-    const items = await InventoryDB.find({ enabled: true, updatedAt: { $lte: (new Date).toISOString() } }).sort("-createdAt -_id").limit(LIMIT);
+    const items = await InventoryDB.find({
+      enabled: true,
+      updatedAt: { $lte: new Date().toISOString() },
+    })
+      .sort("-createdAt -_id")
+      .limit(LIMIT);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
   } catch (error) {
@@ -320,9 +327,11 @@ export const getOfferCars = async (query) => {
 
     const sort = query?.sort || "reciente";
 
-    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true, updatedAt: { $lte: (new Date).toISOString() } }).sort(
-      SORT_CASES[sort]
-    );
+    const items = await InventoryDB.find({
+      discount: { $gt: 0 },
+      enabled: true,
+      updatedAt: { $lte: new Date().toISOString() },
+    }).sort(SORT_CASES[sort]);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
   } catch (error) {
@@ -344,7 +353,11 @@ export const getLatestOfferCars = async () => {
     await connectMongo();
 
     const LIMIT = 3;
-    const items = await InventoryDB.find({ discount: { $gt: 0 }, enabled: true, updatedAt: { $lte: (new Date).toISOString() } })
+    const items = await InventoryDB.find({
+      discount: { $gt: 0 },
+      enabled: true,
+      updatedAt: { $lte: new Date().toISOString() },
+    })
       .sort("-updatedAt -_id")
       .limit(LIMIT);
 
