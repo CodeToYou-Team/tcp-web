@@ -5,8 +5,6 @@ import VehicleCard from "@/components/VehicleCard";
 import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
 
-export const dynamic = "force-dynamic";
-
 // Función para generar metadatos de forma dinámica
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -16,7 +14,14 @@ export async function generateMetadata({ params }) {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
     description: `Descubre este increíble ${vehicle?.brand} ${vehicle?.model}. ¡Programa una cita para conocer más detalles!`,
     openGraph: {
-      images: [{ url: vehicle.images[0] }],
+      images: [
+        {
+          url: vehicle.images[0],
+          width: 400,
+          height: 400,
+          alt: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.year}`,
+        },
+      ],
     },
   };
 }
@@ -24,7 +29,6 @@ export async function generateMetadata({ params }) {
 export default async function Product({ params }) {
   const { id } = params;
   const vehicle = (await getCar(id)).item;
-  console.log("og image:", vehicle?.images[0]);
 
   const recommendedVehicles = await getRecommendationCars(id, {
     brand: vehicle.brand,
