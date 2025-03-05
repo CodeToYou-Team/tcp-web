@@ -16,9 +16,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       images: [
         {
-          url: vehicle.images[0],
-          width: 400,
-          height: 400,
+          url: `${vehicle?.images[0]}?tr=w-640,h-640,q-100`,
           alt: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.year}`,
         },
       ],
