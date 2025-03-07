@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const inventorySchema = mongoose.Schema({
+  fullName: String,
   brand: String,
   model: String,
   version: String,
