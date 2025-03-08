@@ -45,7 +45,7 @@ export default function SearchBar() {
         type="text"
         size={"sm"}
         color="zinc"
-        placeholder="Introduce una marca o modelo..."
+        placeholder="Introduce una marca, modelo o versión..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         startContent={
