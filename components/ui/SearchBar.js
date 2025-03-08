@@ -53,7 +53,7 @@ export default function SearchBar() {
       />
       <Button
         onClick={handleSearch}
-        className="block w-auto px-10 bg-graffiti-500 text-zinc-800"
+        className="block w-auto bg-graffiti-500 text-zinc-800"
       >
         Buscar
       </Button>
