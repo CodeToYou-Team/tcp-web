@@ -82,6 +82,12 @@ export const getCars = async (query) => {
     ascendente: "price -_id",
   };
 
+  const SORT_CASES_OBJ = {
+    reciente: { createdAt: -1, _id: -1 },
+    descendente: { price: -1, _id: -1 },
+    ascendente: { price: 1, _id: -1 },
+  };
+
   try {
     await connectMongo();
 
@@ -90,8 +96,10 @@ export const getCars = async (query) => {
     let filters = { ...query, enabled: true };
     const sort = queryDB.sort || "reciente";
     const page = queryDB.page || 1;
+    const search = queryDB?.search || "";
     delete queryDB.page;
     delete queryDB.sort;
+    delete queryDB.search;
     const startIndex = (Number(page) - 1) * LIMIT;
 
     if (filters.hasOwnProperty("type")) {
@@ -148,23 +156,6 @@ export const getCars = async (query) => {
       }
     }
 
-    if (filters.hasOwnProperty("search")) {
-      if (queryDB.hasOwnProperty("$and")) {
-        let newQuery = queryDB["$and"].shift();
-        delete newQuery.search;
-        queryDB = {
-          $and: [
-            newQuery,
-            ...queryDB["$and"],
-            { $text: { $search: filters.search } },
-          ],
-        };
-      } else {
-        delete queryDB.search;
-        queryDB = { $and: [queryDB, { $text: { $search: filters.search } }] };
-      }
-    }
-
     if (
       filters.hasOwnProperty("minPrice") &&
       filters.hasOwnProperty("maxPrice")
@@ -196,11 +187,56 @@ export const getCars = async (query) => {
       }
     }
 
-    const count = await InventoryDB.countDocuments(queryDB);
-    const items = await InventoryDB.find(queryDB)
-      .sort(SORT_CASES[sort])
-      .skip(startIndex)
-      .limit(LIMIT);
+    let count = 0;
+    let items = [];
+
+    if (search) {
+
+      let steps = [
+        {
+          $search: {
+            index: "autocomplete",
+            autocomplete: {
+              query: search,
+              path: "fullName",
+              fuzzy: {
+                maxEdits: 1,
+              },
+              tokenOrder: "sequential",
+            },
+          },
+        },
+      ];
+
+      if (Object.keys(queryDB).length > 0) {
+        steps.push({ $match: queryDB });
+      };
+
+      steps.push({
+        $facet: {
+          metadata: [{ $count: "total" }], // Cuenta los resultados
+          data: [
+            { $sort: SORT_CASES_OBJ[sort] },
+            { $skip: startIndex },
+            { $limit: LIMIT },
+          ] // Obtiene los datos paginados
+        }
+      });
+
+      const result = await InventoryDB.aggregate(steps).exec();
+
+      count = result?.at(0)?.metadata?.length > 0 ? result?.at(0)?.metadata?.at(0)?.total : 0;
+      items = result?.at(0)?.data;
+
+    } else {
+
+      count = await InventoryDB.countDocuments(queryDB);
+      items = await InventoryDB.find(queryDB)
+        .sort(SORT_CASES[sort])
+        .skip(startIndex)
+        .limit(LIMIT);
+
+    };
 
     return {
       ok: true,
