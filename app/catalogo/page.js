@@ -4,6 +4,7 @@ import { vehicleType, transmission, sort } from "@/lib/data";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
+import SearchBar from "@/components/ui/SearchBar";
 
 export const metadata = {
   title: "Tu Carro Propio - Catálogo",
@@ -52,6 +53,7 @@ export default async function Catalogo({ searchParams }) {
         models={models?.items || []}
         sort={sort}
       />
+      <SearchBar />
       <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
         <Catalog query={query} />
       </Suspense>
