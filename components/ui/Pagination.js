@@ -20,7 +20,7 @@ export default function CatalogPagination({
 
     setTimeout(() => {
       window.scrollTo(0, 0);
-    }, 1000); // Retraso de 1 segundo
+    }, 1000);
   };
 
   const startProd = 1 + (page * limit - limit);
