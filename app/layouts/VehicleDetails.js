@@ -10,33 +10,29 @@ const VehicleDetails = ({ vehicle }) => {
           </h2>
           {vehicle.tapizado && (
             <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-semibold mr-3">
-                Tapizado:
-              </span>
+              <span className="text-md md:text-lg font-normal">Tapizado:</span>{" "}
               <span className="font-semibold">{vehicle.tapizado}</span>
             </p>
           )}
           {vehicle.power && (
             <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-semibold mr-3">
-                Potencia:
-              </span>
-              <span className="font-semibold">{vehicle.power} HP</span>
+              <span className="text-md md:text-lg font-normal">Potencia:</span>{" "}
+              <span className="font-semibold">{vehicle.power}</span>
             </p>
           )}
           {vehicle.fuelCapacity && (
             <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-semibold mr-3">
+              <span className="text-md md:text-lg font-normal">
                 Capacidad de combustible:
-              </span>
+              </span>{" "}
               <span className="font-semibold">{vehicle.fuelCapacity}</span>
             </p>
           )}
           {vehicle.fuelCapacity && (
             <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-semibold mr-3">
+              <span className="text-md md:text-lg font-normal">
                 Consumo de combustible:
-              </span>
+              </span>{" "}
               <span className="font-semibold">{vehicle.fuelConsumption}</span>
             </p>
           )}
@@ -48,7 +44,7 @@ const VehicleDetails = ({ vehicle }) => {
           <h2 className="font-bold text-2xl text-center my-12">Detalles</h2>
           {vehicle.details && (
             <p className="text-center md:text-left">
-              <span className="font-semibold">{vehicle.details}</span>
+              <span className="font-normal">{vehicle.details}</span>
             </p>
           )}
         </div>
