@@ -1,4 +1,6 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
+"use client";
+
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 
 export default function Map() {
   return (

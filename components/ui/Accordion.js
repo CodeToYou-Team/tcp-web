@@ -1,6 +1,6 @@
 "use client";
 
-import { Accordion as NextUiAccordion, AccordionItem } from "@nextui-org/react";
+import { Accordion as NextUiAccordion, AccordionItem } from "@heroui/react";
 import { Plus, Minus } from "lucide-react";
 import Checkbox from "./Checkbox";
 

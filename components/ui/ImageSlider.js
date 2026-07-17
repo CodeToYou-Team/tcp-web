@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/zoom";
 import { useRef } from "react";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 
 const ImageSlider = ({ vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];

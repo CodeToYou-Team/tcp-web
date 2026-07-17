@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Search } from "lucide-react";
-import { extendVariants, Input, Button } from "@nextui-org/react";
+import { extendVariants, Input, Button } from "@heroui/react";
 
 export const TcpInput = extendVariants(Input, {
   variants: {

@@ -1,5 +1,7 @@
-import { Image } from "@nextui-org/react";
-import { Card } from "@nextui-org/react";
+"use client";
+
+import { Image } from "@heroui/react";
+import { Card } from "@heroui/react";
 import Link from "next/link";
 import { formatNumber } from "@/lib/services";
 

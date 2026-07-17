@@ -1,4 +1,6 @@
-import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@nextui-org/react";
+"use client";
+
+import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 

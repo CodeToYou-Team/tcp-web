@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/Sheet";
-import { Button } from "@nextui-org/react";
+import { Button } from "@heroui/react";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
 import { usePathname, useRouter } from "next/navigation";

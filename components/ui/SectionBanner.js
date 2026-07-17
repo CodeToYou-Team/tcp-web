@@ -1,4 +1,6 @@
-import { Button } from "@nextui-org/react";
+"use client";
+
+import { Button } from "@heroui/react";
 import { Gift } from "lucide-react";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Pagination } from "@nextui-org/react";
+import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function CatalogPagination({
