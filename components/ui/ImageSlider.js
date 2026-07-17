@@ -37,7 +37,7 @@ const ImageSlider = ({ vehicle }) => {
             <SwiperSlide className="px-2 cursor-grab" key={slideIndex}>
               <div className="swiper-zoom-container">
                 <Image
-                  src={`${slide}?tr=w-640,h-640,q-100`}
+                  src={`${slide}`}
                   alt={`car-img-${slideIndex}`}
                   className="gap-4"
                 />

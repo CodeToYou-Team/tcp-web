@@ -16,6 +16,7 @@ export const TcpInput = extendVariants(Input, {
           "data-[hover=true]:bg-zinc-800",
           "group-data-[focus=true]:bg-zinc-800",
         ],
+        input: ["truncate"],
       },
     },
   },
@@ -39,13 +40,13 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-3/4 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center">
+    <div className="w-5/6 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center ">
       <TcpInput
         autoComplete="off"
         type="text"
         size={"sm"}
         color="zinc"
-        placeholder="Introduce una marca o modelo..."
+        placeholder="Busca una marca o modelo"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         startContent={

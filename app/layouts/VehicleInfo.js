@@ -30,17 +30,15 @@ const VehicleInfo = ({ vehicle }) => {
           <div className="flex flex-col justify-center items-center md:items-start my-10">
             {vehicle.year && (
               <p>
-                <span className="text-md md:text-lg font-normal mr-3">
-                  Año:
-                </span>
+                <span className="text-md md:text-lg font-normal">Año:</span>{" "}
                 <span className="font-semibold">{vehicle.year}</span>
               </p>
             )}
             {vehicle.km && (
               <p>
-                <span className="text-md md:text-lg font-normal mr-3">
+                <span className="text-md md:text-lg font-normal">
                   Recorrido:
-                </span>
+                </span>{" "}
                 <span className="font-semibold">
                   {formatNumber(vehicle.km)} {vehicle.km_unit}
                 </span>
@@ -48,25 +46,21 @@ const VehicleInfo = ({ vehicle }) => {
             )}
             {vehicle.transmission && (
               <p>
-                <span className="text-md md:text-lg font-normal mr-3 ">
+                <span className="text-md md:text-lg font-normal">
                   Transmisión:
-                </span>
+                </span>{" "}
                 <span className="font-semibold">{vehicle.transmission}</span>
               </p>
             )}
             {vehicle.motor && (
               <p>
-                <span className="text-md md:text-lg font-normal mr-3 ">
-                  Motor:
-                </span>
+                <span className="text-md md:text-lg font-normal">Motor:</span>{" "}
                 <span className="font-semibold">{vehicle.motor}</span>
               </p>
             )}
             {vehicle.owners && (
               <p>
-                <span className="text-md md:text-lg font-normal mr-3 ">
-                  Dueños:
-                </span>
+                <span className="text-md md:text-lg font-normal">Dueños:</span>{" "}
                 <span className="font-semibold">{vehicle.owners}</span>
               </p>
             )}

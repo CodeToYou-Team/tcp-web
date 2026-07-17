@@ -16,9 +16,11 @@ export default function CatalogPagination({
 
   const handleChange = (e) => {
     params.set("page", e);
-
     replace(`${pathName}?${params.toString()}`);
-    window.scrollTo(0, 0);
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1000);
   };
 
   const startProd = 1 + (page * limit - limit);
