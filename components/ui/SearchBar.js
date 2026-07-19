@@ -44,11 +44,12 @@ export default function SearchBar() {
       <TcpInput
         autoComplete="off"
         type="text"
-        size={"sm"}
+        //size={"sm"}
         color="zinc"
         placeholder="Busca una marca o modelo"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        className="text-sm"
         startContent={
           <div className="pr-1">
             <Search className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -57,7 +58,7 @@ export default function SearchBar() {
       />
       <Button
         onClick={handleSearch}
-        className="block w-auto bg-graffiti-500 text-zinc-800"
+        className="block w-auto bg-graffiti-500 text-zinc-800 text-sm"
       >
         Buscar
       </Button>

@@ -57,7 +57,7 @@ export default function VehicleCard({ vehicles }) {
               className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
               src={`${vehicle?.images[0]}`}
               width={600}
-              height={600}
+              //height={600}
             />
           </Link>
         </Card>

@@ -63,6 +63,7 @@ export default function Checkbox({
             ? "Selecciona la transmisión"
             : ""
         }
+        className="text-base"
         value={searchParams.get(filterType)?.split(",")}
         onValueChange={(e) => handleChange(e)}
         //disableAnimation={true}
@@ -72,6 +73,7 @@ export default function Checkbox({
             className="text-background"
             value={option.name}
             key={key}
+            radius={"md"}
           >
             {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
           </NextUiCheckbox>

@@ -57,7 +57,7 @@ export default function PriceRange() {
         minValue={0}
         value={value}
         onChange={(e) => handleChange(e)}
-        className="max-w-md"
+        className="max-w-md text-sm"
       />
       <p className="text-zinc-400 font-medium text-xs">
         Rango seleccionado:{" "}

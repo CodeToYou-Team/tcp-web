@@ -29,7 +29,7 @@ export default function Accordion({
               <Plus className="text-graffiti-500" />
             )
           }
-          title={<p className="text-graffiti-500">Tipo de vehículo</p>}
+          title={<p className="text-graffiti-500 text-lg">Tipo de vehículo</p>}
         >
           <Checkbox options={vehicleType} filterType={"type"} />
         </AccordionItem>
@@ -44,7 +44,7 @@ export default function Accordion({
               <Plus className="text-graffiti-500" />
             )
           }
-          title={<p className="text-graffiti-500">Marcas</p>}
+          title={<p className="text-graffiti-500 text-lg">Marcas</p>}
         >
           <Checkbox options={brands} filterType={"brand"} />
         </AccordionItem>
@@ -61,7 +61,7 @@ export default function Accordion({
                 <Plus className="text-graffiti-500" />
               )
             }
-            title={<p className="text-graffiti-500">Modelos</p>}
+            title={<p className="text-graffiti-500 text-lg">Modelos</p>}
             //isDisabled={models.length === 0}
           >
             <Checkbox options={models} filterType={"model"} dependency={true} />
@@ -79,7 +79,7 @@ export default function Accordion({
               <Plus className="text-graffiti-500" />
             )
           }
-          title={<p className="text-graffiti-500">Transmisión</p>}
+          title={<p className="text-graffiti-500 text-lg">Transmisión</p>}
         >
           <Checkbox options={transmission} filterType={"transmission"} />
         </AccordionItem>
@@ -94,7 +94,7 @@ export default function Accordion({
               <Plus className="text-graffiti-500" />
             )
           }
-          title={<p className="text-graffiti-500">Ordenar</p>}
+          title={<p className="text-graffiti-500 text-lg">Ordenar</p>}
         >
           <Checkbox options={sort} filterType={"sort"} onlyOne={true} />
         </AccordionItem>

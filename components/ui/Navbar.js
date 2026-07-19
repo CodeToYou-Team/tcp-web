@@ -58,7 +58,7 @@ export default function Navbar() {
         {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              className="whitespace-nowrap text-graffiti-500"
+              className="whitespace-nowrap text-graffiti-500 text-lg"
               href={item.route}
             >
               {item.text}

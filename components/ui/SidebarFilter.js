@@ -60,7 +60,7 @@ const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
             </div>
             <SheetFooter>
               <Button
-                className="bg-graffiti-500 text-zinc-800 font-medium my-6"
+                className="bg-graffiti-500 text-zinc-800 font-medium my-6 text-sm"
                 onClick={CleanFilter}
               >
                 Limpiar búsqueda
