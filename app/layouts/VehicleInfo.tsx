@@ -1,8 +1,9 @@
 "use client";
 import { Button } from "@heroui/react";
 import { formatNumber } from "@/lib/services";
+import type { Vehicle } from "@/lib/types";
 
-const VehicleInfo = ({ vehicle }) => {
+const VehicleInfo = ({ vehicle }: { vehicle: Vehicle }) => {
   return (
     <>
       <div className="px-4 text-center items-center md:mt-6">

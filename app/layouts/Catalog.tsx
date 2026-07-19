@@ -3,8 +3,9 @@ import VehicleCard from "../../components/VehicleCard";
 import Pagination from "@/components/ui/Pagination";
 import { getCars } from "@/app/lib/actions";
 import NoResults from "./NoResults";
+import type { CarsQuery } from "@/lib/types";
 
-const Catalog = async ({ query }) => {
+const Catalog = async ({ query }: { query: CarsQuery }) => {
   const vehicles = await getCars(query);
   return (
     <>

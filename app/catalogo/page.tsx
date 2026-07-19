@@ -23,15 +23,21 @@ export const metadata = {
   },
 };
 
+type SearchParams = { [key: string]: string | string[] | undefined };
+
 const brands = await getBrands();
 
-export default async function Catalogo({ searchParams: searchParamsPromise }) {
+export default async function Catalogo({
+  searchParams: searchParamsPromise,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
   const searchParams = await searchParamsPromise;
   const keys = Object.keys(searchParams);
 
-  const models = await getModels({ brand: searchParams["brand"] });
+  const models = await getModels({ brand: searchParams["brand"] as string });
 
-  let query = {};
+  let query: Record<string, any> = {};
 
   for (let i = 0; i < keys.length; i++) {
     if (searchParams[keys[i]] === "Agregado recientemente") {

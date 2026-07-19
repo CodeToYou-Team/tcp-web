@@ -8,8 +8,9 @@ import "swiper/css/pagination";
 import "swiper/css/zoom";
 import { useRef } from "react";
 import { Image } from "@heroui/react";
+import type { Vehicle } from "@/lib/types";
 
-const ImageSlider = ({ vehicle }: { vehicle: any }) => {
+const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
 
   const swiperRef = useRef(null);

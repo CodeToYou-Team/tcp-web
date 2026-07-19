@@ -1,4 +1,13 @@
-export default function CTA({ title, description, image, link }) {
+import type { ReactNode } from "react";
+
+interface CTAProps {
+  title: ReactNode;
+  description: ReactNode;
+  image: ReactNode;
+  link: ReactNode;
+}
+
+export default function CTA({ title, description, image, link }: CTAProps) {
   return (
     <div>
       <div className="mx-auto max-w-7xl py-12 sm:px-6 sm:py-32 lg:px-8">

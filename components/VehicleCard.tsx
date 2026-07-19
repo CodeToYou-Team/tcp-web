@@ -4,8 +4,13 @@ import { Image } from "@heroui/react";
 import { Card } from "@heroui/react";
 import Link from "next/link";
 import { formatNumber } from "@/lib/services";
+import type { Vehicle } from "@/lib/types";
 
-export default function VehicleCard({ vehicles }) {
+interface VehicleCardProps {
+  vehicles: { items?: Vehicle[] };
+}
+
+export default function VehicleCard({ vehicles }: VehicleCardProps) {
   return (
     <>
       {vehicles?.items?.map((vehicle) => (
@@ -55,7 +60,7 @@ export default function VehicleCard({ vehicles }) {
             <Image
               alt="latest-1"
               className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
-              src={`${vehicle?.images[0]}`}
+              src={`${vehicle?.images?.[0]}`}
               width={600}
               //height={600}
             />

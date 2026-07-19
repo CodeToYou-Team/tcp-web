@@ -1,5 +1,5 @@
 // ----> Función para obtener todos los vehículos <----
-export async function getVehicles(query) {
+export async function getVehicles(query: string) {
   try {
     //console.log(`${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/search?${query}`);
     const res = await fetch(
@@ -9,7 +9,7 @@ export async function getVehicles(query) {
     const data_vehicles = await res.json();
 
     return data_vehicles;
-  } catch (error) {   
+  } catch (error: any) {
     //console.error("Database error:", error);
     console.log("Failed to fetch vehicles data")
     return [];
@@ -26,7 +26,7 @@ export async function getLatestVehicles() {
     const data_vehicles = await res.json();
 
     return data_vehicles;
-  } catch (error) {
+  } catch (error: any) {
     //console.error("Database error:", error);
     console.log("Failed to fetch latest vehicles data")
     return [];
@@ -35,7 +35,7 @@ export async function getLatestVehicles() {
 }
 
 // ----> Función para obtener los vehículos por su id <----
-export const getVehicleById = async (id) => {
+export const getVehicleById = async (id: string) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/inventory/${id}`,
@@ -44,7 +44,7 @@ export const getVehicleById = async (id) => {
     const vehicle = await res.json();
 
     return vehicle;
-  } catch (error) {
+  } catch (error: any) {
     //console.error("Database error:", error);
     console.log("Failed to fetch vehicle by id data")
     return [];
@@ -53,7 +53,7 @@ export const getVehicleById = async (id) => {
 };
 
 // ----> Función para obtener las marcas de los vehículos <----
-export const getBrands = async (context) => {
+export const getBrands = async (context: any) => {
   try {
     const res_brands = await fetch(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/brands`,
@@ -61,7 +61,7 @@ export const getBrands = async (context) => {
     );
     const data_brands = await res_brands.json();
     return data_brands;
-  } catch (error) {
+  } catch (error: any) {
     //console.error("Database error:", error);
     console.log("Failed to fetch vehicle brand")
     return [];
@@ -70,7 +70,7 @@ export const getBrands = async (context) => {
 };
 
 // ----> Función para formatear el valor de kilometraje y precio <----
-export const formatNumber = (number) => {
+export const formatNumber = (number: number | string | undefined | null) => {
   const formatString =
     number !== undefined && number !== null ? number.toString() : "";
   if (formatString.length >= 4) {
@@ -80,7 +80,7 @@ export const formatNumber = (number) => {
 };
 
 // ----> Función para obtener los vehículos recomendados <----
-export async function getRecommendationCars(id, brand) {
+export async function getRecommendationCars(id: string, brand: string) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/recommendations?id=${id}&brand=${brand}`,
@@ -89,7 +89,7 @@ export async function getRecommendationCars(id, brand) {
     const data_vehicles = await res.json();
 
     return data_vehicles;
-  } catch (error) {
+  } catch (error: any) {
     console.log("Failed to fetch recommendations cars")
     return [];
     //console.error("Database error:", error);
@@ -97,7 +97,7 @@ export async function getRecommendationCars(id, brand) {
 }
 
 // ----> Función para obtener los modelos asociados a una marca <----
-export async function getModels(brand) {
+export async function getModels(brand: string) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_ENDPOINT}/models?brand=${brand}`,
@@ -106,7 +106,7 @@ export async function getModels(brand) {
     const data_vehicles = await res.json();
 
     return data_vehicles;
-  } catch (error) {
+  } catch (error: any) {
     console.log("Failed to fetch models")
     return [];
     //console.error("Database error:", error);
@@ -124,7 +124,7 @@ export async function getOffers() {
     const data_offers = await res.json();
 
     return data_offers;
-  } catch (error) {
+  } catch (error: any) {
     console.log("Failed to fetch offers cars")
     return [];
     //console.error("Database error:", error);

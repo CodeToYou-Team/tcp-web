@@ -1,4 +1,6 @@
-const VehicleDetails = ({ vehicle }) => {
+import type { Vehicle } from "@/lib/types";
+
+const VehicleDetails = ({ vehicle }: { vehicle: Vehicle }) => {
   return (
     <>
       <div className="flex flex-col md:flex-row mx-16 mt-10 justify-center gap-6 md:gap-24">

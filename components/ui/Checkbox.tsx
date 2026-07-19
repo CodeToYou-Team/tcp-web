@@ -22,7 +22,7 @@ export default function Checkbox({
   const pathName = usePathname();
   const params = new URLSearchParams(searchParams);
 
-  const handleChange = (e) => {
+  const handleChange = (e: string[]) => {
     params.set("page", "1");
 
     const value = e.join(",");
@@ -43,8 +43,7 @@ export default function Checkbox({
   if (dependency) {
     if (params.has(filterType)) {
       const values = options.map((x) => x.name);
-      const newItems = params
-        .get(filterType)
+      const newItems = (params.get(filterType) || "")
         .split(",")
         .filter((x) => values.includes(x));
       if (newItems.length > 0) {

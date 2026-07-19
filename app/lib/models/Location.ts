@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import type { Location } from "@/lib/types";
 
 const locationSchema = new mongoose.Schema({
   name: { type: String, required:  true },
@@ -9,4 +10,4 @@ const locationSchema = new mongoose.Schema({
 });
 
 export default (mongoose.models?.Location ||
-  mongoose.model("Location", locationSchema)) as mongoose.Model<any>;
+  mongoose.model("Location", locationSchema)) as mongoose.Model<Location>;

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import type { VehicleModel } from "@/lib/types";
 
 const modelSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -10,4 +11,4 @@ const modelSchema = new mongoose.Schema({
 });
 
 export default (mongoose.models?.Model ||
-  mongoose.model("Model", modelSchema)) as mongoose.Model<any>;
+  mongoose.model("Model", modelSchema)) as mongoose.Model<VehicleModel>;

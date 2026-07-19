@@ -1,16 +1,26 @@
 import mongoose from "mongoose";
 
-const DATABASE_URL = process.env.DATABASE_URL;
-
-if (!DATABASE_URL) {
-  throw new Error("Please define the DATABASE_URL environment variable inside .env");
+interface MongooseCache {
+  connection: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
 }
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { connection: null, promise: null };
+declare global {
+  var mongooseCache: MongooseCache | undefined;
 }
+
+const databaseUrl: string = (() => {
+  const url = process.env.DATABASE_URL;
+  if (!url) {
+    throw new Error(
+      "Please define the DATABASE_URL environment variable inside .env"
+    );
+  }
+  return url;
+})();
+
+const cached: MongooseCache =
+  global.mongooseCache || (global.mongooseCache = { connection: null, promise: null });
 
 async function connectMongo() {
 
@@ -23,13 +33,13 @@ async function connectMongo() {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(DATABASE_URL, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(databaseUrl, opts).then((mongoose) => {
       return mongoose;
     });
   }
 
   cached.connection = await cached.promise;
-  
+
   return cached.connection;
 
 }

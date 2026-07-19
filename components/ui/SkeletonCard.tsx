@@ -1,6 +1,7 @@
 import ContentLoader from "react-content-loader";
+import type { ComponentProps } from "react";
 
-const SkeletonCard = (props) => (
+const SkeletonCard = (props: ComponentProps<typeof ContentLoader>) => (
   <div className="col-span-12 md:col-span-6 lg:col-span-4 h-[350px]">
     <ContentLoader
       speed={1}

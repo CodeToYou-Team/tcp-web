@@ -5,33 +5,48 @@ import InventoryDB from "@/app/lib/models/Inventory";
 import BrandDB from "@/app/lib/models/Brand";
 import ModelDB from "@/app/lib/models/Model";
 import LocationDB from "@/app/lib/models/Location";
+import type {
+  Brand,
+  CarsListResult,
+  CarsQuery,
+  ItemResult,
+  ListResult,
+  Location,
+  SortKey,
+  Vehicle,
+  VehicleModel,
+} from "@/lib/types";
 
-export const getBrands = async () => {
+const toActionError = (error: any) => ({
+  name: error?.name,
+  case: error?.message,
+  code: error?.code,
+  stack: error?.stack,
+});
+
+export const getBrands = async (): Promise<ListResult<Brand>> => {
   try {
     await connectMongo();
 
     const items = await BrandDB.find({ enabled: true }).sort("name");
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getModels = async (query?: any) => {
+export const getModels = async (query?: {
+  brand?: string;
+}): Promise<ListResult<VehicleModel>> => {
   try {
     await connectMongo();
 
-    let queryDB: { enabled: boolean; brand?: any } = { enabled: true };
+    let queryDB: { enabled: boolean; brand?: string } = { enabled: true };
 
     if (query?.brand !== undefined) {
       queryDB.brand = query?.brand;
@@ -40,49 +55,39 @@ export const getModels = async (query?: any) => {
     const items = await ModelDB.find(queryDB).sort("name");
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getLocations = async () => {
+export const getLocations = async (): Promise<ListResult<Location>> => {
   try {
     await connectMongo();
 
     const items = await LocationDB.find({ enabled: true }).sort("name");
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getCars = async (query: any) => {
-  const SORT_CASES = {
+export const getCars = async (query: CarsQuery): Promise<CarsListResult> => {
+  const SORT_CASES: Record<SortKey, string> = {
     reciente: "-createdAt -_id",
     descendente: "-price -_id",
     ascendente: "price -_id",
   };
 
-  const SORT_CASES_OBJ = {
+  const SORT_CASES_OBJ: Record<SortKey, Record<string, number>> = {
     reciente: { createdAt: -1, _id: -1 },
     descendente: { price: -1, _id: -1 },
     ascendente: { price: 1, _id: -1 },
@@ -92,9 +97,9 @@ export const getCars = async (query: any) => {
     await connectMongo();
 
     const LIMIT = 9;
-    let queryDB = { ...query, enabled: true };
-    let filters = { ...query, enabled: true };
-    const sort = queryDB.sort || "reciente";
+    let queryDB: any = { ...query, enabled: true };
+    let filters: any = { ...query, enabled: true };
+    const sort: SortKey = queryDB.sort || "reciente";
     const page = queryDB.page || 1;
     const search = queryDB?.search || "";
     delete queryDB.page;
@@ -188,7 +193,7 @@ export const getCars = async (query: any) => {
     }
 
     let count = 0;
-    let items = [];
+    let items: Vehicle[] = [];
 
     if (search) {
 
@@ -247,42 +252,32 @@ export const getCars = async (query: any) => {
       limit: LIMIT,
       filters,
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getCar = async (id: any) => {
+export const getCar = async (id: string): Promise<ItemResult<Vehicle>> => {
   try {
     await connectMongo();
 
     const item = await InventoryDB.findById(id);
 
     return { ok: true, item: JSON.parse(JSON.stringify(item)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       item: {},
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getLatestCars = async () => {
+export const getLatestCars = async (): Promise<ListResult<Vehicle>> => {
   try {
     await connectMongo();
 
@@ -295,26 +290,24 @@ export const getLatestCars = async () => {
       .limit(LIMIT);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getRecommendationCars = async (id: any, query: any) => {
+export const getRecommendationCars = async (
+  id: string,
+  query: any
+): Promise<ListResult<Vehicle>> => {
   try {
     await connectMongo();
 
     const LIMIT = 3;
-    let queryDB = { ...query, enabled: true };
+    let queryDB: any = { ...query, enabled: true };
     queryDB = { $and: [queryDB, { _id: { $ne: id } }] };
 
     const initialReq = await InventoryDB.countDocuments(queryDB);
@@ -335,22 +328,19 @@ export const getRecommendationCars = async (id: any, query: any) => {
     }
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getOfferCars = async (query?: any) => {
-  const SORT_CASES = {
+export const getOfferCars = async (query?: {
+  sort?: SortKey;
+}): Promise<ListResult<Vehicle>> => {
+  const SORT_CASES: Record<SortKey, string> = {
     reciente: "-updatedAt -_id",
     descendente: "-price -_id",
     ascendente: "price -_id",
@@ -359,7 +349,7 @@ export const getOfferCars = async (query?: any) => {
   try {
     await connectMongo();
 
-    const sort = query?.sort || "reciente";
+    const sort: SortKey = query?.sort || "reciente";
 
     const items = await InventoryDB.find({
       discount: { $gt: 0 },
@@ -368,21 +358,16 @@ export const getOfferCars = async (query?: any) => {
     }).sort(SORT_CASES[sort]);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };
 
-export const getLatestOfferCars = async () => {
+export const getLatestOfferCars = async (): Promise<ListResult<Vehicle>> => {
   try {
     await connectMongo();
 
@@ -396,16 +381,11 @@ export const getLatestOfferCars = async () => {
       .limit(LIMIT);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error) {
+  } catch (error: any) {
     return {
       ok: false,
       items: [],
-      message: {
-        name: error.name,
-        case: error.message,
-        code: error.code,
-        stack: error.stack,
-      },
+      message: toActionError(error),
     };
   }
 };

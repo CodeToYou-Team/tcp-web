@@ -4,11 +4,14 @@ import VehicleInfo from "@/app/layouts/VehicleInfo";
 import VehicleCard from "@/components/VehicleCard";
 import { VehiclesLayout } from "@/app/layouts/VehiclesLayout";
 import VehicleDetails from "@/app/layouts/VehicleDetails";
+import type { Vehicle } from "@/lib/types";
+
+type Params = Promise<{ id: string }>;
 
 // Función para generar metadatos de forma dinámica
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params }: { params: Params }) {
   const { id } = await params;
-  const vehicle = (await getCar(id)).item;
+  const vehicle = (await getCar(id)).item as Vehicle;
 
   return {
     title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
@@ -16,7 +19,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       images: [
         {
-          url: `${vehicle?.images[0]}?tr=w-640,h-640,q-100`,
+          url: `${vehicle?.images?.[0]}?tr=w-640,h-640,q-100`,
           alt: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.year}`,
         },
       ],
@@ -24,9 +27,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function Product({ params }) {
+export default async function Product({ params }: { params: Params }) {
   const { id } = await params;
-  const vehicle = (await getCar(id)).item;
+  const vehicle = (await getCar(id)).item as Vehicle;
 
   const recommendedVehicles = await getRecommendationCars(id, {
     brand: vehicle.brand,

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import type { Vehicle } from "@/lib/types";
 
 const inventorySchema = new mongoose.Schema({
   fullName: String,
@@ -58,4 +59,4 @@ const inventorySchema = new mongoose.Schema({
 })
 
 export default (mongoose.models?.Inventory ||
-  mongoose.model("Inventory", inventorySchema)) as mongoose.Model<any>;
+  mongoose.model("Inventory", inventorySchema)) as mongoose.Model<Vehicle>;

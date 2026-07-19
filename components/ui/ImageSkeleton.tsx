@@ -1,6 +1,7 @@
 import ContentLoader from "react-content-loader";
+import type { ComponentProps } from "react";
 
-const ImageSkeleton = (props) => (
+const ImageSkeleton = (props: ComponentProps<typeof ContentLoader>) => (
   <ContentLoader
     speed={2}
     width={400}
