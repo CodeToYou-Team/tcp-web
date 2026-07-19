@@ -17,6 +17,7 @@ const Hero = () => {
             height={720}
             src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709090693/corolla-hero_i9hays.jpg"
             className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>

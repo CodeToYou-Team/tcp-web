@@ -10,7 +10,7 @@ import { Image } from "@heroui/react";
 
 const ImageSlider = ({ vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
-  console.log(vehicle.images[0]);
+
   const swiperRef = useRef(null);
 
   return (

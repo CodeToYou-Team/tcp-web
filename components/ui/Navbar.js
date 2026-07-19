@@ -46,6 +46,7 @@ export default function Navbar() {
               alt="tcp-logo"
               width={2650}
               height={590}
+              loading="eager"
             />
           </Link>
         </NavbarBrand>

@@ -25,7 +25,8 @@ export const metadata = {
 
 const brands = await getBrands();
 
-export default async function Catalogo({ searchParams }) {
+export default async function Catalogo({ searchParams: searchParamsPromise }) {
+  const searchParams = await searchParamsPromise;
   const keys = Object.keys(searchParams);
 
   const models = await getModels({ brand: searchParams["brand"] });
@@ -46,14 +47,18 @@ export default async function Catalogo({ searchParams }) {
 
   return (
     <>
-      <SidebarFilter
-        brands={brands?.items || []}
-        vehicleType={vehicleType}
-        transmission={transmission}
-        models={models?.items || []}
-        sort={sort}
-      />
-      <SearchBar />
+      <Suspense>
+        <SidebarFilter
+          brands={brands?.items || []}
+          vehicleType={vehicleType}
+          transmission={transmission}
+          models={models?.items || []}
+          sort={sort}
+        />
+      </Suspense>
+      <Suspense>
+        <SearchBar />
+      </Suspense>
       <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
         <Catalog query={query} />
       </Suspense>

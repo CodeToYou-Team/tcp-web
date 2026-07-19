@@ -7,7 +7,7 @@ import VehicleDetails from "@/app/layouts/VehicleDetails";
 
 // Función para generar metadatos de forma dinámica
 export async function generateMetadata({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const vehicle = (await getCar(id)).item;
 
   return {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function Product({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const vehicle = (await getCar(id)).item;
 
   const recommendedVehicles = await getRecommendationCars(id, {

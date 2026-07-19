@@ -22,6 +22,7 @@ const NoResults = () => {
           width={1000}
           height={1000}
           alt="no-results"
+          loading="eager"
         />
       </div>
     </div>

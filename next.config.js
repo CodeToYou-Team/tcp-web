@@ -6,10 +6,6 @@ const nextConfig = {
       { protocol: "https", hostname: "ik.imagekit.io", pathname: "**" },
     ],
   },
-  i18n: {
-    locales: ["es"],
-    defaultLocale: "es",
-  },
   headers: () => [
     {
       source: "/(.*)",

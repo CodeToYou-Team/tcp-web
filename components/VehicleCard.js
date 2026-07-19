@@ -5,7 +5,7 @@ import { Card } from "@heroui/react";
 import Link from "next/link";
 import { formatNumber } from "@/lib/services";
 
-export default async function VehicleCard({ vehicles }) {
+export default function VehicleCard({ vehicles }) {
   return (
     <>
       {vehicles?.items?.map((vehicle) => (

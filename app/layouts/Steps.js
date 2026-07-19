@@ -29,6 +29,7 @@ export default function Steps() {
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step1-bg_s4blpr.png"
+              loading="eager"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
@@ -62,6 +63,7 @@ export default function Steps() {
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089556/tcp-web/step2-bg_slt7no.png"
+              loading="eager"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>
@@ -100,6 +102,7 @@ export default function Steps() {
               alt="Card example background"
               className="z-0 h-full object-cover"
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step3-bg_zwkmis.png"
+              loading="eager"
             />
             <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
               <div>

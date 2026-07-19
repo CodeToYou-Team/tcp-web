@@ -36,6 +36,7 @@ export default function Venta() {
             alt="App screenshot"
             width={1335}
             height={2000}
+            loading="eager"
           />
         }
         link={
