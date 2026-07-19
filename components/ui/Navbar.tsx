@@ -76,7 +76,7 @@ export default function Navbar() {
               className="w-full text-graffiti-500"
               href={item.route}
               onClick={handleLinkClick}
-              size="lg"
+              {...({ size: "lg" } as any)}
             >
               {item.text}
             </Link>

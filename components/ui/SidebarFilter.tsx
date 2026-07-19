@@ -16,7 +16,21 @@ import { usePathname, useRouter } from "next/navigation";
 import { ListFilter } from "lucide-react";
 import SectionBanner from "./SectionBanner";
 
-const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
+interface SidebarFilterProps {
+  brands: any;
+  vehicleType: any;
+  transmission: any;
+  models: any;
+  sort: any;
+}
+
+const SidebarFilter = ({
+  brands,
+  vehicleType,
+  transmission,
+  models,
+  sort,
+}: SidebarFilterProps) => {
   const { replace } = useRouter();
   const pathName = usePathname();
 
@@ -27,7 +41,7 @@ const SidebarFilter = ({ brands, vehicleType, transmission, models, sort }) => {
     <>
       {" "}
       <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <Sheet className="scrollbar-thumb-gray-900">
+        <Sheet {...({ className: "scrollbar-thumb-gray-900" } as any)}>
           <SectionBanner>
             <SheetTrigger className="w-fullflex" asChild>
               <Button

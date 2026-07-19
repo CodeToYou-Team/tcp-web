@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const inventorySchema = mongoose.Schema({
+const inventorySchema = new mongoose.Schema({
   fullName: String,
   brand: String,
   model: String,
@@ -57,4 +57,5 @@ const inventorySchema = mongoose.Schema({
   collection: 'inventory'
 })
 
-export default mongoose.models?.Inventory || mongoose.model("Inventory", inventorySchema);
+export default (mongoose.models?.Inventory ||
+  mongoose.model("Inventory", inventorySchema)) as mongoose.Model<any>;

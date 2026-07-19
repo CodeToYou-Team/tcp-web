@@ -1,10 +1,10 @@
 "use server";
 
 import connectMongo from "@/app/lib/connect-mongo";
-import InventoryDB from "@/app/lib/models/Inventory.js";
-import BrandDB from "@/app/lib/models/Brand.js";
-import ModelDB from "@/app/lib/models/Model.js";
-import LocationDB from "@/app/lib/models/Location.js";
+import InventoryDB from "@/app/lib/models/Inventory";
+import BrandDB from "@/app/lib/models/Brand";
+import ModelDB from "@/app/lib/models/Model";
+import LocationDB from "@/app/lib/models/Location";
 
 export const getBrands = async () => {
   try {
@@ -27,11 +27,11 @@ export const getBrands = async () => {
   }
 };
 
-export const getModels = async (query) => {
+export const getModels = async (query?: any) => {
   try {
     await connectMongo();
 
-    let queryDB = { enabled: true };
+    let queryDB: { enabled: boolean; brand?: any } = { enabled: true };
 
     if (query?.brand !== undefined) {
       queryDB.brand = query?.brand;
@@ -75,7 +75,7 @@ export const getLocations = async () => {
   }
 };
 
-export const getCars = async (query) => {
+export const getCars = async (query: any) => {
   const SORT_CASES = {
     reciente: "-createdAt -_id",
     descendente: "-price -_id",
@@ -192,7 +192,7 @@ export const getCars = async (query) => {
 
     if (search) {
 
-      let steps = [
+      let steps: any[] = [
         {
           $search: {
             index: "autocomplete",
@@ -261,7 +261,7 @@ export const getCars = async (query) => {
   }
 };
 
-export const getCar = async (id) => {
+export const getCar = async (id: any) => {
   try {
     await connectMongo();
 
@@ -309,7 +309,7 @@ export const getLatestCars = async () => {
   }
 };
 
-export const getRecommendationCars = async (id, query) => {
+export const getRecommendationCars = async (id: any, query: any) => {
   try {
     await connectMongo();
 
@@ -349,7 +349,7 @@ export const getRecommendationCars = async (id, query) => {
   }
 };
 
-export const getOfferCars = async (query) => {
+export const getOfferCars = async (query?: any) => {
   const SORT_CASES = {
     reciente: "-updatedAt -_id",
     descendente: "-price -_id",

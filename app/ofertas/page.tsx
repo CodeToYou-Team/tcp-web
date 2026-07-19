@@ -29,7 +29,10 @@ export default async function Ofertas() {
     <>
       {offersVehicles?.items?.length > 0 ? (
         <VehiclesLayout>
-          <Suspense key={offersVehicles} fallback={<SkeletonLayout />}>
+          <Suspense
+            key={offersVehicles as unknown as string}
+            fallback={<SkeletonLayout />}
+          >
             <VehicleCard vehicles={offersVehicles} />
           </Suspense>
         </VehiclesLayout>

@@ -4,12 +4,19 @@ import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
+interface CheckboxProps {
+  options: any[];
+  filterType: string;
+  onlyOne?: boolean;
+  dependency?: boolean;
+}
+
 export default function Checkbox({
   options,
   filterType,
   onlyOne,
   dependency = false,
-}) {
+}: CheckboxProps) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();

@@ -1,4 +1,5 @@
 "use client";
+import type { CSSProperties } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Zoom } from "swiper/modules";
 import "swiper/css";
@@ -8,7 +9,7 @@ import "swiper/css/zoom";
 import { useRef } from "react";
 import { Image } from "@heroui/react";
 
-const ImageSlider = ({ vehicle }) => {
+const ImageSlider = ({ vehicle }: { vehicle: any }) => {
   const slides = vehicle?.images && [...vehicle.images];
 
   const swiperRef = useRef(null);
@@ -24,7 +25,7 @@ const ImageSlider = ({ vehicle }) => {
             "--swiper-pagination-bullet-size": "10px",
             "--swiper-pagination-bullet-horizontal-gap": "6px",
             "--swiper-navigation-color": "#fcf744",
-          }}
+          } as CSSProperties}
           navigation={true}
           pagination={{ clickable: true }}
           zoom={true}

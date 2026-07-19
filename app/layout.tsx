@@ -42,7 +42,10 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={poppins.className} antialised="true">
+      <body
+        className={poppins.className}
+        {...({ antialised: "true" } as any)}
+      >
         <Navbar />
         <Providers>{children}</Providers>
         <Footer />

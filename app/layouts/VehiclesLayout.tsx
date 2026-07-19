@@ -1,4 +1,12 @@
-export const VehiclesLayout = ({ children, title }) => {
+import type { ReactNode } from "react";
+
+export const VehiclesLayout = ({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title?: string;
+}) => {
   return (
     <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-16 mb-32">
       {title && (

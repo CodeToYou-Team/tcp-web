@@ -1,12 +1,12 @@
 // "use server";
 
 import connectMongo from "@/app/lib/connect-mongo";
-import InventoryDB from "@/app/lib/models/Inventory.js";
+import InventoryDB from "@/app/lib/models/Inventory";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(req, res) {
+export async function GET(req: Request) {
   if (req.method === "GET") {
     await connectMongo();
 

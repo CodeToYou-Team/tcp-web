@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const locationSchema = mongoose.Schema({
+const locationSchema = new mongoose.Schema({
   name: { type: String, required:  true },
   enabled: { type: Boolean, default: true },
 },
@@ -8,4 +8,5 @@ const locationSchema = mongoose.Schema({
   collection: 'location'
 });
 
-export default mongoose.models?.Location || mongoose.model("Location", locationSchema);
+export default (mongoose.models?.Location ||
+  mongoose.model("Location", locationSchema)) as mongoose.Model<any>;

@@ -3,19 +3,27 @@
 import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+interface CatalogPaginationProps {
+  page: number;
+  numberOfPages: number;
+  count: number;
+  limit: number;
+  visible?: boolean;
+}
+
 export default function CatalogPagination({
   page,
   numberOfPages,
   count,
   limit,
-}) {
+}: CatalogPaginationProps) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
   const params = new URLSearchParams(searchParams);
 
-  const handleChange = (e) => {
-    params.set("page", e);
+  const handleChange = (e: number) => {
+    params.set("page", String(e));
     replace(`${pathName}?${params.toString()}`);
 
     setTimeout(() => {

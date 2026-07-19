@@ -4,13 +4,21 @@ import { Accordion as NextUiAccordion, AccordionItem } from "@heroui/react";
 import { Plus, Minus } from "lucide-react";
 import Checkbox from "./Checkbox";
 
+interface AccordionProps {
+  brands: any[];
+  vehicleType: any[];
+  transmission: any[];
+  models: any[];
+  sort: any[];
+}
+
 export default function Accordion({
   brands,
   vehicleType,
   transmission,
   models,
   sort,
-}) {
+}: AccordionProps) {
   return (
     <>
       <NextUiAccordion

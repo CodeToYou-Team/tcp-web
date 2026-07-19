@@ -11,22 +11,22 @@ export default function PriceRange() {
   const pathName = usePathname();
   const params = new URLSearchParams(searchParams);
 
-  const [value, setValue] = useState([
-    searchParams.get("minPrice") || 0,
-    searchParams.get("maxPrice") || 80000,
+  const [value, setValue] = useState<number[]>([
+    Number(searchParams.get("minPrice")) || 0,
+    Number(searchParams.get("maxPrice")) || 80000,
   ]);
 
   useEffect(() => {
     if (!searchParams.get("minPrice")) {
       setValue([
-        searchParams.get("minPrice") || 0,
-        searchParams.get("maxPrice") || 80000,
+        Number(searchParams.get("minPrice")) || 0,
+        Number(searchParams.get("maxPrice")) || 80000,
       ])
     }
   }, [searchParams])
-  
-  const handleChange = (e) => {
-    let adjustedValue = parseInt(e[1]);
+
+  const handleChange = (e: number[]) => {
+    let adjustedValue = e[1];
 
     if (adjustedValue === 80000) {
       adjustedValue += 920000;
@@ -56,7 +56,7 @@ export default function PriceRange() {
         maxValue={80000}
         minValue={0}
         value={value}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleChange(Array.isArray(e) ? e : [e, e])}
         className="max-w-md text-sm"
       />
       <p className="text-zinc-400 font-medium text-xs">
