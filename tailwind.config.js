@@ -1,12 +1,9 @@
-import { heroui } from "@heroui/theme";
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -22,34 +19,57 @@ module.exports = {
           800: "#b0ad30",
           900: "#979429",
         },
+        // Tokens shadcn/ui (leen las variables CSS de globals.css).
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
   darkMode: "class",
-  plugins: [
-    heroui({
-      addCommonColors: false, // override common colors (e.g. "blue", "green", "pink").
-      defaultTheme: "dark", // default theme from the themes object
-      defaultExtendTheme: "dark", // default theme to extend on custom themes
-      layout: {}, // common layout tokens (applied to all themes)
-      themes: {
-        light: {
-          layout: {}, // light theme layout tokens
-          colors: {
-            //
-          }, // light theme colors
-        },
-        dark: {
-          layout: {}, // dark theme layout tokens
-          colors: {
-            primary: "#fcf744",
-            background: "#18181b", // zinc-900
-            secondaryBg: "#27272a", // zinc-800
-            foreground: "#f4f4f5", // zinc-100
-          }, // dark theme colors
-        },
-        // ... custom themes
-      },
-    }),
-  ],
+  plugins: [require("tailwindcss-animate")],
 };

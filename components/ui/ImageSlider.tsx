@@ -7,7 +7,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/zoom";
 import { useRef } from "react";
-import { Image } from "@heroui/react";
 import type { Vehicle } from "@/lib/types";
 
 const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
@@ -38,7 +37,8 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
           {slides?.map((slide, slideIndex) => (
             <SwiperSlide className="px-2 cursor-grab" key={slideIndex}>
               <div className="swiper-zoom-container">
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={`${slide}`}
                   alt={`car-img-${slideIndex}`}
                   className="gap-4"

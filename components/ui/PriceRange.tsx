@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Slider } from "@heroui/react";
+import { Slider } from "@/components/ui/slider-primitive";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -48,16 +48,14 @@ export default function PriceRange() {
 
   return (
     <div className="flex flex-col gap-2 w-full h-full my-2 max-w-md items-start justify-center">
+      <span className="text-sm">Rango de precios</span>
       <Slider
-        label="Rango de precios"
-        hideValue={true}
-        formatOptions={{ style: "currency", currency: "USD" }}
         step={500}
-        maxValue={80000}
-        minValue={0}
+        max={80000}
+        min={0}
         value={value}
-        onChange={(e) => handleChange(Array.isArray(e) ? e : [e, e])}
-        className="max-w-md text-sm"
+        onValueChange={(e) => handleChange(e)}
+        className="max-w-md"
       />
       <p className="text-zinc-400 font-medium text-xs">
         Rango seleccionado:{" "}

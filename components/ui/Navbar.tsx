@@ -1,23 +1,16 @@
 "use client";
 
-import {
-  Navbar as NextUiNavbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from "@heroui/navbar";
 import Link from "next/link";
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { navbarItems } from "@/lib/data";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((open) => !open);
   };
 
   const handleLinkClick = () => {
@@ -27,18 +20,21 @@ export default function Navbar() {
   };
 
   return (
-    <NextUiNavbar
-      className="bg-zinc-900"
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={handleMenuToggle}
-    >
-      <NavbarContent>
-        <NavbarMenuToggle
+    <nav className="sticky top-0 z-40 flex w-full items-center justify-center bg-zinc-900">
+      <div className="relative flex h-16 w-full max-w-[1024px] flex-nowrap items-center justify-between gap-4 px-6">
+        <button
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+          onClick={handleMenuToggle}
+          className="flex h-full w-6 items-center justify-center sm:hidden"
+        >
+          {isMenuOpen ? (
+            <X className="text-graffiti-500" />
+          ) : (
+            <Menu className="text-graffiti-500" />
+          )}
+        </button>
 
-        <NavbarBrand>
+        <div className="flex flex-grow basis-0 flex-nowrap items-center justify-start">
           <Link href="/">
             <Image
               className="w-auto h-16"
@@ -49,40 +45,37 @@ export default function Navbar() {
               loading="eager"
             />
           </Link>
-        </NavbarBrand>
-      </NavbarContent>
+        </div>
 
-      {/* desktop navbar items */}
-
-      <NavbarContent className="hidden sm:flex gap-6 " justify="end">
-        {navbarItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+        {/* desktop navbar items */}
+        <div className="hidden gap-6 sm:flex flex-grow basis-0 items-center justify-end">
+          {navbarItems.map((item, index) => (
             <Link
+              key={`${item.text}-${index}`}
               className="whitespace-nowrap text-graffiti-500 text-lg"
               href={item.route}
             >
               {item.text}
             </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarContent>
+          ))}
+        </div>
+      </div>
 
-      {/* mobile navbar items */}
-
-      <NavbarMenu className="bg-zinc-900 gap-8">
-        {navbarItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+      {/* mobile navbar menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-x-0 top-16 bottom-0 z-30 flex w-screen flex-col gap-2 overflow-y-auto bg-zinc-900 px-6 pt-2 sm:hidden">
+          {navbarItems.map((item, index) => (
             <Link
-              className="w-full text-graffiti-500"
+              key={`${item.text}-${index}`}
+              className="w-full py-2 text-lg text-graffiti-500"
               href={item.route}
               onClick={handleLinkClick}
-              {...({ size: "lg" } as any)}
             >
               {item.text}
             </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </NextUiNavbar>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }

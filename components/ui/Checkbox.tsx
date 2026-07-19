@@ -1,8 +1,9 @@
 "use client";
 
-import { CheckboxGroup, Checkbox as NextUiCheckbox } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { Checkbox as CheckboxPrimitive } from "@/components/ui/checkbox-primitive";
+import { Label } from "@/components/ui/Label";
 
 interface CheckboxProps {
   options: any[];
@@ -10,6 +11,13 @@ interface CheckboxProps {
   onlyOne?: boolean;
   dependency?: boolean;
 }
+
+const FILTER_LABELS: Record<string, string> = {
+  brand: "Selecciona una o más marcas",
+  type: "Selecciona un tipo de vehículo",
+  model: "Selecciona un modelo",
+  transmission: "Selecciona la transmisión",
+};
 
 export default function Checkbox({
   options,
@@ -21,6 +29,9 @@ export default function Checkbox({
   const { replace } = useRouter();
   const pathName = usePathname();
   const params = new URLSearchParams(searchParams);
+
+  const selected =
+    searchParams.get(filterType)?.split(",").filter(Boolean) || [];
 
   const handleChange = (e: string[]) => {
     params.set("page", "1");
@@ -40,12 +51,17 @@ export default function Checkbox({
     replace(`${pathName}?${params.toString()}`);
   };
 
+  const handleCheckedChange = (name: string, checked: boolean) => {
+    const next = checked
+      ? [...selected, name]
+      : selected.filter((value) => value !== name);
+    handleChange(next);
+  };
+
   if (dependency) {
     if (params.has(filterType)) {
       const values = options.map((x) => x.name);
-      const newItems = (params.get(filterType) || "")
-        .split(",")
-        .filter((x) => values.includes(x));
+      const newItems = selected.filter((x) => values.includes(x));
       if (newItems.length > 0) {
         params.set(filterType, newItems.join(","));
       } else {
@@ -57,34 +73,31 @@ export default function Checkbox({
 
   return (
     <Suspense key={searchParams.toString()}>
-      <CheckboxGroup
-        label={
-          filterType === "brand"
-            ? "Selecciona una o más marcas"
-            : filterType === "type"
-            ? "Selecciona un tipo de vehículo"
-            : filterType === "model"
-            ? "Selecciona un modelo"
-            : filterType === "transmission"
-            ? "Selecciona la transmisión"
-            : ""
-        }
-        className="text-base"
-        value={searchParams.get(filterType)?.split(",")}
-        onValueChange={(e) => handleChange(e)}
-        //disableAnimation={true}
-      >
-        {options.map((option, key) => (
-          <NextUiCheckbox
-            className="text-background"
-            value={option.name}
-            key={key}
-            radius={"md"}
-          >
-            {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
-          </NextUiCheckbox>
-        ))}
-      </CheckboxGroup>
+      <div className="flex flex-col gap-2 text-base">
+        <span className="text-muted-foreground">
+          {FILTER_LABELS[filterType] ?? ""}
+        </span>
+        <div className="flex flex-col flex-wrap gap-2">
+          {options.map((option, key) => {
+            const id = `${filterType}-${key}`;
+            const checked = selected.includes(option.name);
+            return (
+              <div key={key} className="flex items-center gap-2">
+                <CheckboxPrimitive
+                  id={id}
+                  checked={checked}
+                  onCheckedChange={(value) =>
+                    handleCheckedChange(option.name, value === true)
+                  }
+                />
+                <Label htmlFor={id} className="cursor-pointer font-normal">
+                  {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
+                </Label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </Suspense>
   );
 }

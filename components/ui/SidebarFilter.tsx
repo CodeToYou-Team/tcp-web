@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/Sheet";
-import { Button } from "@heroui/react";
+import { Button } from "@/components/ui/Button";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
 import { usePathname, useRouter } from "next/navigation";
@@ -45,7 +45,6 @@ const SidebarFilter = ({
           <SectionBanner>
             <SheetTrigger className="w-fullflex" asChild>
               <Button
-                disableAnimation={true}
                 radius="sm"
                 className="flex  w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
               >

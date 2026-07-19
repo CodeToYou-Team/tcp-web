@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Card, CardHeader, CardFooter, Button } from "@heroui/react";
+import { Card, CardHeader, CardFooter } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 export default function Steps() {
@@ -14,10 +15,7 @@ export default function Steps() {
           </h2>
         </div>
         <div className=" w-full mt-24 gap-8 grid grid-cols-12">
-          <Card
-            isFooterBlurred
-            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
-          >
+          <Card className="col-span-12  md:col-span-6  lg:col-span-4 h-fit">
             <CardHeader className="absolute z-10 top-1 flex-col items-start">
               <span className="text-background font-medium text-lg sm:text-xl">
                 Revisa nuestro catálogo
@@ -31,7 +29,7 @@ export default function Steps() {
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step1-bg_s4blpr.png"
               loading="eager"
             />
-            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
+            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between backdrop-blur">
               <div>
                 <span className="text-background text-sm mx-1">
                   Gran variedad de marcas y modelos.
@@ -48,10 +46,7 @@ export default function Steps() {
               </Link>
             </CardFooter>
           </Card>
-          <Card
-            isFooterBlurred
-            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
-          >
+          <Card className="col-span-12  md:col-span-6  lg:col-span-4 h-fit">
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
               <span className="text-background font-medium text-lg sm:text-xl leading-4">
                 Pauta la fecha de inspección
@@ -65,7 +60,7 @@ export default function Steps() {
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089556/tcp-web/step2-bg_slt7no.png"
               loading="eager"
             />
-            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
+            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between backdrop-blur">
               <div>
                 <span className="text-background text-sm mx-1">
                   ¿Quieres programar una cita?
@@ -87,10 +82,7 @@ export default function Steps() {
               </a>
             </CardFooter>
           </Card>
-          <Card
-            isFooterBlurred
-            className="col-span-12  md:col-span-6  lg:col-span-4 h-fit"
-          >
+          <Card className="col-span-12  md:col-span-6  lg:col-span-4 h-fit">
             <CardHeader className="absolute z-10 top-0 flex-col items-start">
               <span className="text-background font-medium text-lg sm:text-xl">
                 Concreta tu compra
@@ -104,7 +96,7 @@ export default function Steps() {
               src="https://res.cloudinary.com/dkokeszcd/image/upload/w_642,h_367/v1709089558/tcp-web/step3-bg_zwkmis.png"
               loading="eager"
             />
-            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between">
+            <CardFooter className="absolute bg-white/50 bottom-0 z-10 justify-between backdrop-blur">
               <div>
                 <span className="text-background text-sm mx-1">
                   Realiza el papeleo y obtén tu nuevo vehículo.

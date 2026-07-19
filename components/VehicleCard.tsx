@@ -1,7 +1,6 @@
 "use client";
 
-import { Image } from "@heroui/react";
-import { Card } from "@heroui/react";
+import { Card } from "@/components/ui/Card";
 import Link from "next/link";
 import { formatNumber } from "@/lib/services";
 import type { Vehicle } from "@/lib/types";
@@ -57,12 +56,12 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
               </div>
             </div>
 
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               alt="latest-1"
               className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
               src={`${vehicle?.images?.[0]}`}
               width={600}
-              //height={600}
             />
           </Link>
         </Card>

@@ -2,7 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Variables shadcn/ui (formato HSL "H S% L%", sin hsl()).
+  Valores calcados 1:1 de los que generaba el plugin heroui() para
+  no introducir ningun cambio visual al migrar los componentes.
+*/
+:root {
+  --background: 240 5.88% 10%;
+  --foreground: 240 4.76% 95.88%;
+
+  --card: 240 5.88% 10%;
+  --card-foreground: 240 4.76% 95.88%;
+
+  --popover: 240 5.88% 10%;
+  --popover-foreground: 240 4.76% 95.88%;
+
+  --primary: 58.37 96.84% 62.75%;
+  --primary-foreground: 240 5.88% 10%;
+
+  --secondary: 270 59.26% 57.65%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 240 3.7% 15.88%;
+  --muted-foreground: 240 3.83% 46.08%;
+
+  --accent: 240 3.7% 15.88%;
+  --accent-foreground: 240 4.76% 95.88%;
+
+  --destructive: 339.2 90.36% 51.18%;
+  --destructive-foreground: 0 0% 100%;
+
+  --success: 145.96 79.46% 43.92%;
+  --success-foreground: 0 0% 0%;
+
+  --warning: 37.03 91.27% 55.1%;
+  --warning-foreground: 0 0% 0%;
+
+  --border: 240 3.7% 15.88%;
+  --input: 240 3.7% 15.88%;
+  --ring: 212.02 100% 46.67%;
+
+  --radius: 0.75rem;
+}
+
 @layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+
   ::-webkit-scrollbar {
     width: 10px;
     background: transparent;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@/components/ui/Card";
 
 export default function Map() {
   return (

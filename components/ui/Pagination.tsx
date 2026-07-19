@@ -1,7 +1,7 @@
 "use client";
 
-import { Pagination } from "@heroui/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 interface CatalogPaginationProps {
   page: number;
@@ -11,11 +11,27 @@ interface CatalogPaginationProps {
   visible?: boolean;
 }
 
+function getPageRange(current: number, total: number): (number | "dots")[] {
+  const siblings = 1;
+  const boundaries = 1;
+  const range: (number | "dots")[] = [];
+
+  const start = Math.max(boundaries + 1, current - siblings);
+  const end = Math.min(total - boundaries, current + siblings);
+
+  for (let i = 1; i <= boundaries; i++) range.push(i);
+  if (start > boundaries + 1) range.push("dots");
+  for (let i = start; i <= end; i++) range.push(i);
+  if (end < total - boundaries) range.push("dots");
+  for (let i = Math.max(total - boundaries + 1, end + 1); i <= total; i++)
+    range.push(i);
+
+  return range;
+}
+
 export default function CatalogPagination({
   page,
   numberOfPages,
-  count,
-  limit,
 }: CatalogPaginationProps) {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -31,21 +47,39 @@ export default function CatalogPagination({
     }, 1000);
   };
 
-  const startProd = 1 + (page * limit - limit);
-  const endProd = page * limit > count ? count : page * limit;
+  if (numberOfPages <= 1) return null;
+
+  const items = getPageRange(page, numberOfPages);
 
   return (
-    <Pagination
-      classNames={{
-        base: "w-full flex justify-center my-8",
-        wrapper: "overflow-visible h-8 rounded",
-        item: "w-8 h-8 text-sm text-zinc-100 hover:text-zinc-900 hover:bg-zinc-800 bg-zinc-800 mx-1",
-        cursor: "text-zinc-900",
-      }}
-      total={numberOfPages}
-      initialPage={1}
-      page={page}
-      onChange={(e) => handleChange(e)}
-    />
+    <div className="w-full flex justify-center my-8">
+      <div className="flex flex-nowrap items-center h-8 overflow-visible rounded">
+        {items.map((item, index) =>
+          item === "dots" ? (
+            <span
+              key={`dots-${index}`}
+              className="w-8 h-8 flex items-center justify-center text-sm text-zinc-100"
+            >
+              ...
+            </span>
+          ) : (
+            <button
+              key={item}
+              aria-label={`Página ${item}`}
+              aria-current={item === page ? "page" : undefined}
+              onClick={() => handleChange(item)}
+              className={cn(
+                "w-8 h-8 mx-1 rounded rounded-xl text-sm transition-colors",
+                item === page
+                  ? "bg-graffiti-500 text-zinc-800 font-semibold"
+                  : "bg-zinc-800 text-zinc-100 hover:text-zinc-900 hover:bg-zinc-600"
+              )}
+            >
+              {item}
+            </button>
+          )
+        )}
+      </div>
+    </div>
   );
 }

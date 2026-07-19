@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@heroui/react";
+import { Button } from "@/components/ui/Button";
 import { Gift } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -12,10 +12,8 @@ const SectionBanner = ({ children }: { children: ReactNode }) => {
         <div className="flex items-center md:ml-14">
           {children}
           <Link href={"/ofertas"}>
-            <Button
-              disableAnimation={true}
-              className="flex w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
-            >
+            <Button className="flex w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500">
+
               <Gift className="text-graffiti-500 scale-85" />
               Ofertas
             </Button>

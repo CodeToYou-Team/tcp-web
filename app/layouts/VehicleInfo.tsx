@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@heroui/react";
+import { Button } from "@/components/ui/Button";
 import { formatNumber } from "@/lib/services";
 import type { Vehicle } from "@/lib/types";
 

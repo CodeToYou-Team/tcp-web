@@ -3,24 +3,8 @@
 import { useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Search } from "lucide-react";
-import { extendVariants, Input, Button } from "@heroui/react";
-
-export const TcpInput = extendVariants(Input, {
-  variants: {
-    color: {
-      zinc: {
-        inputWrapper: [
-          "text-zinc-100",
-          "bg-zinc-800",
-          "focus-within:bg-zinc-800",
-          "data-[hover=true]:bg-zinc-800",
-          "group-data-[focus=true]:bg-zinc-800",
-        ],
-        input: ["truncate"],
-      },
-    },
-  },
-});
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 
 export default function SearchBar() {
   const router = useRouter();
@@ -41,21 +25,19 @@ export default function SearchBar() {
 
   return (
     <div className="w-5/6 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center ">
-      <TcpInput
-        autoComplete="off"
-        type="text"
-        //size={"sm"}
-        color="zinc"
-        placeholder="Busca una marca o modelo"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="text-sm"
-        startContent={
-          <div className="pr-1">
-            <Search className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-          </div>
-        }
-      />
+      <div className="relative flex-1">
+        <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+          <Search className="h-6 w-6 text-muted-foreground flex-shrink-0" />
+        </div>
+        <Input
+          autoComplete="off"
+          type="text"
+          placeholder="Busca una marca o modelo"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="truncate bg-zinc-800 pl-10 text-sm text-zinc-100"
+        />
+      </div>
       <Button
         onClick={handleSearch}
         className="block w-auto bg-graffiti-500 text-zinc-800 text-sm"
