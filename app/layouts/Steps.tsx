@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Card, CardHeader, CardFooter } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import Link from "next/link";
+import { WHATSAPP_PHONE } from "@/lib/site-config";
 
 export default function Steps() {
   return (
@@ -70,7 +71,7 @@ export default function Steps() {
                 aria-label="Enlace al whatsapp de tu carro propio"
                 rel="noreferrer"
                 target="_blank"
-                href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20coordinar%20una%20cita%20`}
+                href={`https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=Buenas,%20estoy%20interesado/a%20en%20coordinar%20una%20cita%20`}
               >
                 <Button
                   className="text-xs font-medium bg-graffiti-500 text-background"

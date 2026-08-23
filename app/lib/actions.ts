@@ -1,21 +1,26 @@
 "use server";
 
+import { cache } from "react";
 import connectMongo from "@/app/lib/connect-mongo";
 import InventoryDB from "@/app/lib/models/Inventory";
 import BrandDB from "@/app/lib/models/Brand";
 import ModelDB from "@/app/lib/models/Model";
-import LocationDB from "@/app/lib/models/Location";
 import type {
   Brand,
   CarsListResult,
   CarsQuery,
   ItemResult,
   ListResult,
-  Location,
   SortKey,
   Vehicle,
   VehicleModel,
 } from "@/lib/types";
+import {
+  buildCarFilter,
+  PAGE_SIZE,
+  SORT_CRITERIA,
+  SORT_CRITERIA_OBJ,
+} from "@/lib/catalog-query";
 
 const toActionError = (error: any) => ({
   name: error?.name,
@@ -64,145 +69,24 @@ export const getModels = async (query?: {
   }
 };
 
-export const getLocations = async (): Promise<ListResult<Location>> => {
-  try {
-    await connectMongo();
-
-    const items = await LocationDB.find({ enabled: true }).sort("name");
-
-    return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error: any) {
-    return {
-      ok: false,
-      items: [],
-      message: toActionError(error),
-    };
-  }
-};
-
 export const getCars = async (query: CarsQuery): Promise<CarsListResult> => {
-  const SORT_CASES: Record<SortKey, string> = {
-    reciente: "-createdAt -_id",
-    descendente: "-price -_id",
-    ascendente: "price -_id",
-  };
-
-  const SORT_CASES_OBJ: Record<SortKey, Record<string, number>> = {
-    reciente: { createdAt: -1, _id: -1 },
-    descendente: { price: -1, _id: -1 },
-    ascendente: { price: 1, _id: -1 },
-  };
-
   try {
     await connectMongo();
 
-    const LIMIT = 9;
-    let queryDB: any = { ...query, enabled: true };
-    let filters: any = { ...query, enabled: true };
-    const sort: SortKey = queryDB.sort || "reciente";
-    const page = queryDB.page || 1;
-    const search = queryDB?.search || "";
-    delete queryDB.page;
-    delete queryDB.sort;
-    delete queryDB.search;
-    const startIndex = (Number(page) - 1) * LIMIT;
-
-    if (filters.hasOwnProperty("type")) {
-      const typeList = queryDB.type.split(",");
-      delete queryDB.type;
-      queryDB = { $and: [queryDB, { type: { $in: typeList } }] };
-    }
-
-    if (filters.hasOwnProperty("brand")) {
-      const brandList = filters.brand.split(",");
-      if (queryDB.hasOwnProperty("$and")) {
-        let newQuery = queryDB["$and"].shift();
-        delete newQuery.brand;
-        queryDB = {
-          $and: [newQuery, ...queryDB["$and"], { brand: { $in: brandList } }],
-        };
-      } else {
-        delete queryDB.brand;
-        queryDB = { $and: [queryDB, { brand: { $in: brandList } }] };
-      }
-    }
-
-    if (filters.hasOwnProperty("model")) {
-      const modelList = filters.model.split(",");
-      if (queryDB.hasOwnProperty("$and")) {
-        let newQuery = queryDB["$and"].shift();
-        delete newQuery.model;
-        queryDB = {
-          $and: [newQuery, ...queryDB["$and"], { model: { $in: modelList } }],
-        };
-      } else {
-        delete queryDB.model;
-        queryDB = { $and: [queryDB, { model: { $in: modelList } }] };
-      }
-    }
-
-    if (filters.hasOwnProperty("transmission")) {
-      const transmissionList = filters.transmission.split(",");
-      if (queryDB.hasOwnProperty("$and")) {
-        let newQuery = queryDB["$and"].shift();
-        delete newQuery.transmission;
-        queryDB = {
-          $and: [
-            newQuery,
-            ...queryDB["$and"],
-            { transmission: { $in: transmissionList } },
-          ],
-        };
-      } else {
-        delete queryDB.transmission;
-        queryDB = {
-          $and: [queryDB, { transmission: { $in: transmissionList } }],
-        };
-      }
-    }
-
-    if (
-      filters.hasOwnProperty("minPrice") &&
-      filters.hasOwnProperty("maxPrice")
-    ) {
-      const minPrice = Number(filters.minPrice);
-      const maxPrice = Number(filters.maxPrice);
-      if (queryDB.hasOwnProperty("$and")) {
-        let newQuery = queryDB["$and"].shift();
-        delete newQuery.minPrice;
-        delete newQuery.maxPrice;
-        queryDB = {
-          $and: [
-            newQuery,
-            ...queryDB["$and"],
-            { price: { $gte: minPrice } },
-            { price: { $lte: maxPrice } },
-          ],
-        };
-      } else {
-        delete queryDB.minPrice;
-        delete queryDB.maxPrice;
-        queryDB = {
-          $and: [
-            queryDB,
-            { price: { $gte: minPrice } },
-            { price: { $lte: maxPrice } },
-          ],
-        };
-      }
-    }
+    const queryDB = buildCarFilter(query);
+    const startIndex = (query.page - 1) * PAGE_SIZE;
 
     let count = 0;
     let items: Vehicle[] = [];
 
-    if (search) {
+    if (query.search) {
 
       let steps: any[] = [
         {
           $search: {
             index: "autocomplete",
             autocomplete: {
-              query: search,
+              query: query.search,
               path: "fullName",
               fuzzy: {
                 maxEdits: 1,
@@ -221,11 +105,11 @@ export const getCars = async (query: CarsQuery): Promise<CarsListResult> => {
         $facet: {
           metadata: [{ $count: "total" }], // Cuenta los resultados
           data: [
-            { $sort: SORT_CASES_OBJ[sort] },
+            { $sort: SORT_CRITERIA_OBJ[query.sort] },
             { $skip: startIndex },
-            { $limit: LIMIT },
-          ] // Obtiene los datos paginados
-        }
+            { $limit: PAGE_SIZE },
+          ],
+        } // Obtiene los datos paginados
       });
 
       const result = await InventoryDB.aggregate(steps).exec();
@@ -237,20 +121,19 @@ export const getCars = async (query: CarsQuery): Promise<CarsListResult> => {
 
       count = await InventoryDB.countDocuments(queryDB);
       items = await InventoryDB.find(queryDB)
-        .sort(SORT_CASES[sort])
+        .sort(SORT_CRITERIA[query.sort])
         .skip(startIndex)
-        .limit(LIMIT);
+        .limit(PAGE_SIZE);
 
     };
 
     return {
       ok: true,
       items: JSON.parse(JSON.stringify(items)),
-      currentPage: Number(page),
-      numberOfPages: Math.ceil(count / LIMIT),
+      currentPage: query.page,
+      numberOfPages: Math.ceil(count / PAGE_SIZE),
       count: count,
-      limit: LIMIT,
-      filters,
+      limit: PAGE_SIZE,
     };
   } catch (error: any) {
     return {
@@ -261,21 +144,24 @@ export const getCars = async (query: CarsQuery): Promise<CarsListResult> => {
   }
 };
 
-export const getCar = async (id: string): Promise<ItemResult<Vehicle>> => {
-  try {
-    await connectMongo();
+// Deducup por request: generateMetadata y la página comparten la misma llamada
+export const getCar = cache(
+  async (id: string): Promise<ItemResult<Vehicle>> => {
+    try {
+      await connectMongo();
 
-    const item = await InventoryDB.findById(id);
+      const item = await InventoryDB.findById(id);
 
-    return { ok: true, item: JSON.parse(JSON.stringify(item)) };
-  } catch (error: any) {
-    return {
-      ok: false,
-      item: {},
-      message: toActionError(error),
-    };
+      return { ok: true, item: JSON.parse(JSON.stringify(item)) };
+    } catch (error: any) {
+      return {
+        ok: false,
+        item: {},
+        message: toActionError(error),
+      };
+    }
   }
-};
+);
 
 export const getLatestCars = async (): Promise<ListResult<Vehicle>> => {
   try {
@@ -356,29 +242,6 @@ export const getOfferCars = async (query?: {
       enabled: true,
       updatedAt: { $lte: new Date().toISOString() },
     }).sort(SORT_CASES[sort]);
-
-    return { ok: true, items: JSON.parse(JSON.stringify(items)) };
-  } catch (error: any) {
-    return {
-      ok: false,
-      items: [],
-      message: toActionError(error),
-    };
-  }
-};
-
-export const getLatestOfferCars = async (): Promise<ListResult<Vehicle>> => {
-  try {
-    await connectMongo();
-
-    const LIMIT = 3;
-    const items = await InventoryDB.find({
-      discount: { $gt: 0 },
-      enabled: true,
-      updatedAt: { $lte: new Date().toISOString() },
-    })
-      .sort("-updatedAt -_id")
-      .limit(LIMIT);
 
     return { ok: true, items: JSON.parse(JSON.stringify(items)) };
   } catch (error: any) {

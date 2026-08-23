@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
-import { formatNumber } from "@/lib/services";
+import { formatNumber } from "@/lib/utils";
 import type { Vehicle } from "@/lib/types";
 
 interface VehicleCardProps {

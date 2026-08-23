@@ -9,16 +9,21 @@ export const navbarItems = [
 
 // ----> Parámetros de filtrado <----
 
-export const vehicleType = [
+import type { FilterOption } from "./types";
+
+export const vehicleType: FilterOption[] = [
   { name: "Carro" },
   { name: "Camioneta" },
   { name: "Camión" },
   { name: "Moto" },
 ];
 
-export const transmission = [{ name: "Automático" }, { name: "Sincrónico" }];
+export const transmission: FilterOption[] = [
+  { name: "Automático" },
+  { name: "Sincrónico" },
+];
 
-export const sort = [
+export const sort: FilterOption[] = [
   { name: "Agregado recientemente" },
   { name: "Precio ascendente" },
   { name: "Precio descendente" },

@@ -1,16 +1,18 @@
 import SidebarFilter from "@/components/ui/SidebarFilter";
 import { getBrands, getModels } from "@/app/lib/actions";
 import { vehicleType, transmission, sort } from "@/lib/data";
+import { parseSearchParams } from "@/lib/catalog-query";
 import Catalog from "@/app/layouts/Catalog";
 import { Suspense } from "react";
 import SkeletonLayout from "../layouts/SkeletonLayout";
 import SearchBar from "@/components/ui/SearchBar";
+import { SEO_IMAGE, SITE_URL } from "@/lib/site-config";
 
 export const metadata = {
   title: "Tu Carro Propio - Catálogo",
   description:
     "Conoce nuestro amplio catálogo de vehículos, con las mejores marcas y modelos del mercado",
-  metadataBase: new URL("https://www.tucarropropiove.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/catalogo",
     languages: {
@@ -18,14 +20,11 @@ export const metadata = {
     },
   },
   openGraph: {
-    images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+    images: SEO_IMAGE,
   },
 };
 
 type SearchParams = { [key: string]: string | string[] | undefined };
-
-const brands = await getBrands();
 
 export default async function Catalogo({
   searchParams: searchParamsPromise,
@@ -33,23 +32,15 @@ export default async function Catalogo({
   searchParams: Promise<SearchParams>;
 }) {
   const searchParams = await searchParamsPromise;
-  const keys = Object.keys(searchParams);
 
-  const models = await getModels({ brand: searchParams["brand"] as string });
+  // Por request: las marcas cambian en el inventario y no deben cachearse a
+  // nivel de proceso (antes se resolvían al importar el módulo).
+  const [brands, models] = await Promise.all([
+    getBrands(),
+    getModels({ brand: searchParams["brand"] as string }),
+  ]);
 
-  let query: Record<string, any> = {};
-
-  for (let i = 0; i < keys.length; i++) {
-    if (searchParams[keys[i]] === "Agregado recientemente") {
-      query[keys[i]] = "reciente";
-    } else if (searchParams[keys[i]] === "Precio ascendente") {
-      query[keys[i]] = "ascendente";
-    } else if (searchParams[keys[i]] === "Precio descendente") {
-      query[keys[i]] = "descendente";
-    } else {
-      query[keys[i]] = searchParams[keys[i]];
-    }
-  }
+  const query = parseSearchParams(searchParams);
 
   return (
     <>

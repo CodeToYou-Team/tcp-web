@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { setPage } from "@/lib/catalog-query";
 
 interface CatalogPaginationProps {
   page: number;
@@ -36,10 +37,9 @@ export default function CatalogPagination({
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
-  const params = new URLSearchParams(searchParams);
 
   const handleChange = (e: number) => {
-    params.set("page", String(e));
+    const params = setPage(new URLSearchParams(searchParams), e);
     replace(`${pathName}?${params.toString()}`);
 
     setTimeout(() => {

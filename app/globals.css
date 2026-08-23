@@ -75,3 +75,13 @@
 .ReactImageMagnify__LargeImageContainer {
   width: 200% !important;
 }
+
+/* Legibilidad de flechas y bullets del slider sobre la foto */
+.swiper-button-next,
+.swiper-button-prev {
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.55));
+}
+
+.swiper-pagination-bullet {
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
+}

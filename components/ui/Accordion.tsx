@@ -7,13 +7,14 @@ import {
   AccordionContent,
 } from "./accordion-primitive";
 import Checkbox from "./Checkbox";
+import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface AccordionProps {
-  brands: any[];
-  vehicleType: any[];
-  transmission: any[];
-  models: any[];
-  sort: any[];
+  brands: Brand[];
+  vehicleType: FilterOption[];
+  transmission: FilterOption[];
+  models: VehicleModel[];
+  sort: FilterOption[];
 }
 
 function AccordionIndicator() {

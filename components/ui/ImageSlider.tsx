@@ -6,49 +6,52 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/zoom";
-import { useRef } from "react";
 import type { Vehicle } from "@/lib/types";
 
 const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   const slides = vehicle?.images && [...vehicle.images];
 
-  const swiperRef = useRef(null);
+  const vehicleName = [vehicle?.brand, vehicle?.model, vehicle?.version]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <>
-      <div className="mx-auto w-full md:w-10/12 relative text-graffiti-500">
-        <Swiper
-          style={{
+    <div className="relative w-5/6 mx-6 md:w-5/7 text-graffiti-500">
+      <Swiper
+        style={
+          {
             "--swiper-pagination-color": "#fcf744",
-            "--swiper-pagination-bullet-inactive-color": "#18181b",
-            "--swiper-pagination-bullet-inactive-opacity": "1",
+            "--swiper-pagination-bullet-inactive-color": "#ffffff",
+            "--swiper-pagination-bullet-inactive-opacity": "0.45",
             "--swiper-pagination-bullet-size": "10px",
             "--swiper-pagination-bullet-horizontal-gap": "6px",
             "--swiper-navigation-color": "#fcf744",
-          } as CSSProperties}
-          navigation={true}
-          pagination={{ clickable: true }}
-          zoom={true}
-          loop={true}
-          className="rounded-lg gap-4 text-graffiti-500"
-          modules={[Navigation, Pagination, Zoom]}
-          ref={swiperRef}
-        >
-          {slides?.map((slide, slideIndex) => (
-            <SwiperSlide className="px-2 cursor-grab" key={slideIndex}>
-              <div className="swiper-zoom-container">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`${slide}`}
-                  alt={`car-img-${slideIndex}`}
-                  className="gap-4"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </>
+          } as CSSProperties
+        }
+        navigation={true}
+        pagination={{ clickable: true }}
+        zoom={true}
+        loop={true}
+        grabCursor={true}
+        className="rounded-lg overflow-hidden text-graffiti-500"
+        modules={[Navigation, Pagination, Zoom]}
+      >
+        {slides?.map((slide, slideIndex) => (
+          <SwiperSlide className="cursor-grab" key={slideIndex}>
+            <div className="swiper-zoom-container aspect-auto w-full">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${slide}`}
+                alt={`Foto ${slideIndex + 1} de ${vehicleName || "el vehículo"}`}
+                className="h-full w-full object-cover"
+                loading={slideIndex === 0 ? "eager" : "lazy"}
+                fetchPriority={slideIndex === 0 ? "high" : "auto"}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

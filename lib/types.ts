@@ -74,16 +74,15 @@ export interface ItemResult<T> {
 export type SortKey = "reciente" | "descendente" | "ascendente";
 
 export interface CarsQuery {
-  page?: string | number;
-  sort?: SortKey;
+  page: number;
+  sort: SortKey;
   search?: string;
-  type?: string;
-  brand?: string;
-  model?: string;
-  transmission?: string;
-  minPrice?: string | number;
-  maxPrice?: string | number;
-  [key: string]: any;
+  type?: string[];
+  brand?: string[];
+  model?: string[];
+  transmission?: string[];
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 export interface CarsListResult extends ListResult<Vehicle> {
@@ -91,5 +90,4 @@ export interface CarsListResult extends ListResult<Vehicle> {
   numberOfPages?: number;
   count?: number;
   limit?: number;
-  filters?: Record<string, any>;
 }

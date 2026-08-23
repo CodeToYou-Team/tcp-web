@@ -4,10 +4,17 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { Checkbox as CheckboxPrimitive } from "@/components/ui/checkbox-primitive";
 import { Label } from "@/components/ui/Label";
+import {
+  parseSearchParams,
+  setMultiValues,
+  setSingleValue,
+  type MultiFilterKey,
+} from "@/lib/catalog-query";
+import type { FilterOption } from "@/lib/types";
 
 interface CheckboxProps {
-  options: any[];
-  filterType: string;
+  options: FilterOption[];
+  filterType: MultiFilterKey | "sort";
   onlyOne?: boolean;
   dependency?: boolean;
 }
@@ -28,46 +35,46 @@ export default function Checkbox({
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
-  const params = new URLSearchParams(searchParams);
 
-  const selected =
-    searchParams.get(filterType)?.split(",").filter(Boolean) || [];
+  const isMulti = (filterType as string) !== "sort";
+  const query = parseSearchParams(searchParams);
+  const selected = isMulti
+    ? ((query[filterType as MultiFilterKey] ?? []) as string[])
+    : (searchParams.get("sort") ? [searchParams.get("sort") as string] : []);
 
-  const handleChange = (e: string[]) => {
-    params.set("page", "1");
-
-    const value = e.join(",");
-
-    if (value !== "") {
-      if (onlyOne) {
-        params.set(filterType, e.slice(-1).join(","));
-      } else {
-        params.set(`${filterType}`, `${e.join(",")}`);
-      }
-    } else if (params.has(filterType)) {
-      params.delete(filterType);
-    }
-
+  const replaceWith = (params: URLSearchParams) => {
     replace(`${pathName}?${params.toString()}`);
   };
 
   const handleCheckedChange = (name: string, checked: boolean) => {
-    const next = checked
-      ? [...selected, name]
-      : selected.filter((value) => value !== name);
-    handleChange(next);
+    if (!isMulti) {
+      const current = searchParams.get("sort");
+      const next = checked ? name : "";
+      if (next !== current) {
+        replaceWith(
+          setSingleValue(new URLSearchParams(searchParams), "sort", next)
+        );
+      }
+      return;
+    }
+
+    const key = filterType as MultiFilterKey;
+    const nextValues = checked
+      ? [...(query[key] ?? []), name]
+      : (query[key] ?? []).filter((value) => value !== name);
+
+    replaceWith(
+      setMultiValues(new URLSearchParams(searchParams), key, nextValues)
+    );
   };
 
-  if (dependency) {
+  if (dependency && isMulti) {
+    const params = new URLSearchParams(searchParams);
     if (params.has(filterType)) {
       const values = options.map((x) => x.name);
-      const newItems = selected.filter((x) => values.includes(x));
-      if (newItems.length > 0) {
-        params.set(filterType, newItems.join(","));
-      } else {
-        params.delete(filterType);
-      }
-      replace(`${pathName}?${params.toString()}`);
+      const key = filterType as MultiFilterKey;
+      const pruned = (query[key] ?? []).filter((x) => values.includes(x));
+      replaceWith(setMultiValues(params, key, pruned));
     }
   }
 
