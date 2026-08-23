@@ -11,8 +11,15 @@ export function InfoBlock({
   children: ReactNode;
 }) {
   return (
-    <section className={cn("rounded-xl p-4 md:p-5", className)}>
-      <h2 className="text-lg font-bold mb-2">{title}</h2>
+    <section
+      className={cn(
+        "p-4 md:p-5",
+        className
+      )}
+    >
+      <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-zinc-400">
+        {title}
+      </h2>
       {children}
     </section>
   );

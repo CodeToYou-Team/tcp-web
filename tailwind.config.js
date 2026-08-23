@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Display: solo título del vehículo y precio (Anton).
+        display: ["var(--font-display)", "Impact", "sans-serif"],
+        // Datos: quick-facts de la ficha técnica (IBM Plex Mono).
+        data: ["var(--font-mono-data)", "ui-monospace", "monospace"],
+      },
       colors: {
         graffiti: {
           100: "#fdfa8f",

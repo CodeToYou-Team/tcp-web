@@ -1,98 +1,180 @@
-"use client";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { InfoBlock } from "@/components/ui/InfoBlock";
-import { formatNumber } from "@/lib/utils";
-import { SITE_URL, WHATSAPP_PHONE } from "@/lib/site-config";
+import { SpecList } from "@/components/ui/SpecList";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { cn, formatNumber } from "@/lib/utils";
+import { buildWhatsAppInquiry } from "@/lib/whatsapp";
 import type { Vehicle } from "@/lib/types";
 
-function WhatsAppIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="currentColor"
-      width="20px"
-      height="20px"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z" />
-    </svg>
-  );
+// Nombre completo del vehículo: marca + modelo + versión.
+export function vehicleFullName(vehicle: Vehicle): string {
+  return [vehicle.brand, vehicle.model, vehicle.version]
+    .filter(Boolean)
+    .join(" ");
 }
 
+// Panel de compra: título, precio y vía de contacto siempre a la vista.
+// Alineado al inicio para acompañar a la galería en desktop.
 export function VehicleHeader({ vehicle }: { vehicle: Vehicle }) {
   return (
-    <div className="[grid-area:header] text-center">
-      <h2 className="text-4xl md:text-5xl font-bold">
-        {vehicle.brand} {vehicle.model} {vehicle.version}
-      </h2>
+    <div
+      data-purchase-panel
+      className="[grid-area:panel] flex flex-col gap-6 self-start"
+    >
+      <div>
+        {vehicle.condition && (
+          <p className="mb-2">
+            <span className="inline-block rounded-full bg-graffiti-500/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-graffiti-500 ring-1 ring-inset ring-graffiti-500/40">
+              Nuevo
+            </span>
+          </p>
+        )}
+        <h1 className="font-display text-4xl uppercase leading-[1.05] tracking-wide text-zinc-50 md:text-5xl">
+          {vehicleFullName(vehicle)}
+        </h1>
+      </div>
 
-      {vehicle.discount !== 0 ? (
-        <div className="flex items-baseline gap-3 mt-2">
-          <span className="text-red-500 line-through text-lg md:text-xl">
-            ${formatNumber(vehicle.discount)}
-          </span>
-          <span className="text-4xl font-bold">
-            ${formatNumber(vehicle.price)}
-          </span>
-        </div>
-      ) : (
-        <div className="mt-2">
-          <span className="text-4xl font-bold">
-            ${formatNumber(vehicle.price)}
-          </span>
-        </div>
-      )}
+      <VehiclePrice vehicle={vehicle} />
+
+      <QuickFacts vehicle={vehicle} />
+
+      <WhatsAppCta vehicle={vehicle} />
     </div>
   );
 }
 
-export function VehicleSpecs({ vehicle }: { vehicle: Vehicle }) {
-  const specs = [
-    { label: "Año:", value: vehicle.year },
-    {
-      label: "Recorrido:",
-      value:
-        vehicle.km && `${formatNumber(vehicle.km)} ${vehicle.km_unit ?? ""}`,
-    },
-    { label: "Transmisión:", value: vehicle.transmission },
-    { label: "Motor:", value: vehicle.motor },
-    { label: "Dueños:", value: vehicle.owners },
-  ].filter((spec) => spec.value);
+// Precio vigente resaltado con la firma "marcador"; si hubo rebaja,
+// se muestra el precio anterior tachado.
+function VehiclePrice({ vehicle }: { vehicle: Vehicle }) {
+  return (
+    <div>
+      {vehicle.discount !== 0 && (
+        <p className="mb-2 text-sm text-zinc-400">
+          Antes <s className="text-red-400">${formatNumber(vehicle.discount)}</s>
+        </p>
+      )}
+      <p className="relative inline-block -rotate-1 px-3 py-1">
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 -skew-x-6 rounded-[3px] bg-graffiti-500"
+        />
+        <span className="relative font-display text-4xl text-zinc-900">
+          ${formatNumber(vehicle.price)}
+        </span>
+      </p>
+    </div>
+  );
+}
 
-  if (specs.length === 0) return null;
+// Los tres datos que disparan la consulta, en voz de ficha técnica.
+function QuickFacts({ vehicle }: { vehicle: Vehicle }) {
+  const kmValue = vehicle.km
+    ? `${formatNumber(vehicle.km)} ${vehicle.km_unit ?? ""}`.trim()
+    : undefined;
+
+  const facts = [vehicle.year, kmValue, vehicle.transmission].filter(Boolean);
+
+  if (facts.length === 0) return null;
+
+  return (
+    <ul className="flex flex-wrap items-baseline font-data text-sm text-zinc-200">
+      {facts.map((fact, index) => (
+        <li
+          key={index}
+          className={cn(index > 0 && "before:mr-2 before:text-zinc-500 before:content-['·']")}
+        >
+          {fact}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function VehicleSpecs({ vehicle }: { vehicle: Vehicle }) {
+  const hasAny = [
+    vehicle.year,
+    vehicle.km,
+    vehicle.transmission,
+    vehicle.motor,
+    vehicle.owners,
+  ].some(Boolean);
+
+  if (!hasAny) return null;
 
   return (
     <InfoBlock title="Datos generales">
-      <ul className="space-y-1.5">
-        {specs.map((spec) => (
-          <li key={spec.label}>
-            <span>{spec.label}</span>{" "}
-            <span className="font-semibold">{spec.value}</span>
-          </li>
-        ))}
-      </ul>
+      <SpecList
+        items={[
+          { label: "Año", value: vehicle.year },
+          {
+            label: "Recorrido",
+            value: vehicle.km
+              ? `${formatNumber(vehicle.km)} ${vehicle.km_unit ?? ""}`.trim()
+              : undefined,
+          },
+          { label: "Transmisión", value: vehicle.transmission },
+          { label: "Motor", value: vehicle.motor },
+          { label: "Dueños", value: vehicle.owners },
+        ]}
+      />
     </InfoBlock>
   );
 }
 
 export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
-  const whatsappHref = `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(
-    `Buenas, estoy interesado/a en este vehículo ${SITE_URL}/catalogo/${vehicle._id}`,
-  )}`;
+  return (
+    <Button
+      asChild
+      size="lg"
+      className="w-full bg-primary px-8 text-primary-foreground hover:opacity-90"
+    >
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Consultar por WhatsApp sobre este ${vehicle.brand} ${vehicle.model}`}
+        href={buildWhatsAppInquiry(vehicle)}
+      >
+        <WhatsAppIcon />
+        Consultar por WhatsApp
+      </a>
+    </Button>
+  );
+}
+
+export function VehicleBreadcrumb({ vehicle }: { vehicle: Vehicle }) {
+  const label = [vehicle.brand, vehicle.model].filter(Boolean).join(" ");
 
   return (
-    <a
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Consultar por WhatsApp sobre este ${vehicle.brand} ${vehicle.model}`}
-      href={whatsappHref}
-      className="[grid-area:cta] justify-self-center w-auto"
-    >
-      <Button className=" md:w-auto rounded-lg px-6">
-        <WhatsAppIcon />
-        Consultar vía Whatsapp
-      </Button>
-    </a>
+    <nav aria-label="Ruta de navegación" className="text-xs text-zinc-400">
+      <ol className="flex items-center gap-1.5">
+        <li>
+          <Link
+            href="/"
+            className="outline-none transition-colors hover:text-graffiti-500 focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Inicio
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="h-3 w-3 text-zinc-600" />
+        </li>
+        <li>
+          <Link
+            href="/catalogo"
+            className="outline-none transition-colors hover:text-graffiti-500 focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Catálogo
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="h-3 w-3 text-zinc-600" />
+        </li>
+        <li aria-current="page" className="max-w-[10rem] truncate text-zinc-200 sm:max-w-xs">
+          {label}
+        </li>
+      </ol>
+    </nav>
   );
 }

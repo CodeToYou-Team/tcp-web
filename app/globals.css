@@ -72,16 +72,23 @@
   }
 }
 
-.ReactImageMagnify__LargeImageContainer {
-  width: 200% !important;
+/* Galería del detalle: fotos siempre cubren el marco de aspect fijo.
+   El width 100% en los slides es el fallback pre-inicializacion de Swiper
+   (evita que las imagenes expandan la grilla; luego Swiper fija inline). */
+.vehicle-gallery .swiper-slide {
+  width: 100%;
 }
 
-/* Legibilidad de flechas y bullets del slider sobre la foto */
-.swiper-button-next,
-.swiper-button-prev {
-  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.55));
+.vehicle-gallery .swiper-slide .swiper-zoom-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.swiper-pagination-bullet {
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.45);
+/* Foco visible en las flechas generadas por Swiper */
+.vehicle-gallery .swiper-button-next:focus-visible,
+.vehicle-gallery .swiper-button-prev:focus-visible {
+  outline: 2px solid #fcf744;
+  outline-offset: 2px;
+  border-radius: 4px;
 }

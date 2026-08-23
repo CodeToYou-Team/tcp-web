@@ -63,7 +63,7 @@ export default function Navbar() {
 
       {/* mobile navbar menu */}
       {isMenuOpen && (
-        <div className="fixed inset-x-0 top-16 bottom-0 z-30 flex w-screen flex-col gap-2 overflow-y-auto bg-zinc-900 px-6 pt-2 sm:hidden">
+        <div className="fixed left-0 right-0 top-16 bottom-0 z-30 flex flex-col gap-2 overflow-y-auto bg-zinc-900 px-6 pt-2 sm:hidden">
           {navbarItems.map((item, index) => (
             <Link
               key={`${item.text}-${index}`}
