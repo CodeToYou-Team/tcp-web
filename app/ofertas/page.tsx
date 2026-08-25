@@ -1,8 +1,6 @@
 import { VehiclesLayout } from "../layouts/VehiclesLayout";
 import VehicleCard from "@/components/VehicleCard";
 import { getOfferCars } from "@/app/lib/actions";
-import { Suspense } from "react";
-import SkeletonLayout from "../layouts/SkeletonLayout";
 import NoResults from "../layouts/NoResults";
 import { SEO_IMAGE, SITE_URL } from "@/lib/site-config";
 
@@ -28,13 +26,8 @@ export default async function Ofertas() {
   return (
     <>
       {offersVehicles?.items?.length > 0 ? (
-        <VehiclesLayout>
-          <Suspense
-            key={offersVehicles as unknown as string}
-            fallback={<SkeletonLayout />}
-          >
-            <VehicleCard vehicles={offersVehicles} />
-          </Suspense>
+        <VehiclesLayout title="Ofertas de la semana">
+          <VehicleCard vehicles={offersVehicles} />
         </VehiclesLayout>
       ) : (
         <NoResults />
