@@ -15,8 +15,8 @@ export function SpecList({ items }: { items: SpecItem[] }) {
           key={label}
           className="flex items-baseline justify-between gap-4 border-b border-white/5 py-2 first:pt-0 last:border-none last:pb-0"
         >
-          <dt className="shrink-0 text-sm text-zinc-400">{label}</dt>
-          <dd className="text-right text-sm font-medium text-zinc-100">
+          <dt className="shrink-1 text-sm text-zinc-400">{label}</dt>
+          <dd className="shrink-0 text-right text-sm font-medium text-zinc-100">
             {value}
           </dd>
         </div>

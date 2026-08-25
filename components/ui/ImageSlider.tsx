@@ -4,14 +4,16 @@ import {
   useState,
   useSyncExternalStore,
   type CSSProperties,
+  type KeyboardEvent,
   type MouseEvent,
 } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { cn } from "@/lib/utils";
+import { DOT_PITCH, dotWindow } from "@/lib/dot-window";
 import type { Vehicle } from "@/lib/types";
 
 // Media query reactiva con snapshot seguro para SSR.
@@ -31,13 +33,83 @@ function useMediaQuery(query: string): boolean {
 const ACCENT = "#fcf744";
 
 const SWIPER_VARS = {
-  "--swiper-pagination-color": ACCENT,
-  "--swiper-pagination-bullet-inactive-color": "#ffffff",
-  "--swiper-pagination-bullet-inactive-opacity": "0.45",
-  "--swiper-pagination-bullet-size": "10px",
-  "--swiper-pagination-bullet-horizontal-gap": "6px",
   "--swiper-navigation-color": ACCENT,
 } as CSSProperties;
+
+// Tira con ventana deslizante (lib/dot-window): el activo queda centrado
+// con ±2 vecinos; en los extremos la ventana se recorta contra el borde.
+const DotStrip = ({
+  count,
+  activeIndex,
+  onSelect,
+}: {
+  count: number;
+  activeIndex: number;
+  onSelect: (index: number) => void;
+}) => {
+  const { windowSize, start } = dotWindow(count, activeIndex);
+  const inWindow = (index: number) =>
+    index >= start && index < start + windowSize;
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Roving tabindex con flechas: mueven el activo y el foco juntos, de modo
+  // que el foco nunca quede en un dot recortado fuera de la ventana.
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+    event.preventDefault();
+    const delta = event.key === "ArrowRight" ? 1 : -1;
+    const next = Math.min(count - 1, Math.max(0, activeIndex + delta));
+    if (next === activeIndex) return;
+    onSelect(next);
+    buttonRefs.current[next]?.focus({ preventScroll: true });
+  };
+
+  return (
+    <div
+      className="pointer-events-none absolute bottom-3 left-1/2 z-10 -translate-x-1/2"
+      onKeyDown={handleKeyDown}
+    >
+      <div
+        className="overflow-hidden drop-shadow-[0_1px_2px_rgba(0,0,0,0.55)]"
+        style={{ width: windowSize * DOT_PITCH }}
+      >
+        <div
+          className="flex w-max transition-transform duration-300 ease-out motion-reduce:transition-none"
+          style={{ transform: `translateX(-${start * DOT_PITCH}px)` }}
+        >
+          {Array.from({ length: count }, (_, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <button
+                key={index}
+                ref={(node) => {
+                  buttonRefs.current[index] = node;
+                }}
+                type="button"
+                onClick={() => onSelect(index)}
+                tabIndex={inWindow(index) ? 0 : -1}
+                aria-label={`Ir a la foto ${index + 1}`}
+                aria-current={isActive || undefined}
+                className="pointer-events-auto flex h-6 w-5 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-graffiti-500"
+              >
+                <span
+                  className={cn(
+                    "rounded-full transition-all duration-300 motion-reduce:transition-none",
+                    isActive
+                      ? "h-[11px] w-[11px] bg-graffiti-500"
+                      : Math.abs(index - activeIndex) === 1
+                        ? "h-1.5 w-1.5 bg-white/70"
+                        : "h-1.5 w-1.5 bg-white/50"
+                  )}
+                />
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Ampliación del zoom por doble click en desktop (equivalente al 200% histórico).
 const ZOOM_RATIO = 2;
@@ -54,6 +126,7 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   const [zoomedSlide, setZoomedSlide] = useState<number | null>(null);
   // Refs directos a las <img>: el zoom escribe estilos sin re-renders.
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const swiperRef = useRef<SwiperClass | null>(null);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   if (slides.length === 0) return null;
@@ -111,14 +184,16 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
     <div className="vehicle-gallery relative w-full min-w-0">
       <Swiper
         style={SWIPER_VARS}
-        modules={[Navigation, Pagination]}
+        modules={[Navigation]}
         onSlideChange={(instance) => {
           imageRefs.current.forEach(clearZoomStyles);
           setZoomedSlide(null);
           setActiveIndex(instance.activeIndex);
         }}
+        onSwiper={(instance) => {
+          swiperRef.current = instance;
+        }}
         navigation={hasMultiple}
-        pagination={hasMultiple ? { clickable: true } : false}
         speed={reducedMotion ? 0 : 300}
         grabCursor={true}
         className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-zinc-800 sm:aspect-[16/10]"
@@ -150,6 +225,14 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {hasMultiple && (
+        <DotStrip
+          count={slides.length}
+          activeIndex={activeIndex}
+          onSelect={(index) => swiperRef.current?.slideTo(index)}
+        />
+      )}
 
       {hasMultiple && (
         <p

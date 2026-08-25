@@ -52,7 +52,8 @@ function VehiclePrice({ vehicle }: { vehicle: Vehicle }) {
     <div>
       {vehicle.discount !== 0 && (
         <p className="mb-2 text-sm text-zinc-400">
-          Antes <s className="text-red-400">${formatNumber(vehicle.discount)}</s>
+          Antes{" "}
+          <s className="text-red-400">${formatNumber(vehicle.discount)}</s>
         </p>
       )}
       <p className="relative inline-block -rotate-1 px-3 py-1">
@@ -83,7 +84,10 @@ function QuickFacts({ vehicle }: { vehicle: Vehicle }) {
       {facts.map((fact, index) => (
         <li
           key={index}
-          className={cn(index > 0 && "before:mr-2 before:text-zinc-500 before:content-['·']")}
+          className={cn(
+            index > 0 &&
+              "before:mr-2 before:text-zinc-500 before:content-['·']",
+          )}
         >
           {fact}
         </li>
@@ -128,7 +132,7 @@ export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
     <Button
       asChild
       size="lg"
-      className="w-full bg-primary px-8 text-primary-foreground hover:opacity-90"
+      className="flex mx-auto w-4/6 bg-primary px-8 text-primary-foreground hover:opacity-90"
     >
       <a
         target="_blank"
@@ -171,7 +175,10 @@ export function VehicleBreadcrumb({ vehicle }: { vehicle: Vehicle }) {
         <li aria-hidden="true">
           <ChevronRight className="h-3 w-3 text-zinc-600" />
         </li>
-        <li aria-current="page" className="max-w-[10rem] truncate text-zinc-200 sm:max-w-xs">
+        <li
+          aria-current="page"
+          className="max-w-[10rem] truncate text-zinc-200 sm:max-w-xs"
+        >
           {label}
         </li>
       </ol>

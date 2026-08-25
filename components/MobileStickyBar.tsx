@@ -19,7 +19,7 @@ export default function MobileStickyBar({ vehicle }: { vehicle: Vehicle }) {
       ([entry]) => {
         setVisible(!entry.isIntersecting && entry.boundingClientRect.top < 0);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(panel);
@@ -35,6 +35,9 @@ export default function MobileStickyBar({ vehicle }: { vehicle: Vehicle }) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 pb-[max(env(safe-area-inset-bottom),0.625rem)] pt-2.5">
         <p className="leading-tight">
+          <span>
+            {vehicle.brand} {vehicle.model} {vehicle.version}
+          </span>
           <span className="block text-[11px] uppercase tracking-wider text-zinc-400">
             Precio
           </span>
