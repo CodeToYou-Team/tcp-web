@@ -56,8 +56,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Script>
       </head>
       <body
-        className={`${poppins.className} ${anton.variable} ${plexMono.variable}`}
-        {...({ antialised: "true" } as any)}
+        className={`${poppins.className} ${anton.variable} ${plexMono.variable} antialiased`}
       >
         <Navbar />
         <Providers>{children}</Providers>

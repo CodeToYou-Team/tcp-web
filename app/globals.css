@@ -40,7 +40,8 @@
 
   --border: 240 3.7% 15.88%;
   --input: 240 3.7% 15.88%;
-  --ring: 212.02 100% 46.67%;
+  /* Anillo de foco en el amarillo de marca (igual a --primary). */
+  --ring: 58.37 96.84% 62.75%;
 
   --radius: 0.75rem;
 }
@@ -62,13 +63,13 @@
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #fcf744;
+    background: hsl(var(--primary));
     border-radius: 5px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #fcf744;
+    background: hsl(var(--primary));
   }
 }
 
@@ -88,7 +89,7 @@
 /* Foco visible en las flechas generadas por Swiper */
 .vehicle-gallery .swiper-button-next:focus-visible,
 .vehicle-gallery .swiper-button-prev:focus-visible {
-  outline: 2px solid #fcf744;
+  outline: 2px solid hsl(var(--primary));
   outline-offset: 2px;
   border-radius: 4px;
 }
