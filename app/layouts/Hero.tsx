@@ -37,18 +37,12 @@ const Hero = () => {
 
             <div className="mt-8 flex gap-4 w-full justify-center md:justify-start">
               <Link href="/catalogo">
-                <Button
-                  radius="sm"
-                  className="block w-auto px-10 bg-graffiti-500 text-zinc-800 text-sm"
-                >
+                <Button className="block w-auto px-10 bg-graffiti-500 text-zinc-800 text-sm">
                   Catálogo
                 </Button>
               </Link>
               <Link href="/venta">
-                <Button
-                  radius="sm"
-                  className="block w-auto px-6 bg-zinc-50 text-background text-sm"
-                >
+                <Button className="block w-auto px-6 bg-zinc-50 text-background text-sm">
                   Vende tu auto
                 </Button>
               </Link>

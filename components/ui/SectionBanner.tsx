@@ -7,20 +7,22 @@ import type { ReactNode } from "react";
 
 const SectionBanner = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <div className="fixed top-14 h-10 justify-left pb-6 z-30 flex w-full  border-b border-zinc-800 bg-zinc-900">
-        <div className="flex items-center md:ml-14">
-          {children}
-          <Link href={"/ofertas"}>
-            <Button className="flex w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500">
-
-              <Gift className="text-graffiti-500 scale-85" />
-              Ofertas
-            </Button>
+    <div className="fixed top-14 z-30 flex h-10 w-full items-center border-b border-border bg-background">
+      <div className="mx-auto flex w-full max-w-7xl items-center px-4 sm:px-6 lg:px-8">
+        {children}
+        <Button
+          asChild
+          variant="ghost"
+          size="sm"
+          className="gap-2 font-semibold text-primary"
+        >
+          <Link href="/ofertas">
+            <Gift className="h-4 w-4" aria-hidden="true" />
+            Ofertas
           </Link>
-        </div>
+        </Button>
       </div>
-    </>
+    </div>
   );
 };
 

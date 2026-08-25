@@ -39,52 +39,47 @@ const SidebarFilter = ({
     replace(`${pathName}`);
   };
   return (
-    <>
-      {" "}
-      <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <Sheet {...({ className: "scrollbar-thumb-gray-900" } as any)}>
-          <SectionBanner>
-            <SheetTrigger className="w-fullflex" asChild>
-              <Button
-                radius="sm"
-                className="flex  w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
-              >
-                <ListFilter className="text-graffiti-500 scale-85" />
-                Filtrar
-              </Button>
-            </SheetTrigger>
-          </SectionBanner>
+    <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+      <Sheet>
+        <SectionBanner>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="gap-2 font-semibold text-primary"
+            >
+              <ListFilter className="h-4 w-4" aria-hidden="true" />
+              Filtrar
+            </Button>
+          </SheetTrigger>
+        </SectionBanner>
 
-          <SheetContent className="bg-zinc-900 overflow-auto" side="left">
-            <SheetHeader>
-              <SheetTitle>Filtra tu búsqueda</SheetTitle>
-              <SheetDescription>
-                Ingresa los parámetros de filtrado
-              </SheetDescription>
-            </SheetHeader>
-            <div className="grid gap-4 py-4">
-              <Accordion
-                brands={brands}
-                vehicleType={vehicleType}
-                transmission={transmission}
-                models={models}
-                sort={sort}
-              />
-              <PriceRange />
-            </div>
-            <SheetFooter>
-              <Button
-                className="bg-graffiti-500 text-zinc-800 font-medium my-6 text-sm"
-                onClick={CleanFilter}
-              >
-                Limpiar búsqueda
-              </Button>
-              <SheetClose asChild></SheetClose>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-      </div>
-    </>
+        <SheetContent className="overflow-auto" side="left">
+          <SheetHeader>
+            <SheetTitle>Filtra tu búsqueda</SheetTitle>
+            <SheetDescription>
+              Ingresa los parámetros de filtrado
+            </SheetDescription>
+          </SheetHeader>
+          <div className="grid gap-4 py-4">
+            <Accordion
+              brands={brands}
+              vehicleType={vehicleType}
+              transmission={transmission}
+              models={models}
+              sort={sort}
+            />
+            <PriceRange />
+          </div>
+          <SheetFooter>
+            <Button className="my-6" onClick={CleanFilter}>
+              Limpiar búsqueda
+            </Button>
+            <SheetClose asChild></SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
+    </div>
   );
 };
 

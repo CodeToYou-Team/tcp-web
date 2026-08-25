@@ -39,7 +39,6 @@ export default function Steps() {
               <Link href="/catalogo">
                 <Button
                   className="text-xs font-medium bg-graffiti-500 text-background"
-                  radius="sm"
                   size="lg"
                 >
                   Ver catálogo
@@ -75,7 +74,6 @@ export default function Steps() {
               >
                 <Button
                   className="text-xs font-medium bg-graffiti-500 text-background"
-                  radius="sm"
                   size="lg"
                 >
                   Whatsapp
@@ -106,7 +104,6 @@ export default function Steps() {
               <Link href="/acerca-de-nosotros">
                 <Button
                   className="text-xs px-2 font-medium bg-graffiti-500 text-background"
-                  radius="sm"
                   size="lg"
                 >
                   Más info
