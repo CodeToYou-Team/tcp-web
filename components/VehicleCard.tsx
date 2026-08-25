@@ -9,6 +9,13 @@ interface VehicleCardProps {
   vehicles: { items?: Vehicle[] };
 }
 
+// Misma convención que ImageSlider: transforma sin romper URLs con query.
+function cardImage(url: string | undefined) {
+  if (!url) return "";
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}tr=w-600,q_auto,f_auto`;
+}
+
 export default function VehicleCard({ vehicles }: VehicleCardProps) {
   return (
     <>
@@ -16,53 +23,55 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
         <Card
           key={vehicle?._id}
           isPressable
-          className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit bg-zinc-800 active:shadow-graffiti-500 active:shadow-md"
+          className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit"
         >
-          <Link className="relative w-full" href={`/catalogo/${vehicle?._id}`}>
-            <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
-              {/* Contenedor izquierdo para la información principal del vehículo */}
-              <div className="flex flex-col items-start">
-                <h2 className="font-bold text-base text-zinc-100 text-left">
-                  {vehicle?.brand +
-                    " " +
-                    vehicle?.model +
-                    " " +
-                    vehicle?.version}
-                </h2>
-                <span className="text-md text-zinc-100 font-bold">
-                  {vehicle?.year}
-                </span>
-                <div className="flex gap-2">
-                  <span className="text-zinc-100 text-xl font-bold">
-                    ${formatNumber(vehicle?.price)}
-                  </span>
-                  {vehicle?.discount !== 0 && (
-                    <span className="text-red-500 text-md mt-0.5 font-semibold line-through">
-                      ${formatNumber(vehicle.discount)}
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Contenedor derecho para la condición del vehículo */}
-              <div className="flex flex-col font-bold items-end">
-                <span className="text-primary">
-                  {vehicle?.condition ? "Nuevo" : ""}
-                </span>
-                <span className={vehicle?.condition ? "" : "mt-7"}>
-                  {formatNumber(vehicle.km)} {vehicle.km_unit}
-                </span>
-                <span>{vehicle.transmission}</span>
-              </div>
+          <Link
+            className="group relative flex w-full flex-col"
+            href={`/catalogo/${vehicle?._id}`}
+          >
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt={`${vehicle?.brand ?? ""} ${vehicle?.model ?? ""} ${vehicle?.year ?? ""}`.trim()}
+                className="h-full w-full object-cover transition-transform duration-300 motion-reduce:transition-none group-hover:scale-105"
+                src={cardImage(vehicle?.images?.[0])}
+                loading="lazy"
+              />
             </div>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt="latest-1"
-              className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
-              src={`${vehicle?.images?.[0]}`}
-              width={600}
-            />
+            <div className="flex flex-col gap-1.5 p-4">
+              <div className="flex items-start justify-between gap-2">
+                <h2 className="text-left font-bold text-base leading-snug text-foreground">
+                  {[vehicle?.brand, vehicle?.model, vehicle?.version]
+                    .filter(Boolean)
+                    .join(" ")}
+                </h2>
+                {vehicle?.condition && (
+                  <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-primary">
+                    Nuevo
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-baseline gap-2">
+                <span className="text-xl font-bold text-foreground">
+                  ${formatNumber(vehicle?.price)}
+                </span>
+                {vehicle?.discount !== 0 && (
+                  <span className="text-sm font-semibold text-destructive line-through">
+                    ${formatNumber(vehicle.discount)}
+                  </span>
+                )}
+                <span className="ml-auto text-sm text-muted-foreground">
+                  {vehicle?.year}
+                </span>
+              </div>
+
+              <p className="text-sm text-muted-foreground">
+                {formatNumber(vehicle.km)} {vehicle.km_unit} ·{" "}
+                {vehicle.transmission}
+              </p>
+            </div>
           </Link>
         </Card>
       ))}
