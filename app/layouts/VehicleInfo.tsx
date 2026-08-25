@@ -21,7 +21,7 @@ export function VehicleHeader({ vehicle }: { vehicle: Vehicle }) {
   return (
     <div
       data-purchase-panel
-      className="[grid-area:panel] flex flex-col gap-6 self-start"
+      className="[grid-area:panel] flex flex-col gap-6 self-center md:mx-auto"
     >
       <div>
         {vehicle.condition && (
@@ -132,7 +132,7 @@ export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
     <Button
       asChild
       size="lg"
-      className="flex mx-auto w-4/6 bg-primary px-8 text-primary-foreground hover:opacity-90"
+      className="flex mx-auto w-4/6 md:w-full bg-primary px-8 text-primary-foreground hover:opacity-90"
     >
       <a
         target="_blank"

@@ -25,7 +25,7 @@ function useMediaQuery(query: string): boolean {
       return () => mediaQueryList.removeEventListener("change", onStoreChange);
     },
     () => window.matchMedia(query).matches,
-    () => false
+    () => false,
   );
 }
 
@@ -99,7 +99,7 @@ const DotStrip = ({
                       ? "h-[11px] w-[11px] bg-graffiti-500"
                       : Math.abs(index - activeIndex) === 1
                         ? "h-1.5 w-1.5 bg-white/70"
-                        : "h-1.5 w-1.5 bg-white/50"
+                        : "h-1.5 w-1.5 bg-white/50",
                   )}
                 />
               </button>
@@ -181,7 +181,7 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   };
 
   return (
-    <div className="vehicle-gallery relative w-full min-w-0">
+    <div className="vehicle-gallery relative min-w-0 md:w-11/12">
       <Swiper
         style={SWIPER_VARS}
         modules={[Navigation]}
@@ -196,14 +196,16 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
         navigation={hasMultiple}
         speed={reducedMotion ? 0 : 300}
         grabCursor={true}
-        className="aspect-[4/3] w-full overflow-hidden rounded-lg bg-zinc-800 sm:aspect-[16/10]"
+        className=" w-full overflow-hidden rounded-lg bg-zinc-800 "
       >
         {slides.map((slide, slideIndex) => (
           <SwiperSlide key={`${slide}-${slideIndex}`} className="h-full w-full">
             <div
               className={cn(
                 "swiper-zoom-container h-full w-full touch-manipulation select-none",
-                zoomedSlide === slideIndex ? "cursor-zoom-out" : "cursor-zoom-in"
+                zoomedSlide === slideIndex
+                  ? "cursor-zoom-out"
+                  : "cursor-zoom-in",
               )}
               onDoubleClick={toggleZoom(slideIndex)}
               onMouseMove={panZoom(slideIndex)}
