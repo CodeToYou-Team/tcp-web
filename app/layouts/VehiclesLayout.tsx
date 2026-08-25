@@ -8,15 +8,17 @@ export const VehiclesLayout = ({
   title?: string;
 }) => {
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 md:py-24 lg:px-8">
+    <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-16 mb-32">
       {title && (
-        <h2 className="text-center font-display text-3xl uppercase tracking-wide md:text-4xl">
-          {title}
-        </h2>
+        <div className="mx-auto max-w-2xl">
+          <h2 className="text-center text-2xl md:text-3xl font-semibold leading-8">
+            {title}
+          </h2>
+        </div>
       )}
-      <div className="mt-12 grid grid-cols-12 gap-6">
+      <div className="w-full h-fit mt-12 gap-6 grid md:grid-cols-12">
         {children}
       </div>
-    </section>
+    </div>
   );
 };

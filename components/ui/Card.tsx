@@ -11,9 +11,9 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "relative flex flex-col overflow-hidden rounded-xl bg-card text-card-foreground shadow-md",
+        "relative flex flex-col overflow-hidden rounded-[14px] bg-card text-card-foreground shadow-md",
         isPressable &&
-          "cursor-pointer transform-gpu transition-transform motion-reduce:transition-none active:scale-[0.97]",
+          "cursor-pointer transform-gpu transition-transform active:scale-[0.97]",
         className
       )}
       {...props}

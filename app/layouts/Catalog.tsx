@@ -17,11 +17,16 @@ const Catalog = async ({ query }: { query: CarsQuery }) => {
         <NoResults />
       )}
 
-      {vehicles?.items?.length > 0 && (
+      {vehicles?.items?.length > 0 ? (
         <Pagination
           page={vehicles?.currentPage || 1}
           numberOfPages={vehicles?.numberOfPages || 1}
+          count={vehicles?.count || 0}
+          limit={vehicles?.limit || 9}
+          visible={vehicles?.items?.length === 0}
         />
+      ) : (
+        <></>
       )}
     </>
   );

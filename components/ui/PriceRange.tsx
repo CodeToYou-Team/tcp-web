@@ -43,17 +43,16 @@ export default function PriceRange() {
 
   return (
     <div className="flex flex-col gap-2 w-full h-full my-2 max-w-md items-start justify-center">
-      <span className="text-sm font-semibold uppercase tracking-wider">
-        Rango de precios
-      </span>
+      <span className="text-sm">Rango de precios</span>
       <Slider
         step={500}
         max={PRICE_SLIDER_MAX}
         min={0}
         value={value}
         onValueChange={(e) => handleChange(e)}
+        className="max-w-md"
       />
-      <p className="text-muted-foreground font-medium text-xs">
+      <p className="text-zinc-400 font-medium text-xs">
         Rango seleccionado:{" "}
         {Array.isArray(value) &&
           value

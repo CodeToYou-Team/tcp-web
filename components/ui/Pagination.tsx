@@ -7,6 +7,9 @@ import { setPage } from "@/lib/catalog-query";
 interface CatalogPaginationProps {
   page: number;
   numberOfPages: number;
+  count: number;
+  limit: number;
+  visible?: boolean;
 }
 
 function getPageRange(current: number, total: number): (number | "dots")[] {
@@ -39,12 +42,9 @@ export default function CatalogPagination({
     const params = setPage(new URLSearchParams(searchParams), e);
     replace(`${pathName}?${params.toString()}`);
 
-    window.scrollTo({
-      top: 0,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth",
-    });
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 1000);
   };
 
   if (numberOfPages <= 1) return null;
@@ -52,13 +52,13 @@ export default function CatalogPagination({
   const items = getPageRange(page, numberOfPages);
 
   return (
-    <div className="flex w-full justify-center my-8">
-      <div className="flex flex-nowrap items-center h-8 overflow-visible">
+    <div className="w-full flex justify-center my-8">
+      <div className="flex flex-nowrap items-center h-8 overflow-visible rounded">
         {items.map((item, index) =>
           item === "dots" ? (
             <span
               key={`dots-${index}`}
-              className="flex h-8 w-8 items-center justify-center text-sm text-muted-foreground"
+              className="w-8 h-8 flex items-center justify-center text-sm text-zinc-100"
             >
               ...
             </span>
@@ -69,10 +69,10 @@ export default function CatalogPagination({
               aria-current={item === page ? "page" : undefined}
               onClick={() => handleChange(item)}
               className={cn(
-                "mx-1 flex h-8 w-8 items-center justify-center rounded-xl border text-sm transition-colors motion-reduce:transition-none",
+                "w-8 h-8 mx-1 rounded rounded-xl text-sm transition-colors",
                 item === page
-                  ? "border-primary bg-primary font-semibold text-primary-foreground"
-                  : "border-transparent text-foreground hover:border-input hover:bg-accent"
+                  ? "bg-graffiti-500 text-zinc-800 font-semibold"
+                  : "bg-zinc-800 text-zinc-100 hover:text-zinc-900 hover:bg-zinc-600"
               )}
             >
               {item}

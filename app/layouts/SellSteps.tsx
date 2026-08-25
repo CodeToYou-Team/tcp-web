@@ -1,36 +1,34 @@
-import { sellSteps, consignationSteps } from "@/lib/data";
+import { sellSteps } from "@/lib/data";
+import { consignationSteps } from "@/lib/data";
 
 export default function SellSteps() {
   return (
-    <section className="py-16 md:py-24">
-      <div className="mx-auto grid w-full max-w-7xl items-start gap-x-8 gap-y-16 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <>
+      <div className="mx-auto w-5/6 grid items-center gap-x-8 gap-y-16 px-4 py-12 sm:px-6 sm:py-12 lg:max-w-4xl lg:px-8">
         <div>
-          <h2 className="font-display text-3xl uppercase tracking-wide sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Pasos para vender tu auto.
           </h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
+          <p className="mt-4">
             Es importante que agendes una cita con nosotros para la inspección
             del vehículo. La cita es rápida y sencilla de programar, escríbenos
             vía whatsapp para coordinar la fecha y hora.
           </p>
 
-          <dl className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
             {sellSteps.map((step) => (
-              <div key={step.name} className="border-t border-border pt-4">
-                <dt className="font-medium">{step.name}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </dd>
+              <div key={step.name} className="border-t border-gray-200 pt-4">
+                <dt className="font-medium ">{step.name}</dt>
+                <dd className="mt-2 text-sm ">{step.description}</dd>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
-
         <div>
-          <h2 className="font-display text-3xl uppercase tracking-wide sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mt-12">
             Consignación.
           </h2>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
+          <p className="mt-4">
             Consignar tu vehículo con nosotros es totalmente gratis, nos
             encargaremos de acondicionar su vehículo para la venta con nuestro
             servicio de pulitura y autolavado para que su vehículo sea exhibido
@@ -42,18 +40,18 @@ export default function SellSteps() {
             confiable.
           </p>
 
-          <dl className="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
+          <div className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
             {consignationSteps.map((consignationStep) => (
               <div
                 key={consignationStep.name}
-                className="border-t border-border pt-4"
+                className="border-t border-gray-200"
               >
-                <dt className="font-medium">{consignationStep.name}</dt>
+                <h2 className="mt-2 text-md ">{consignationStep.name}</h2>
               </div>
             ))}
-          </dl>
+          </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }

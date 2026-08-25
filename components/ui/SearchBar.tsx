@@ -24,34 +24,26 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
-      <form
-        className="mx-auto flex max-w-xl items-center gap-2"
-        role="search"
-        onSubmit={(event) => {
-          event.preventDefault();
-          handleSearch();
-        }}
-      >
-        <div className="relative flex-1">
-          <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-            <Search
-              className="h-5 w-5 shrink-0 text-muted-foreground"
-              aria-hidden="true"
-            />
-          </div>
-          <Input
-            autoComplete="off"
-            type="text"
-            placeholder="Busca una marca o modelo"
-            aria-label="Buscar vehículo por marca o modelo"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-10"
-          />
+    <div className="w-5/6 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center ">
+      <div className="relative flex-1">
+        <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+          <Search className="h-6 w-6 text-muted-foreground flex-shrink-0" />
         </div>
-        <Button type="submit">Buscar</Button>
-      </form>
+        <Input
+          autoComplete="off"
+          type="text"
+          placeholder="Busca una marca o modelo"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="truncate bg-zinc-800 pl-10 text-sm text-zinc-100"
+        />
+      </div>
+      <Button
+        onClick={handleSearch}
+        className="block w-auto bg-graffiti-500 text-zinc-800 text-sm"
+      >
+        Buscar
+      </Button>
     </div>
   );
 }

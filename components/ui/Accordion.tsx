@@ -7,7 +7,6 @@ import {
   AccordionContent,
 } from "./accordion-primitive";
 import Checkbox from "./Checkbox";
-import type { ReactNode } from "react";
 import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface AccordionProps {
@@ -18,18 +17,11 @@ interface AccordionProps {
   sort: FilterOption[];
 }
 
-// Receta única de etiqueta de grupo de filtros.
-const FilterGroupLabel = ({ children }: { children: ReactNode }) => (
-  <p className="text-sm font-semibold uppercase tracking-wider">
-    {children}
-  </p>
-);
-
 function AccordionIndicator() {
   return (
     <span className="relative flex h-4 w-4 shrink-0 items-center justify-center text-graffiti-500">
       <span className="absolute h-0.5 w-4 rounded-full bg-current" />
-      <span className="absolute h-0.5 w-4 rotate-90 rounded-full bg-current transition-transform duration-200 motion-reduce:transition-none group-data-[state=open]:rotate-0" />
+      <span className="absolute h-0.5 w-4 rotate-90 rounded-full bg-current transition-transform duration-200 group-data-[state=open]:rotate-0" />
     </span>
   );
 }
@@ -42,10 +34,10 @@ export default function Accordion({
   sort,
 }: AccordionProps) {
   return (
-    <AccordionRoot type="multiple" className="w-full">
+    <AccordionRoot type="multiple" className="w-full text-xs">
       <AccordionItem value="type">
         <AccordionTrigger className="hover:no-underline">
-          <FilterGroupLabel>Tipo de vehículo</FilterGroupLabel>
+          <p className="text-graffiti-500 text-lg">Tipo de vehículo</p>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -55,7 +47,7 @@ export default function Accordion({
 
       <AccordionItem value="brand">
         <AccordionTrigger className="hover:no-underline">
-          <FilterGroupLabel>Marcas</FilterGroupLabel>
+          <p className="text-graffiti-500 text-lg">Marcas</p>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -66,7 +58,7 @@ export default function Accordion({
       {models.length !== 0 ? (
         <AccordionItem value="model">
           <AccordionTrigger className="hover:no-underline">
-            <FilterGroupLabel>Modelos</FilterGroupLabel>
+            <p className="text-graffiti-500 text-lg">Modelos</p>
             <AccordionIndicator />
           </AccordionTrigger>
           <AccordionContent>
@@ -77,7 +69,7 @@ export default function Accordion({
 
       <AccordionItem value="transmission">
         <AccordionTrigger className="hover:no-underline">
-          <FilterGroupLabel>Transmisión</FilterGroupLabel>
+          <p className="text-graffiti-500 text-lg">Transmisión</p>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -87,7 +79,7 @@ export default function Accordion({
 
       <AccordionItem value="sort">
         <AccordionTrigger className="hover:no-underline">
-          <FilterGroupLabel>Ordenar</FilterGroupLabel>
+          <p className="text-graffiti-500 text-lg">Ordenar</p>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
