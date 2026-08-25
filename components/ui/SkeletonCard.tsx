@@ -1,23 +1,47 @@
-import ContentLoader from "react-content-loader";
-import type { ComponentProps } from "react";
+import { cn } from "@/lib/utils";
 
-const SkeletonCard = (props: ComponentProps<typeof ContentLoader>) => (
-  <div className="col-span-12 md:col-span-6 lg:col-span-4 h-[350px]">
-    <ContentLoader
-      speed={1}
-      width={360}
-      height={420}
-      viewBox="0 0 300 360"
-      backgroundColor="#27272a"
-      foregroundColor="#737373"
-      {...props}
+// Hueso base: superficie neutra con onda shimmer diagonal.
+// La animación vive en un overlay para poder respetar motion-reduce.
+function Bone({ className }: { className?: string }) {
+  return (
+    <div className={cn("relative overflow-hidden bg-white/[0.07]", className)}>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/[0.06] to-transparent motion-reduce:animate-none"
+      />
+    </div>
+  );
+}
+
+// Calco del VehicleCard real: misma barra de información en dos columnas,
+// misma zona de foto y mismos breakpoints de grilla, para que el swap
+// al cargar sea imperceptible.
+const SkeletonCard = () => {
+  return (
+    <div
+      aria-hidden="true"
+      className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit"
     >
-      <rect x="2" y="21" rx="2" ry="2" width="140" height="10" />
-      <rect x="2" y="37" rx="2" ry="2" width="180" height="10" />
-      <rect x="0" y="60" rx="6" ry="6" width="293" height="226" />
-      <rect x="2" y="6" rx="2" ry="2" width="220" height="10" />
-    </ContentLoader>
-  </div>
-);
+      <div className="flex aspect-[4/5] flex-col gap-3 rounded-[14px] bg-zinc-800 p-4">
+        {/* Barra superior: info principal a la izquierda, condición a la derecha */}
+        <div className="flex justify-between">
+          <div className="flex flex-col items-start gap-2">
+            <Bone className="h-4 w-28 rounded-md" />
+            <Bone className="h-3 w-14 rounded-md" />
+            <Bone className="h-5 w-24 rounded-md" />
+          </div>
+          <div className="flex flex-col items-end gap-2">
+            <Bone className="h-3 w-12 rounded-md" />
+            <Bone className="h-3 w-16 rounded-md" />
+            <Bone className="h-3 w-16 rounded-md" />
+          </div>
+        </div>
+
+        {/* Zona de foto */}
+        <Bone className="min-h-0 flex-1 rounded-xl" />
+      </div>
+    </div>
+  );
+};
 
 export default SkeletonCard;

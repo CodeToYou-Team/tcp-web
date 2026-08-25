@@ -5,8 +5,12 @@ import { Suspense } from "react";
 import VehicleCard from "@/components/VehicleCard";
 import { getLatestCars } from "@/app/lib/actions";
 import { VehiclesLayout } from "./layouts/VehiclesLayout";
+import SkeletonLayout from "./layouts/SkeletonLayout";
 
 export const dynamic = "force-dynamic";
+
+const LATEST_TITLE =
+  "¡Échale un vistazo a nuestras últimas incorporaciones!";
 
 export default async function Home() {
   const latestVehicles = await getLatestCars();
@@ -15,8 +19,8 @@ export default async function Home() {
       <Hero />
       <Brands />
       <Steps />
-      <Suspense fallback={<div>Loading...</div>}>
-        <VehiclesLayout title="¡Échale un vistazo a nuestras últimas incorporaciones!">
+      <Suspense fallback={<SkeletonLayout title={LATEST_TITLE} />}>
+        <VehiclesLayout title={LATEST_TITLE}>
           <VehicleCard vehicles={latestVehicles} />
         </VehiclesLayout>
       </Suspense>
