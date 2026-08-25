@@ -132,7 +132,7 @@ export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
     <Button
       asChild
       size="lg"
-      className="flex mx-auto w-4/6 md:w-full bg-primary px-8 text-primary-foreground hover:opacity-90"
+      className="mx-auto flex w-fit bg-primary px-5 text-primary-foreground hover:opacity-90 md:w-fit md:px-8"
     >
       <a
         target="_blank"
@@ -140,8 +140,8 @@ export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
         aria-label={`Consultar por WhatsApp sobre este ${vehicle.brand} ${vehicle.model}`}
         href={buildWhatsAppInquiry(vehicle)}
       >
-        <WhatsAppIcon />
-        Consultar por WhatsApp
+        <WhatsAppIcon className="h-5 w-5 " />
+        <span className="min-w-0 truncate">Consultar por WhatsApp</span>
       </a>
     </Button>
   );

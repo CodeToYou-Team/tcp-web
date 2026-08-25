@@ -196,7 +196,7 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
         navigation={hasMultiple}
         speed={reducedMotion ? 0 : 300}
         grabCursor={true}
-        className=" w-full overflow-hidden rounded-lg bg-zinc-800 "
+        className="aspect-square w-full overflow-hidden rounded-lg bg-zinc-800"
       >
         {slides.map((slide, slideIndex) => (
           <SwiperSlide key={`${slide}-${slideIndex}`} className="h-full w-full">

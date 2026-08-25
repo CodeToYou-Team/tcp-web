@@ -35,11 +35,12 @@ export default function MobileStickyBar({ vehicle }: { vehicle: Vehicle }) {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 pb-[max(env(safe-area-inset-bottom),0.625rem)] pt-2.5">
         <p className="leading-tight">
-          <span>
+          <span className="font-display">
             {vehicle.brand} {vehicle.model} {vehicle.version}
           </span>
-          <span className="block text-[11px] uppercase tracking-wider text-zinc-400">
-            Precio
+          <span className="font-data block text-[12px] text-zinc-400">
+            {formatNumber(vehicle.km)} {vehicle.km_unit ?? ""} {vehicle.year}{" "}
+            {vehicle.transmission}
           </span>
           <span className="font-display text-xl text-graffiti-500">
             ${formatNumber(vehicle.price)}
