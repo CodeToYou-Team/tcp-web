@@ -36,6 +36,15 @@ const SWIPER_VARS = {
   "--swiper-navigation-color": ACCENT,
 } as CSSProperties;
 
+// Efecto de presión en las flechas que genera Swiper, escrito solo con
+// utilidades Tailwind vía variantes arbitrarias sobre el contenedor.
+const NAV_PRESS_EFFECT =
+  "[&_.swiper-button-next]:transition-transform [&_.swiper-button-prev]:transition-transform " +
+  "[&_.swiper-button-next]:duration-150 [&_.swiper-button-prev]:duration-150 " +
+  "[&_.swiper-button-next:active]:scale-90 [&_.swiper-button-prev:active]:scale-90 " +
+  "[&_.swiper-button-next]:motion-reduce:transition-none " +
+  "[&_.swiper-button-prev]:motion-reduce:transition-none";
+
 // Tira con ventana deslizante (lib/dot-window): el activo queda centrado
 // con ±2 vecinos; en los extremos la ventana se recorta contra el borde.
 const DotStrip = ({
@@ -181,7 +190,7 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   };
 
   return (
-    <div className="vehicle-gallery relative min-w-0 md:w-11/12">
+    <div className={`vehicle-gallery relative min-w-0 md:w-11/12 ${NAV_PRESS_EFFECT}`}>
       <Swiper
         style={SWIPER_VARS}
         modules={[Navigation]}

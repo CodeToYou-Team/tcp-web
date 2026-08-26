@@ -40,7 +40,8 @@
 
   --border: 240 3.7% 15.88%;
   --input: 240 3.7% 15.88%;
-  --ring: 212.02 100% 46.67%;
+  /* Anillo de foco en el amarillo de marca (igual a --primary). */
+  --ring: 58.37 96.84% 62.75%;
 
   --radius: 0.75rem;
 }
@@ -91,4 +92,12 @@
   outline: 2px solid #fcf744;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* La barra fija de contacto tapa el pie en movil mientras esta activa:
+   el footer gana aire inferior solo en ese caso (la barra es md:hidden). */
+@media (max-width: 767.98px) {
+  body:has([data-sticky-active]) footer > div {
+    padding-bottom: 6rem;
+  }
 }

@@ -29,6 +29,7 @@ export default function MobileStickyBar({ vehicle }: { vehicle: Vehicle }) {
   return (
     <div
       aria-hidden={!visible}
+      data-sticky-active={visible || undefined}
       className={`fixed inset-x-0 bottom-0 z-30 border-t border-zinc-800 bg-zinc-900/95 backdrop-blur transition-transform duration-200 motion-reduce:transition-none md:hidden ${
         visible ? "translate-y-0" : "invisible translate-y-full"
       }`}
