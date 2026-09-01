@@ -4,6 +4,7 @@ export const navbarItems = [
   { text: "Inicio", route: "/" },
   { text: "Catálogo", route: "/catalogo" },
   { text: "Vende tu auto", route: "/venta" },
+  { text: "Detailing", route: "/detailing" },
   { text: "Acerca de nosotros", route: "/acerca-de-nosotros" },
 ];
 
@@ -63,6 +64,82 @@ export const sellSteps = [
     name: "Citas",
     description:
       "Nos encargamos de posicionar tu auto en nuestras plataformas, y al tener un interesado programaremos una cita para promover la venta del vehículo.",
+  },
+];
+
+// ----> Detailing <----
+
+export const detailingWhatsappNumber = "584242234621";
+
+export const detailingWhatsappMessage =
+  "Hola, me gustaría solicitar más información sobre los servicios de Detailing para mi vehículo.";
+
+export const detailingWhatsappLink = `https://api.whatsapp.com/send?phone=${detailingWhatsappNumber}&text=${encodeURIComponent(
+  detailingWhatsappMessage
+)}`;
+
+// El campo "icon" se resuelve a un icono de lucide-react en DetailingServices.tsx
+export const detailingServices = [
+  {
+    icon: "polish",
+    name: "Corrección de Pintura y Pulido Profesional",
+    description:
+      "Eliminación de micro-rayones, marcas de agua y restauración del brillo original de la carrocería.",
+  },
+  {
+    icon: "interior",
+    name: "Limpieza Interna Profunda (Detallado de Interiores)",
+    description:
+      "Desinfección y limpieza detallada de tapicería (cuero o tela), alfombras, techo y plásticos, dejando el habitáculo como nuevo.",
+  },
+  {
+    icon: "engine",
+    name: "Acondicionamiento de Motor y Chasis",
+    description:
+      "Limpieza técnica y segura de la zona del motor y partes bajas, eliminando grasa y acumulaciones sin dañar componentes sensibles.",
+  },
+  {
+    icon: "wash",
+    name: "Lavado Tradicional y Aspirado",
+    description:
+      "Servicio rápido y cuidadoso de lavado exterior a mano, secado técnico y aspirado completo del interior para el mantenimiento diario de tu auto.",
+  },
+  {
+    icon: "tint",
+    name: "Instalación de Papel Ahumado (3M Nanocerámico y Wellstar)",
+    description:
+      "Películas de control solar de alta tecnología. Reducción extrema de calor, protección contra rayos UV y mayor privacidad y seguridad sin perder visibilidad nocturna. Trabajamos con marcas líderes como 3M (línea Nanocerámica) y Wellstar.",
+  },
+];
+
+export const detailingBenefits = [
+  {
+    icon: "team",
+    name: "Personal especializado",
+    description: "Técnicos certificados en estética automotriz.",
+  },
+  {
+    icon: "products",
+    name: "Productos de alta gama",
+    description: "Insumos importados de la más alta calidad del mercado.",
+  },
+  {
+    icon: "warranty",
+    name: "Garantía de satisfacción",
+    description: "Cuidado minucioso en cada detalle de tu vehículo.",
+  },
+];
+
+export const detailingFaq = [
+  {
+    question: "¿Cuánto tiempo toma el servicio?",
+    answer:
+      "Varía según el paquete seleccionado (desde 4 horas hasta 2 días para tratamientos cerámicos completos).",
+  },
+  {
+    question: "¿Cómo puedo cotizar mi vehículo?",
+    answer:
+      "Puedes enviarnos un mensaje con el modelo y estado de tu auto para darte una recomendación exacta.",
   },
 ];
 
