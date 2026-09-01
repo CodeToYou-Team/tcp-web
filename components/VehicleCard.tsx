@@ -2,7 +2,7 @@
 
 import { Card } from "@/components/ui/Card";
 import Link from "next/link";
-import { formatNumber } from "@/lib/services";
+import { formatNumber } from "@/lib/utils";
 import type { Vehicle } from "@/lib/types";
 
 interface VehicleCardProps {
@@ -22,13 +22,13 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
             <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
               {/* Contenedor izquierdo para la información principal del vehículo */}
               <div className="flex flex-col items-start">
-                <h1 className="font-bold text-base text-zinc-100 text-left">
+                <h2 className="font-bold text-base text-zinc-100 text-left">
                   {vehicle?.brand +
                     " " +
                     vehicle?.model +
                     " " +
                     vehicle?.version}
-                </h1>
+                </h2>
                 <span className="text-md text-zinc-100 font-bold">
                   {vehicle?.year}
                 </span>

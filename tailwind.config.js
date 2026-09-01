@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Display: solo título del vehículo y precio (Anton).
+        display: ["var(--font-display)", "Impact", "sans-serif"],
+        // Datos: quick-facts de la ficha técnica (IBM Plex Mono).
+        data: ["var(--font-mono-data)", "ui-monospace", "monospace"],
+      },
       colors: {
         graffiti: {
           100: "#fdfa8f",
@@ -63,10 +69,15 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        shimmer: "shimmer 1.6s infinite",
       },
     },
   },

@@ -3,12 +3,13 @@
 import SellSteps from "../layouts/SellSteps";
 import CTA from "../layouts/CTA";
 import Image from "next/image";
+import { SEO_IMAGE, SITE_URL } from "@/lib/site-config";
 
 export const metadata = {
   title: "Tu Carro Propio - Venta",
   description:
     "Descubre como vender tu auto de manera rápida y sencilla con nuestro equipo de ventas",
-  metadataBase: new URL("https://www.tucarropropiove.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/venta",
     languages: {
@@ -16,8 +17,7 @@ export const metadata = {
     },
   },
   openGraph: {
-    images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+    images: SEO_IMAGE,
   },
 };
 

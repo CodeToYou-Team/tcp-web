@@ -16,7 +16,7 @@ export const VehiclesLayout = ({
           </h2>
         </div>
       )}
-      <div className="w-full h-fit mt-12 gap-6 grid grid-cols-12">
+      <div className="w-full h-fit mt-12 gap-6 grid md:grid-cols-12">
         {children}
       </div>
     </div>

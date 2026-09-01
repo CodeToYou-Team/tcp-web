@@ -22,8 +22,8 @@ const Footer = () => {
           />
         </Link>
         <span className="text-sm flex text-center sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-          © Tu Carro Propio C.A 2023 —
-          <div className="flex">
+          © Tu Carro Propio J50149900-4
+          {/* <div className="flex">
             <span
               className=" ml-1"
               {...({ rel: "noopener noreferrer", target: "_blank" } as any)}
@@ -50,7 +50,7 @@ const Footer = () => {
                 </svg>
               </span>
             </a>
-          </div>
+          </div> */}
         </span>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           <a

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
+import { setSingleValue } from "@/lib/catalog-query";
 
 export default function SearchBar() {
   const router = useRouter();
@@ -14,12 +15,11 @@ export default function SearchBar() {
   const [search, setSearch] = useState(searchParams.get("search") || "");
 
   const handleSearch = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (search.trim()) {
-      params.set("search", search);
-    } else {
-      params.delete("search");
-    }
+    const params = setSingleValue(
+      new URLSearchParams(searchParams.toString()),
+      "search",
+      search.trim()
+    );
     router.push(`${pathname}?${params.toString()}`);
   };
 

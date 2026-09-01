@@ -4,12 +4,13 @@ import CTA from "../layouts/CTA";
 import Map from "../layouts/Map";
 import Image from "next/image";
 import ImagesLayout from "../layouts/ImagesLayout";
+import { SEO_IMAGE, SITE_URL } from "@/lib/site-config";
 
 export const metadata = {
   title: "Tu Carro Propio - Acerca de nosotros",
   description:
     "Conoce un poco más sobre nuestra empresa, donde encontrarnos, nuestras redes y más.",
-  metadataBase: new URL("https://www.tucarropropiove.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/acerca-de-nosotros",
     languages: {
@@ -17,8 +18,7 @@ export const metadata = {
     },
   },
   openGraph: {
-    images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+    images: SEO_IMAGE,
   },
 };
 

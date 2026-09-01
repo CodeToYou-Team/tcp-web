@@ -1,69 +1,51 @@
+import { InfoBlock } from "@/components/ui/InfoBlock";
+import { SpecList } from "@/components/ui/SpecList";
 import type { Vehicle } from "@/lib/types";
 
-const VehicleDetails = ({ vehicle }: { vehicle: Vehicle }) => {
+export function CharacteristicsBlock({ vehicle }: { vehicle: Vehicle }) {
+  const hasSpecs = [
+    vehicle.tapizado,
+    vehicle.power,
+    vehicle.fuelCapacity,
+    vehicle.fuelConsumption,
+  ].some(Boolean);
+
+  if (!hasSpecs) return null;
+
   return (
-    <>
-      <div className="flex flex-col md:flex-row mx-16 mt-10 justify-center gap-6 md:gap-24">
-        {/* Características */}
-
-        <div className="max-w-xs md:max-w-sm ">
-          <h2 className="font-bold text-2xl text-center my-6 md:my-12">
-            Características
-          </h2>
-          {vehicle.tapizado && (
-            <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-normal">Tapizado:</span>{" "}
-              <span className="font-semibold">{vehicle.tapizado}</span>
-            </p>
-          )}
-          {vehicle.power && (
-            <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-normal">Potencia:</span>{" "}
-              <span className="font-semibold">{vehicle.power}</span>
-            </p>
-          )}
-          {vehicle.fuelCapacity && (
-            <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-normal">
-                Capacidad de combustible:
-              </span>{" "}
-              <span className="font-semibold">{vehicle.fuelCapacity}</span>
-            </p>
-          )}
-          {vehicle.fuelCapacity && (
-            <p className="text-center md:text-left">
-              <span className="text-md md:text-lg font-normal">
-                Consumo de combustible:
-              </span>{" "}
-              <span className="font-semibold">{vehicle.fuelConsumption}</span>
-            </p>
-          )}
-        </div>
-
-        {/* Detalles */}
-
-        <div className="max-w-xs md:max-w-sm whitespace-pre-line">
-          <h2 className="font-bold text-2xl text-center my-12">Detalles</h2>
-          {vehicle.details && (
-            <p className="text-center md:text-left">
-              <span className="font-normal">{vehicle.details}</span>
-            </p>
-          )}
-        </div>
-
-        {/* Extras */}
-        {vehicle.extras && (
-          <div className="max-w-xs md:max-w-sm whitespace-pre-line">
-            <h2 className="font-bold text-2xl text-center my-12">Extras</h2>
-
-            <p className="text-center md:text-left">
-              <span className="font-semibold">{vehicle.extras}</span>
-            </p>
-          </div>
-        )}
-      </div>
-    </>
+    <InfoBlock title="Características">
+      <SpecList
+        items={[
+          { label: "Tapizado", value: vehicle.tapizado },
+          { label: "Potencia", value: vehicle.power },
+          { label: "Capacidad de combustible", value: vehicle.fuelCapacity },
+          { label: "Consumo de combustible", value: vehicle.fuelConsumption },
+        ]}
+      />
+    </InfoBlock>
   );
-};
+}
 
-export default VehicleDetails;
+export function DetailsBlock({ vehicle }: { vehicle: Vehicle }) {
+  if (!vehicle.details) return null;
+
+  return (
+    <InfoBlock title="Detalles">
+      <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-300">
+        {vehicle.details}
+      </p>
+    </InfoBlock>
+  );
+}
+
+export function ExtrasBlock({ vehicle }: { vehicle: Vehicle }) {
+  if (!vehicle.extras) return null;
+
+  return (
+    <InfoBlock title="Extras">
+      <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-300">
+        {vehicle.extras}
+      </p>
+    </InfoBlock>
+  );
+}

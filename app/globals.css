@@ -40,7 +40,8 @@
 
   --border: 240 3.7% 15.88%;
   --input: 240 3.7% 15.88%;
-  --ring: 212.02 100% 46.67%;
+  /* Anillo de foco en el amarillo de marca (igual a --primary). */
+  --ring: 58.37 96.84% 62.75%;
 
   --radius: 0.75rem;
 }
@@ -72,6 +73,31 @@
   }
 }
 
-.ReactImageMagnify__LargeImageContainer {
-  width: 200% !important;
+/* Galería del detalle: fotos siempre cubren el marco de aspect fijo.
+   El width 100% en los slides es el fallback pre-inicializacion de Swiper
+   (evita que las imagenes expandan la grilla; luego Swiper fija inline). */
+.vehicle-gallery .swiper-slide {
+  width: 100%;
+}
+
+.vehicle-gallery .swiper-slide .swiper-zoom-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Foco visible en las flechas generadas por Swiper */
+.vehicle-gallery .swiper-button-next:focus-visible,
+.vehicle-gallery .swiper-button-prev:focus-visible {
+  outline: 2px solid #fcf744;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* La barra fija de contacto tapa el pie en movil mientras esta activa:
+   el footer gana aire inferior solo en ese caso (la barra es md:hidden). */
+@media (max-width: 767.98px) {
+  body:has([data-sticky-active]) footer > div {
+    padding-bottom: 6rem;
+  }
 }

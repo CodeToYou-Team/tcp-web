@@ -1,87 +1,187 @@
-"use client";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { formatNumber } from "@/lib/services";
+import { InfoBlock } from "@/components/ui/InfoBlock";
+import { SpecList } from "@/components/ui/SpecList";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { cn, formatNumber } from "@/lib/utils";
+import { buildWhatsAppInquiry } from "@/lib/whatsapp";
 import type { Vehicle } from "@/lib/types";
 
-const VehicleInfo = ({ vehicle }: { vehicle: Vehicle }) => {
+// Nombre completo del vehículo: marca + modelo + versión.
+export function vehicleFullName(vehicle: Vehicle): string {
+  return [vehicle.brand, vehicle.model, vehicle.version]
+    .filter(Boolean)
+    .join(" ");
+}
+
+// Panel de compra: título, precio y vía de contacto siempre a la vista.
+// Alineado al inicio para acompañar a la galería en desktop.
+export function VehicleHeader({ vehicle }: { vehicle: Vehicle }) {
   return (
-    <>
-      <div className="px-4 text-center items-center md:mt-6">
-        <h2 className="mt-4 text-4xl lg:text-5xl font-bold md:mb-1">
-          {vehicle.brand} {vehicle.model} {vehicle.version}
-        </h2>
-
-        <div className="mb-2 w-full text-center justify-center">
-          {vehicle.discount !== 0 ? (
-            <div className="flex justify-center my-2">
-              <span className="text-red-500 line-through text-xl px-2 mt-1.5 mb-0.5">
-                ${formatNumber(vehicle.discount)}
-              </span>
-              <span className=" text-3xl md:text-4xl font-bold">
-                ${formatNumber(vehicle.price)}
-              </span>
-            </div>
-          ) : (
-            <div>
-              <span className=" text-5xl md:text-5xl font-bold">
-                ${formatNumber(vehicle.price)}
-              </span>
-            </div>
-          )}
-          <div className="flex flex-col justify-center items-center md:items-start my-10">
-            {vehicle.year && (
-              <p>
-                <span className="text-md md:text-lg font-normal">Año:</span>{" "}
-                <span className="font-semibold">{vehicle.year}</span>
-              </p>
-            )}
-            {vehicle.km && (
-              <p>
-                <span className="text-md md:text-lg font-normal">
-                  Recorrido:
-                </span>{" "}
-                <span className="font-semibold">
-                  {formatNumber(vehicle.km)} {vehicle.km_unit}
-                </span>
-              </p>
-            )}
-            {vehicle.transmission && (
-              <p>
-                <span className="text-md md:text-lg font-normal">
-                  Transmisión:
-                </span>{" "}
-                <span className="font-semibold">{vehicle.transmission}</span>
-              </p>
-            )}
-            {vehicle.motor && (
-              <p>
-                <span className="text-md md:text-lg font-normal">Motor:</span>{" "}
-                <span className="font-semibold">{vehicle.motor}</span>
-              </p>
-            )}
-            {vehicle.owners && (
-              <p>
-                <span className="text-md md:text-lg font-normal">Dueños:</span>{" "}
-                <span className="font-semibold">{vehicle.owners}</span>
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-2 mt-4">
-          <a
-            target="_blank"
-            href={`https://api.whatsapp.com/send?phone=+584241504459&text=Buenas,%20estoy%20interesado/a%20en%20este%20vehículo%20
-            https://www.tucarropropiove.com/catalogo/${vehicle._id}`}
-          >
-            <Button className="sm:flex-none px-6 mx-1 bg-graffiti-500 text-center rounded-lg outline-none transition duration-100 text-background text-sm">
-              Consultar vía Whatsapp
-            </Button>
-          </a>
-        </div>
+    <div
+      data-purchase-panel
+      className="[grid-area:panel] flex flex-col gap-6 self-center md:mx-auto"
+    >
+      <div>
+        {vehicle.condition && (
+          <p className="mb-2">
+            <span className="inline-block rounded-full bg-graffiti-500/15 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider text-graffiti-500 ring-1 ring-inset ring-graffiti-500/40">
+              Nuevo
+            </span>
+          </p>
+        )}
+        <h1 className="font-display text-4xl uppercase leading-[1.05] tracking-wide text-zinc-50 md:text-5xl">
+          {vehicleFullName(vehicle)}
+        </h1>
       </div>
-    </>
-  );
-};
 
-export default VehicleInfo;
+      <VehiclePrice vehicle={vehicle} />
+
+      <QuickFacts vehicle={vehicle} />
+
+      <WhatsAppCta vehicle={vehicle} />
+    </div>
+  );
+}
+
+// Precio vigente resaltado con la firma "marcador"; si hubo rebaja,
+// se muestra el precio anterior tachado.
+function VehiclePrice({ vehicle }: { vehicle: Vehicle }) {
+  return (
+    <div>
+      {vehicle.discount !== 0 && (
+        <p className="mb-2 text-sm text-zinc-400">
+          Antes{" "}
+          <s className="text-red-400">${formatNumber(vehicle.discount)}</s>
+        </p>
+      )}
+      <p className="relative inline-block -rotate-1 px-3 py-1">
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 -skew-x-6 rounded-[3px] bg-graffiti-500"
+        />
+        <span className="relative font-display text-4xl text-zinc-900">
+          ${formatNumber(vehicle.price)}
+        </span>
+      </p>
+    </div>
+  );
+}
+
+// Los tres datos que disparan la consulta, en voz de ficha técnica.
+function QuickFacts({ vehicle }: { vehicle: Vehicle }) {
+  const kmValue = vehicle.km
+    ? `${formatNumber(vehicle.km)} ${vehicle.km_unit ?? ""}`.trim()
+    : undefined;
+
+  const facts = [vehicle.year, kmValue, vehicle.transmission].filter(Boolean);
+
+  if (facts.length === 0) return null;
+
+  return (
+    <ul className="flex flex-wrap items-baseline font-data text-sm text-zinc-200">
+      {facts.map((fact, index) => (
+        <li
+          key={index}
+          className={cn(
+            index > 0 &&
+              "before:mr-2 before:text-zinc-500 before:content-['·']",
+          )}
+        >
+          {fact}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function VehicleSpecs({ vehicle }: { vehicle: Vehicle }) {
+  const hasAny = [
+    vehicle.year,
+    vehicle.km,
+    vehicle.transmission,
+    vehicle.motor,
+    vehicle.owners,
+  ].some(Boolean);
+
+  if (!hasAny) return null;
+
+  return (
+    <InfoBlock title="Datos generales">
+      <SpecList
+        items={[
+          { label: "Año", value: vehicle.year },
+          {
+            label: "Recorrido",
+            value: vehicle.km
+              ? `${formatNumber(vehicle.km)} ${vehicle.km_unit ?? ""}`.trim()
+              : undefined,
+          },
+          { label: "Transmisión", value: vehicle.transmission },
+          { label: "Motor", value: vehicle.motor },
+          { label: "Dueños", value: vehicle.owners },
+        ]}
+      />
+    </InfoBlock>
+  );
+}
+
+export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
+  return (
+    <Button
+      asChild
+      size="lg"
+      className="mx-auto flex w-fit bg-primary px-5 text-primary-foreground hover:opacity-90 md:w-fit md:px-8"
+    >
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Consultar por WhatsApp sobre este ${vehicle.brand} ${vehicle.model}`}
+        href={buildWhatsAppInquiry(vehicle)}
+      >
+        <WhatsAppIcon className="h-5 w-5 " />
+        <span className="min-w-0 truncate">Consultar por WhatsApp</span>
+      </a>
+    </Button>
+  );
+}
+
+export function VehicleBreadcrumb({ vehicle }: { vehicle: Vehicle }) {
+  const label = [vehicle.brand, vehicle.model].filter(Boolean).join(" ");
+
+  return (
+    <nav aria-label="Ruta de navegación" className="text-xs text-zinc-400">
+      <ol className="flex items-center gap-1.5">
+        <li>
+          <Link
+            href="/"
+            className="outline-none transition-colors hover:text-graffiti-500 focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Inicio
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="h-3 w-3 text-zinc-600" />
+        </li>
+        <li>
+          <Link
+            href="/catalogo"
+            className="outline-none transition-colors hover:text-graffiti-500 focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Catálogo
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronRight className="h-3 w-3 text-zinc-600" />
+        </li>
+        <li
+          aria-current="page"
+          className="max-w-[10rem] truncate text-zinc-200 sm:max-w-xs"
+        >
+          {label}
+        </li>
+      </ol>
+    </nav>
+  );
+}

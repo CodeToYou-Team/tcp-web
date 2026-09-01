@@ -15,13 +15,14 @@ import PriceRange from "./PriceRange";
 import { usePathname, useRouter } from "next/navigation";
 import { ListFilter } from "lucide-react";
 import SectionBanner from "./SectionBanner";
+import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface SidebarFilterProps {
-  brands: any;
-  vehicleType: any;
-  transmission: any;
-  models: any;
-  sort: any;
+  brands: Brand[];
+  vehicleType: FilterOption[];
+  transmission: FilterOption[];
+  models: VehicleModel[];
+  sort: FilterOption[];
 }
 
 const SidebarFilter = ({

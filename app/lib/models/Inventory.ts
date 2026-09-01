@@ -39,12 +39,12 @@ const inventorySchema = new mongoose.Schema({
 //  othersImg: [String],
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: new Date(),
-  },  
+    default: Date.now,
+  },
   condition: { 
     type: Boolean, 
     default: false 
