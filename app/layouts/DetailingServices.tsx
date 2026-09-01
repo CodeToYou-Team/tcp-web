@@ -4,6 +4,7 @@ import type { LucideIcon } from "lucide-react";
 import { Armchair, Cog, Sparkles, Sun, WashingMachine } from "lucide-react";
 import { Card, CardBody, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { detailingServices, detailingWhatsappLink } from "@/lib/data";
 
 const serviceIcons: Record<string, LucideIcon> = {
@@ -73,6 +74,7 @@ export default function DetailingServices() {
                   radius="sm"
                   className="bg-graffiti-500 px-6 text-sm font-semibold text-background"
                 >
+                  <WhatsAppIcon className="h-5 w-5" />
                   Cotizar Servicio
                 </Button>
               </a>

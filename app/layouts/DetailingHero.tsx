@@ -1,10 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { detailingWhatsappLink } from "@/lib/data";
 
 export default function DetailingHero() {
   return (
@@ -31,7 +28,7 @@ export default function DetailingHero() {
             Estética automotriz
           </span>
 
-          <h1 className="w-full text-3xl font-extrabold leading-tight sm:text-5xl md:w-3/4">
+          <h1 className="w-full text-3xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.3] md:w-3/4">
             Detailing Profesional
             <span className="mx-2 hidden font-light text-zinc-500 sm:inline">
               |
@@ -45,33 +42,6 @@ export default function DetailingHero() {
             Devolvemos el brillo de salón a tu auto con nuestros servicios de
             restauración, limpieza profunda y protección de pintura.
           </p>
-
-          <div className="mt-10 flex w-full flex-col justify-center gap-4 sm:flex-row md:justify-start">
-            <a
-              aria-label="Agendar cita de detailing por whatsapp"
-              rel="noopener noreferrer"
-              target="_blank"
-              href={detailingWhatsappLink}
-            >
-              <Button
-                radius="sm"
-                size="lg"
-                className="w-full bg-graffiti-500 px-8 text-sm font-semibold text-background sm:w-auto"
-              >
-                Agendar Cita por WhatsApp
-              </Button>
-            </a>
-            <Link href="#servicios-detailing">
-              <Button
-                radius="sm"
-                size="lg"
-                variant="outline"
-                className="w-full border-zinc-50/40 px-8 text-sm font-semibold text-zinc-50 sm:w-auto"
-              >
-                Cotizar Servicio
-              </Button>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
