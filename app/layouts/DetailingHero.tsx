@@ -13,8 +13,8 @@ export default function DetailingHero() {
           priority
           width={1080}
           height={720}
-          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1709090693/corolla-hero_i9hays.jpg"
-          className="absolute inset-0 h-full w-full object-cover"
+          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727229180/tcp-web/2b264e1b-eabd-4b05-b8ff-583ebced3df9_cwlfpm.jpg"
+          className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
