@@ -4,6 +4,7 @@ import DetailingServices from "../layouts/DetailingServices";
 import DetailingBenefits from "../layouts/DetailingBenefits";
 import DetailingFaq from "../layouts/DetailingFaq";
 import CTA from "../layouts/CTA";
+import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { detailingWhatsappLink } from "@/lib/data";
 
@@ -50,10 +51,15 @@ export default function Detailing() {
             rel="noopener noreferrer"
             target="_blank"
             href={detailingWhatsappLink}
-            className="flex cursor-pointer gap-2 text-graffiti-500 hover:animate-pulse"
           >
-            Ir a Whatsapp
-            <WhatsAppIcon className="h-6 w-6" />
+            <Button
+              radius="sm"
+              variant="outline"
+              className="border-graffiti-500/40 hover:bg-graffiti-500/10 px-6 text-sm font-semibold text-graffiti-500"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              Contáctanos
+            </Button>
           </a>
         }
       />

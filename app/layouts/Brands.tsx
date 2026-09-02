@@ -8,13 +8,13 @@ import {
 
 export default function Brands() {
   return (
-    <div className="py-12 md:py-20 ">
+    <div className="py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl">
-          <h2 className="text-center text-2xl md:text-3xl font-semibold leading-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-semibold leading-8 md:text-3xl">
             Trabajamos con las mejores marcas del mercado
           </h2>
-          <p className="mt-6 text-md leading-6 text-center">
+          <p className="mt-4 text-sm text-zinc-400 sm:text-base">
             Escoge el carro que se ajuste a tus necesidades de entre más de 100
             opciones con excelentes marcas y modelos.
           </p>

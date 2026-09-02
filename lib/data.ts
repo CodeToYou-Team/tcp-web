@@ -34,38 +34,43 @@ export const sort: FilterOption[] = [
 
 export const sellSteps = [
   {
+    icon: "wash",
     name: "Limpia tu vehículo",
     description:
       "Trae tu vehículo limpio, le tomaremos fotografías para su exposición.",
   },
   {
+    icon: "search",
     name: "Avalúo",
     description:
       "Le haremos un avalúo a tu vehículo que incluye revisión mecánica y legal.",
   },
   {
+    icon: "database",
     name: "Registro de datos",
     description:
       "Registraremos los datos de tu vehículo en nuestra base de datos.",
   },
   {
+    icon: "docs",
     name: "Documentación",
     description:
       "Debes ser el propietario del carro y debes presentar la documentación el día de la inspección.",
   },
-
   {
+    icon: "camera",
     name: "Fotografía y vídeo",
     description:
       "El proceso tarda un máximo de 20 minutos. Te proporcionamos fotos y vídeos de máxima calidad",
   },
-
   {
+    icon: "price",
     name: "Precio de venta",
     description:
       "Nuestro equipo te recomendará un precio para tu vehículo, pero tú tienes la última palabra.",
   },
   {
+    icon: "calendar",
     name: "Citas",
     description:
       "Nos encargamos de posicionar tu auto en nuestras plataformas, y al tener un interesado programaremos una cita para promover la venta del vehículo.",
@@ -145,6 +150,68 @@ export const detailingFaq = [
     question: "¿Cómo puedo cotizar mi vehículo?",
     answer:
       "Puedes enviarnos un mensaje con el modelo y estado de tu auto para darte una recomendación exacta.",
+  },
+];
+
+export const aboutValues = [
+  {
+    icon: "shield",
+    name: "Seguridad y Transparencia",
+    description:
+      "Cada vehículo en nuestro inventario pasa por una rigurosa revisión legal y mecánica. Garantizamos operaciones claras y sin sorpresas.",
+  },
+  {
+    icon: "building",
+    name: "Instalaciones de Primer Nivel",
+    description:
+      "Disponemos de un espacio cómodo, moderno y con seguridad garantizada, especialmente diseñado para el resguardo, exhibición y tratamiento de todo tipo de vehículos.",
+  },
+  {
+    icon: "globe",
+    name: "Importación y Logística Automotriz",
+    description:
+      "Traemos el auto que estás buscando directamente desde el exterior. Nos encargamos de todo el proceso de selección, logística, trámites de aduana y nacionalización con total transparencia y seguridad.",
+  },
+  {
+    icon: "briefcase",
+    name: "Soluciones Integrales",
+    description:
+      "No solo intermediamos; gestionamos ventas directas, esquemas de inversión eficientes y servicios automotrices de primer nivel.",
+  },
+  {
+    icon: "sparkles",
+    name: "Pasión por el Detalle",
+    description:
+      "Cuidamos la estética y el valor de tu auto con servicios especializados de detailing, protección cerámica e instalación de papel ahumado.",
+  },
+  {
+    icon: "handshake",
+    name: "Atención Personalizada",
+    description:
+      "Asesoría experta adaptada a las necesidades reales de cada cliente, garantizando una relación a largo plazo.",
+  },
+];
+
+export const aboutEcosystem = [
+  {
+    label: "Comercialización Local",
+    description:
+      "Inventario garantizado de vehículos nuevos y usados disponibles en el showroom y nuestra página web.",
+  },
+  {
+    label: "Importación Directa",
+    description:
+      "Gestión integral para traer tu vehículo ideal desde el extranjero sin complicaciones legales ni logísticas.",
+  },
+  {
+    label: "Inversión y Gestión de Venta",
+    description:
+      "Soluciones ágiles y esquemas eficientes para consignación o venta directa.",
+  },
+  {
+    label: "Centro de Detailing y Estética",
+    description:
+      "Cuidado técnico, pulido, protección 3M Nanocerámica y mantenimiento preventivo.",
   },
 ];
 

@@ -36,10 +36,10 @@ export default function DetailingServices() {
             return (
               <Card
                 key={service.name}
-                className="col-span-12 border border-zinc-800 transition-colors hover:border-graffiti-500/50 md:col-span-6 lg:col-span-4"
+                className="col-span-12 border border-zinc-800 transition-colors  md:col-span-6 lg:col-span-4"
               >
-                <CardHeader className="flex-col items-start gap-4 p-6 pb-0">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-graffiti-500/10 text-graffiti-500">
+                <CardHeader className="flex-row items-center gap-4 p-6 pb-0">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-graffiti-500/10 text-graffiti-500">
                     <Icon className="h-6 w-6" />
                   </span>
                   <h3 className="text-lg font-semibold leading-6">
@@ -72,7 +72,8 @@ export default function DetailingServices() {
               >
                 <Button
                   radius="sm"
-                  className="bg-graffiti-500 px-6 text-sm font-semibold text-background"
+                  variant="outline"
+                  className="border-graffiti-500/40 hover:bg-graffiti-500/10 px-6 text-sm font-semibold text-graffiti-500"
                 >
                   <WhatsAppIcon className="h-5 w-5" />
                   Cotizar Servicio
