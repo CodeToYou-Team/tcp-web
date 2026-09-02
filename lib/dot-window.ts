@@ -1,5 +1,6 @@
 // Geometría de la tira de dots: paso fijo entre centros y ventana visible.
-export const DOT_PITCH = 20;
+// Debe coincidir con el ancho real de cada botón de dot (w-6 = 24px).
+export const DOT_PITCH = 24;
 export const MAX_VISIBLE_DOTS = 5;
 
 export interface DotWindow {

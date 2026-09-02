@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { setPage } from "@/lib/catalog-query";
@@ -37,14 +38,20 @@ export default function CatalogPagination({
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathName = usePathname();
+  const activeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Al cambiar de página, mover foco al botón activo y scroll al inicio.
+  // Esto permite que los usuarios de lectores de pantalla sepan que los
+  // resultados cambiaron sin perder el contexto de la paginación.
+  useEffect(() => {
+    activeButtonRef.current?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [page]);
 
   const handleChange = (e: number) => {
+    if (e === page) return;
     const params = setPage(new URLSearchParams(searchParams), e);
     replace(`${pathName}?${params.toString()}`);
-
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 1000);
   };
 
   if (numberOfPages <= 1) return null;
@@ -67,6 +74,7 @@ export default function CatalogPagination({
             <li key={item}>
               <button
                 type="button"
+                ref={item === page ? activeButtonRef : null}
                 aria-label={`Ir a la página ${item}`}
                 aria-current={item === page ? "page" : undefined}
                 onClick={() => handleChange(item)}

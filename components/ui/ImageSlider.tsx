@@ -100,7 +100,7 @@ const DotStrip = ({
                 tabIndex={inWindow(index) ? 0 : -1}
                 aria-label={`Ir a la foto ${index + 1} de ${count}`}
                 aria-current={isActive ? "true" : undefined}
-                className="pointer-events-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-graffiti-500"
+                className="pointer-events-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-graffiti-500"
               >
                 <span
                   className={cn(

@@ -53,7 +53,12 @@ function VehiclePrice({ vehicle }: { vehicle: Vehicle }) {
       {vehicle.discount !== 0 && (
         <p className="mb-2 text-sm text-zinc-400">
           Antes{" "}
-          <s className="text-red-400">${formatNumber(vehicle.discount)}</s>
+          <s
+            aria-label={`Precio anterior: ${formatNumber(vehicle.discount)} dólares`}
+            className="text-red-400"
+          >
+            ${formatNumber(vehicle.discount)}
+          </s>
         </p>
       )}
       <p className="relative inline-block -rotate-1 px-3 py-1">
@@ -141,7 +146,7 @@ export function WhatsAppCta({ vehicle }: { vehicle: Vehicle }) {
         href={buildWhatsAppInquiry(vehicle)}
       >
         <WhatsAppIcon className="h-5 w-5 " />
-        <span className="min-w-0 truncate">Consultar por WhatsApp</span>
+        <span className="min-w-0">Consultar por WhatsApp</span>
       </a>
     </Button>
   );

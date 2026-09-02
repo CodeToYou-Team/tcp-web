@@ -126,3 +126,37 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* 1.4.1 Use of Color (forced-colors / Windows High Contrast Mode):
+   En modo de alto contraste el navegador fuerza colores del sistema.
+   box-shadow y background-image se eliminan; usamos outline para foco
+   y border para delimitar elementos interactivos. */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  button,
+  [role="button"],
+  a {
+    forced-color-adjust: auto;
+  }
+
+  /* Asegurar que los bordes de cards, inputs y botones sean visibles */
+  .vehicle-gallery .swiper-button-next,
+  .vehicle-gallery .swiper-button-prev {
+    border: 2px solid ButtonBorder;
+    border-radius: 4px;
+  }
+
+  /* Los SVG decorativos deben usar el color heredado del sistema */
+  svg[aria-hidden="true"] {
+    forced-color-adjust: auto;
+  }
+
+  /* El precio destacado con la marca graffiti debe seguir siendo legible */
+  .font-display {
+    forced-color-adjust: auto;
+  }
+}
