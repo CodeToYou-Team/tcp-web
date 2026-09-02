@@ -22,7 +22,7 @@ const SkeletonCard = () => {
       aria-hidden="true"
       className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit"
     >
-      <div className="flex aspect-[4/5] flex-col gap-3 rounded-[14px] bg-zinc-800 p-4">
+      <div className="flex flex-col gap-3 overflow-hidden rounded-[14px] bg-zinc-800 p-4 pb-0">
         {/* Barra superior: info principal a la izquierda, condición a la derecha */}
         <div className="flex justify-between">
           <div className="flex flex-col items-start gap-2">
@@ -37,8 +37,8 @@ const SkeletonCard = () => {
           </div>
         </div>
 
-        {/* Zona de foto */}
-        <Bone className="min-h-0 flex-1 rounded-xl" />
+        {/* Zona de foto: cuadrada, calco del aspect-square de VehicleCard */}
+        <Bone className="aspect-square w-full" />
       </div>
     </div>
   );

@@ -6,9 +6,10 @@
 ## Commands
 - `pnpm dev` — dev server (localhost:3000)
 - `pnpm build` — production build
-- `pnpm lint` — ESLint (core-web-vitals config)
 - `pnpm typecheck` — `tsc --noEmit`
 - `pnpm test` — Vitest (tests in `lib/__tests__/`)
+
+No ESLint: it was uninstalled due to conflicts with other packages. There is no `pnpm lint` script — do not run it or reinstall ESLint without asking first.
 
 No single-test-file shortcut is configured; run `pnpm test` for all.
 

@@ -18,7 +18,10 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
           isPressable
           className="col-span-12 min-[500px]:col-span-6 sm:col-span-6 lg:col-span-4 h-fit bg-zinc-800 active:shadow-graffiti-500 active:shadow-md"
         >
-          <Link className="relative w-full" href={`/catalogo/${vehicle?._id}`}>
+          <Link
+            className="group relative w-full"
+            href={`/catalogo/${vehicle?._id}`}
+          >
             <div className="py-2 px-4 flex bg-zinc-800 w-full absolute z-20 justify-between">
               {/* Contenedor izquierdo para la información principal del vehículo */}
               <div className="flex flex-col items-start">
@@ -56,13 +59,14 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
               </div>
             </div>
 
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt="latest-1"
-              className="object-contain h-fit mt-10 rounded-none group-hover:scale-110 transition-all"
-              src={`${vehicle?.images?.[0]}`}
-              width={600}
-            />
+            <div className="aspect-square w-full overflow-hidden bg-zinc-800 mt-10">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt={`${vehicle?.brand} ${vehicle?.model} ${vehicle?.year}`}
+                className="h-full w-full object-cover transition-all group-hover:scale-110"
+                src={`${vehicle?.images?.[0]}`}
+              />
+            </div>
           </Link>
         </Card>
       ))}
