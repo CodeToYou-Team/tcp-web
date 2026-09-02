@@ -33,8 +33,8 @@ const Hero = () => {
             </span>
 
             <h1 className="text-3xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.3] w-full md:w-3/4">
-              Los mejores precios en{" "}
-              <span className="text-graffiti-500">autos.</span>
+              Los Mejores Precios en{" "}
+              <span className="text-graffiti-500">Autos</span>
             </h1>
 
             <p className="mt-6 sm:text-xl/relaxed text-zinc-200 w-full md:w-2/3">

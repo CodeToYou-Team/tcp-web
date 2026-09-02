@@ -31,8 +31,8 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
             >
               <div className="py-2 px-4 flex bg-zinc-800 w-full z-20 justify-between">
                 {/* Contenedor izquierdo para la información principal del vehículo */}
-                <div className="flex flex-col items-start">
-                  <h2 className="font-bold text-base text-zinc-100 text-left">
+                <div className="flex min-w-0 flex-1 flex-col items-start">
+                  <h2 className="truncate font-bold text-base text-zinc-100 text-left">
                     {vehicleName}
                   </h2>
                   <span className="text-md text-zinc-100 font-bold">
@@ -55,23 +55,29 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
                   </div>
                 </div>
 
-                {/* Contenedor derecho para la condición del vehículo */}
-                <div className="flex flex-col font-bold items-end">
-                  <span className="text-primary">
-                    {vehicle?.condition ? "Nuevo" : ""}
+                {/* Contenedor derecho para la condición del vehículo.
+                    shrink-0 + whitespace-nowrap: nunca se aprieta por un
+                    título largo; el slot "Nuevo" siempre está reservado. */}
+                <div className="flex shrink-0 flex-col items-end font-bold whitespace-nowrap">
+                  <span
+                    className={
+                      vehicle?.condition ? "text-primary" : "text-transparent"
+                    }
+                  >
+                    Nuevo
                   </span>
-                  <span className={vehicle?.condition ? "" : "mt-7"}>
+                  <span>
                     {formatNumber(vehicle.km)} {vehicle.km_unit}
                   </span>
                   <span>{vehicle.transmission}</span>
                 </div>
               </div>
 
-              <div className="aspect-square w-full overflow-hidden bg-zinc-800">
+              <div className="relative aspect-square w-full overflow-hidden bg-zinc-800">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt=""
-                  className="h-full w-full object-cover transition-all group-hover:scale-110"
+                  className="absolute inset-0 h-full w-full object-cover transition-all group-hover:scale-110"
                   src={`${vehicle?.images?.[0]}`}
                 />
               </div>
