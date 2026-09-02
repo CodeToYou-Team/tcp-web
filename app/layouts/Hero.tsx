@@ -12,7 +12,7 @@ const Hero = () => {
         {/* Image component as background */}
         <div className="absolute inset-0 z-0">
           <Image
-            alt="Hero Background"
+            alt=""
             priority
             width={1080}
             height={720}
@@ -28,7 +28,7 @@ const Hero = () => {
         <div className="relative z-10 mx-auto w-full max-w-7xl">
           <div className="flex flex-col items-center text-center w-full md:items-start md:text-left">
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-graffiti-500/40 bg-graffiti-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-graffiti-500">
-              <Car className="h-4 w-4" />
+              <Car aria-hidden="true" className="h-4 w-4" />
               Concesionario de autos en Caracas
             </span>
 

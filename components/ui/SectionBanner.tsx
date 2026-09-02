@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
 const SectionBanner = ({ children }: { children: ReactNode }) => {
   return (
     <>
-      <div className="fixed top-14 h-10 justify-left pb-6 z-30 flex w-full  border-b border-zinc-800 bg-zinc-900">
+      <div className="fixed top-16 h-10 justify-left pb-6 z-30 flex w-full  border-b border-zinc-800 bg-zinc-900">
         <div className="flex items-center md:ml-14">
           {children}
           <Link href={"/ofertas"}>

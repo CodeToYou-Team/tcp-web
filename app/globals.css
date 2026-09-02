@@ -71,6 +71,17 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #fcf744;
   }
+
+  /* 2.4.11 Focus Not Obscured: con navbar sticky + section banner fijo,
+     cualquier foco arrastrado por la pantalla debe quedar libre encima
+     de esas barras (h-16 + h-10 = 6rem). */
+  :focus-visible {
+    scroll-margin-top: 7rem;
+  }
+
+  :target {
+    scroll-margin-top: 7rem;
+  }
 }
 
 /* Galería del detalle: fotos siempre cubren el marco de aspect fijo.
@@ -99,5 +110,19 @@
 @media (max-width: 767.98px) {
   body:has([data-sticky-active]) footer > div {
     padding-bottom: 6rem;
+  }
+}
+
+/* 2.3.3 Animation from Interactions: aplanar todas las transiciones
+   de movimiento y color cuando el usuario lo solicite, manteniendo
+   la información (cambios de estado) instantáneos. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

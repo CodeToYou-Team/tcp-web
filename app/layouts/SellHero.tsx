@@ -22,13 +22,16 @@ export default function SellHero() {
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="flex w-full flex-col items-center text-center md:items-start md:text-left">
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-graffiti-500/40 bg-graffiti-500/10 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-graffiti-500">
-            <Tag className="h-4 w-4" />
+            <Tag aria-hidden="true" className="h-4 w-4" />
             Vende tu auto
           </span>
 
           <h1 className="w-full text-3xl font-extrabold leading-[1.4] sm:text-5xl sm:leading-[1.3] md:w-3/4">
             Vende tu vehículo
-            <span className="mx-2 hidden font-light text-zinc-500 sm:inline">
+            <span
+              aria-hidden="true"
+              className="mx-2 hidden font-light text-zinc-500 sm:inline"
+            >
               |
             </span>
             <span className="block text-graffiti-500 sm:inline">

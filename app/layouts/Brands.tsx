@@ -21,11 +21,21 @@ export default function Brands() {
         </div>
       </div>
       <div className="mt-16 w-full flex flex-wrap justify-center gap-10 md:gap-20">
-        <ToyotaIcon />
-        <JeepIcon />
-        <HondaIcon />
-        <MitsubishiIcon />
-        <HyundaiIcon />
+        <span role="img" aria-label="Toyota">
+          <ToyotaIcon />
+        </span>
+        <span role="img" aria-label="Jeep">
+          <JeepIcon />
+        </span>
+        <span role="img" aria-label="Honda">
+          <HondaIcon />
+        </span>
+        <span role="img" aria-label="Mitsubishi">
+          <MitsubishiIcon />
+        </span>
+        <span role="img" aria-label="Hyundai">
+          <HyundaiIcon />
+        </span>
       </div>
     </div>
   );

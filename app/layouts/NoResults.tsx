@@ -21,7 +21,7 @@ const NoResults = () => {
           src="https://res.cloudinary.com/dkokeszcd/image/upload/v1704758823/tcp-web/no-results-tcp_ojl5jx.png"
           width={1000}
           height={1000}
-          alt="no-results"
+          alt="Ilustración de búsqueda sin resultados"
           loading="eager"
         />
       </div>

@@ -40,7 +40,10 @@ export default function AboutValues() {
                 className="rounded-xl border border-zinc-800 bg-zinc-900 p-6"
               >
                 <div className="flex items-center gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500"
+                  >
                     <Icon className="h-6 w-6" />
                   </span>
                   <h3 className="text-lg font-semibold">{value.name}</h3>

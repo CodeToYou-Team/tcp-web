@@ -41,7 +41,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es-VE">
       <head>
         <Script
           async
@@ -56,11 +56,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </Script>
       </head>
       <body
-        className={`${poppins.className} ${anton.variable} ${plexMono.variable}`}
-        {...({ antialised: "true" } as any)}
+        className={`${poppins.className} ${anton.variable} ${plexMono.variable} antialiased`}
       >
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-graffiti-500 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Saltar al contenido principal
+        </a>
         <Navbar />
-        <Providers>{children}</Providers>
+        <main id="main">
+          <Providers>{children}</Providers>
+        </main>
         <Footer />
       </body>
     </html>

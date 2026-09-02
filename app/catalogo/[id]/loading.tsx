@@ -3,7 +3,7 @@ export default function LoadingVehicle() {
     <div
       role="status"
       aria-busy="true"
-      className="mx-auto w-full max-w-7xl animate-pulse px-4 sm:px-6 lg:px-8"
+      className="mx-auto w-full max-w-7xl animate-pulse motion-reduce:animate-none px-4 sm:px-6 lg:px-8"
     >
       <span className="sr-only">Cargando vehículo…</span>
 

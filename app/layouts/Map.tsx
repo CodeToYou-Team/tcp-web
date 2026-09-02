@@ -21,16 +21,20 @@ export default function Map() {
               className="w-full"
               height={400}
               loading="lazy"
-              frameBorder="0"
+              style={{ border: 0 }}
+              referrerPolicy="no-referrer-when-downgrade"
             />
           </CardBody>
           <div className="grid grid-cols-1 divide-y divide-zinc-800 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
             <div className="flex items-start gap-3 p-5">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500">
+              <span
+                aria-hidden="true"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500"
+              >
                 <MapPin className="h-5 w-5" />
               </span>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300">
                   Dirección
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-zinc-300">
@@ -40,11 +44,14 @@ export default function Map() {
               </div>
             </div>
             <div className="flex items-start gap-3 p-5">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500">
+              <span
+                aria-hidden="true"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500"
+              >
                 <Mail className="h-5 w-5" />
               </span>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300">
                   Email
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-zinc-300">
@@ -53,11 +60,14 @@ export default function Map() {
               </div>
             </div>
             <div className="flex items-start gap-3 p-5">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500">
+              <span
+                aria-hidden="true"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500"
+              >
                 <Phone className="h-5 w-5" />
               </span>
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-300">
                   Teléfono
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-zinc-300">

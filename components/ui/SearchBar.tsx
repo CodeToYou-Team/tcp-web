@@ -14,7 +14,8 @@ export default function SearchBar() {
 
   const [search, setSearch] = useState(searchParams.get("search") || "");
 
-  const handleSearch = () => {
+  const handleSearch = (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
     const params = setSingleValue(
       new URLSearchParams(searchParams.toString()),
       "search",
@@ -24,26 +25,34 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-5/6 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center ">
+    <form
+      role="search"
+      onSubmit={handleSearch}
+      className="w-5/6 sm:w-1/3 mx-auto mt-16 flex gap-2 align items-center "
+    >
       <div className="relative flex-1">
         <div className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
-          <Search className="h-6 w-6 text-muted-foreground flex-shrink-0" />
+          <Search
+            aria-hidden="true"
+            className="h-6 w-6 text-muted-foreground flex-shrink-0"
+          />
         </div>
         <Input
           autoComplete="off"
-          type="text"
+          type="search"
           placeholder="Busca una marca o modelo"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="truncate bg-zinc-800 pl-10 text-sm text-zinc-100"
+          aria-label="Buscar vehículo por marca o modelo"
+          className="truncate bg-zinc-800 pl-10 text-sm text-zinc-100 placeholder:text-zinc-300"
         />
       </div>
       <Button
-        onClick={handleSearch}
+        type="submit"
         className="block w-auto bg-graffiti-500 text-zinc-800 text-sm"
       >
         Buscar
       </Button>
-    </div>
+    </form>
   );
 }

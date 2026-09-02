@@ -1,7 +1,6 @@
 "use client";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -49,7 +48,7 @@ const SidebarFilter = ({
                 radius="sm"
                 className="flex  w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
               >
-                <ListFilter className="text-graffiti-500 scale-85" />
+                <ListFilter aria-hidden="true" className="text-graffiti-500 scale-85" />
                 Filtrar
               </Button>
             </SheetTrigger>
@@ -79,7 +78,6 @@ const SidebarFilter = ({
               >
                 Limpiar búsqueda
               </Button>
-              <SheetClose asChild></SheetClose>
             </SheetFooter>
           </SheetContent>
         </Sheet>

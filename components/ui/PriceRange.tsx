@@ -16,7 +16,7 @@ export default function PriceRange() {
   const pathName = usePathname();
 
   const [value, setValue] = useState<number[]>(() =>
-    readPriceRange(searchParams)
+    readPriceRange(searchParams),
   );
   const [prevParams, setPrevParams] = useState(searchParams);
 
@@ -33,34 +33,33 @@ export default function PriceRange() {
 
   const handleChange = (e: number[]) => {
     setValue(e);
-    const params = setPriceRange(
-      new URLSearchParams(searchParams),
-      e[0],
-      e[1]
-    );
+    const params = setPriceRange(new URLSearchParams(searchParams), e[0], e[1]);
     debouncedReplace(`${pathName}?${params.toString()}`);
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full h-full my-2 max-w-md items-start justify-center">
-      <span className="text-sm">Rango de precios</span>
+    <fieldset className="flex w-full max-w-md flex-col items-start justify-center gap-2 border-0 p-0 my-2">
+      <legend className="text-sm text-zinc-200 my-4">Rango de precios</legend>
       <Slider
         step={500}
         max={PRICE_SLIDER_MAX}
         min={0}
         value={value}
         onValueChange={(e) => handleChange(e)}
+        aria-label="Rango de precios"
         className="max-w-md"
       />
-      <p className="text-zinc-400 font-medium text-xs">
-        Rango seleccionado:{" "}
+      <p
+        aria-live="polite"
+        className="text-zinc-300 font-medium text-xs mt-2 self-end"
+      >
         {Array.isArray(value) &&
           value
             .map((b) =>
-              b >= PRICE_SLIDER_MAX ? `$${PRICE_SLIDER_MAX} o más` : `$${b}`
+              b >= PRICE_SLIDER_MAX ? `$${PRICE_SLIDER_MAX} o más` : `$${b}`,
             )
             .join(" – ")}
       </p>
-    </div>
+    </fieldset>
   );
 }

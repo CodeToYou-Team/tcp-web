@@ -17,11 +17,14 @@ export default function AboutEcosystem() {
               key={item.label}
               className="relative rounded-xl border border-zinc-800 bg-zinc-900 p-6"
             >
-              <span className="text-3xl font-bold text-graffiti-500/30">
+              <span
+                aria-hidden="true"
+                className="text-3xl font-bold text-graffiti-500/40"
+              >
                 {String(index + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-2 text-base font-semibold">{item.label}</h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-400">
+              <p className="mt-2 text-sm leading-6 text-zinc-300">
                 {item.description}
               </p>
             </div>

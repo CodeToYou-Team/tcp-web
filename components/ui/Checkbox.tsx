@@ -80,8 +80,11 @@ export default function Checkbox({
 
   return (
     <Suspense key={searchParams.toString()}>
-      <div className="flex flex-col gap-2 text-base">
-        <span className="text-muted-foreground">
+      <fieldset className="flex flex-col gap-2 border-0 p-0 text-base">
+        <legend className="sr-only">
+          {FILTER_LABELS[filterType] ?? "Filtro"}
+        </legend>
+        <span aria-hidden="true" className="text-muted-foreground">
           {FILTER_LABELS[filterType] ?? ""}
         </span>
         <div className="flex flex-col flex-wrap gap-2">
@@ -104,7 +107,7 @@ export default function Checkbox({
             );
           })}
         </div>
-      </div>
+      </fieldset>
     </Suspense>
   );
 }

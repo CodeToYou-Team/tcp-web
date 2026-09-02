@@ -41,7 +41,7 @@ export default function About() {
           <Image
             className="mx-auto my-4 flex w-2/3 max-w-none md:w-5/12"
             src="https://res.cloudinary.com/dkokeszcd/image/upload/v1707316230/iphone-whatsapp-mockup_m06ztd.png"
-            alt="App screenshot"
+            alt="Captura de pantalla de iPhone mostrando una conversación de WhatsApp para recibir asesoría personalizada"
             width={1800}
             height={2000}
             loading="eager"

@@ -30,7 +30,10 @@ export default function DetailingBenefits() {
                   key={benefit.name}
                   className="flex flex-col items-center text-center"
                 >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-14 w-14 items-center justify-center rounded-full bg-graffiti-500/10 text-graffiti-500"
+                  >
                     <Icon className="h-7 w-7" />
                   </span>
                   <h3 className="mt-5 font-semibold">{benefit.name}</h3>

@@ -49,7 +49,10 @@ export default function SellSteps() {
                   className="border border-zinc-800 transition-colors"
                 >
                   <CardHeader className="flex-row items-center gap-4 p-6 pb-0">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-graffiti-500/10 text-graffiti-500">
+                    <span
+                      aria-hidden="true"
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-graffiti-500/10 text-graffiti-500"
+                    >
                       <Icon className="h-6 w-6" />
                     </span>
                     <h3 className="text-lg font-semibold leading-6">

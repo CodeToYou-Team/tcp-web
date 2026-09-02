@@ -1,5 +1,6 @@
 "use client";
 import {
+  useEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -97,9 +98,9 @@ const DotStrip = ({
                 type="button"
                 onClick={() => onSelect(index)}
                 tabIndex={inWindow(index) ? 0 : -1}
-                aria-label={`Ir a la foto ${index + 1}`}
-                aria-current={isActive || undefined}
-                className="pointer-events-auto flex h-6 w-5 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-graffiti-500"
+                aria-label={`Ir a la foto ${index + 1} de ${count}`}
+                aria-current={isActive ? "true" : undefined}
+                className="pointer-events-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-graffiti-500"
               >
                 <span
                   className={cn(
@@ -136,6 +137,7 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   // Refs directos a las <img>: el zoom escribe estilos sin re-renders.
   const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
   const swiperRef = useRef<SwiperClass | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   if (slides.length === 0) return null;
@@ -144,6 +146,21 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
     .filter(Boolean)
     .join(" ");
   const hasMultiple = slides.length > 1;
+
+  // Swiper genera los botones .swiper-button-next / -prev sin aria-label;
+  // los etiquetamos en español después del primer mount y en cada cambio
+  // de slide (Swiper los reemplaza al re-renderizar la navegación).
+  useEffect(() => {
+    if (!galleryRef.current || !hasMultiple) return;
+    const next = galleryRef.current.querySelector<HTMLButtonElement>(
+      ".swiper-button-next",
+    );
+    const prev = galleryRef.current.querySelector<HTMLButtonElement>(
+      ".swiper-button-prev",
+    );
+    next?.setAttribute("aria-label", "Foto siguiente");
+    prev?.setAttribute("aria-label", "Foto anterior");
+  });
 
   const clearZoomStyles = (image: HTMLImageElement | null | undefined) => {
     if (!image) return;
@@ -190,7 +207,13 @@ const ImageSlider = ({ vehicle }: { vehicle: Vehicle }) => {
   };
 
   return (
-    <div className={`vehicle-gallery relative min-w-0 md:w-11/12 ${NAV_PRESS_EFFECT}`}>
+    <div
+      ref={galleryRef}
+      id="vehicle-gallery"
+      role="region"
+      aria-label={`Galería de fotos de ${vehicleName || "el vehículo"}`}
+      className={`vehicle-gallery relative min-w-0 md:w-11/12 ${NAV_PRESS_EFFECT}`}
+    >
       <Swiper
         style={SWIPER_VARS}
         modules={[Navigation]}

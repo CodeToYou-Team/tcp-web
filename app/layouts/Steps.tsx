@@ -81,7 +81,10 @@ export default function Steps() {
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
-                  <span className="absolute left-4 top-4 flex h-12 w-12 items-center justify-center rounded-xl bg-graffiti-500/90 text-zinc-900 shadow-lg">
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-4 top-4 flex h-12 w-12 items-center justify-center rounded-xl bg-graffiti-500/90 text-zinc-900 shadow-lg"
+                  >
                     <Icon className="h-6 w-6" />
                   </span>
                 </div>

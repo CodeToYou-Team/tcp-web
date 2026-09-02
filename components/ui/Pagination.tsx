@@ -52,34 +52,37 @@ export default function CatalogPagination({
   const items = getPageRange(page, numberOfPages);
 
   return (
-    <div className="w-full flex justify-center my-8">
-      <div className="flex flex-nowrap items-center h-8 overflow-visible rounded">
+    <nav aria-label="Paginación del catálogo" className="w-full flex justify-center my-8">
+      <ul className="flex flex-nowrap items-center h-8 overflow-visible rounded list-none p-0 m-0">
         {items.map((item, index) =>
           item === "dots" ? (
-            <span
+            <li
               key={`dots-${index}`}
-              className="w-8 h-8 flex items-center justify-center text-sm text-zinc-100"
+              aria-hidden="true"
+              className="w-8 h-8 flex items-center justify-center text-sm text-zinc-300"
             >
-              ...
-            </span>
+              …
+            </li>
           ) : (
-            <button
-              key={item}
-              aria-label={`Página ${item}`}
-              aria-current={item === page ? "page" : undefined}
-              onClick={() => handleChange(item)}
-              className={cn(
-                "w-8 h-8 mx-1 rounded rounded-xl text-sm transition-colors",
-                item === page
-                  ? "bg-graffiti-500 text-zinc-800 font-semibold"
-                  : "bg-zinc-800 text-zinc-100 hover:text-zinc-900 hover:bg-zinc-600"
-              )}
-            >
-              {item}
-            </button>
+            <li key={item}>
+              <button
+                type="button"
+                aria-label={`Ir a la página ${item}`}
+                aria-current={item === page ? "page" : undefined}
+                onClick={() => handleChange(item)}
+                className={cn(
+                  "w-8 h-8 mx-1 rounded rounded-xl text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  item === page
+                    ? "bg-graffiti-500 text-zinc-800 font-semibold"
+                    : "bg-zinc-800 text-zinc-100 hover:text-zinc-900 hover:bg-zinc-600"
+                )}
+              >
+                {item}
+              </button>
+            </li>
           )
         )}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 }

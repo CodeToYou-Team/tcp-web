@@ -44,21 +44,25 @@ export default async function Catalogo({
 
   return (
     <>
-      <Suspense>
-        <SidebarFilter
-          brands={brands?.items || []}
-          vehicleType={vehicleType}
-          transmission={transmission}
-          models={models?.items || []}
-          sort={sort}
-        />
-      </Suspense>
-      <Suspense>
-        <SearchBar />
-      </Suspense>
-      <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
-        <Catalog query={query} />
-      </Suspense>
+      <aside aria-label="Filtros del catálogo">
+        <Suspense>
+          <SidebarFilter
+            brands={brands?.items || []}
+            vehicleType={vehicleType}
+            transmission={transmission}
+            models={models?.items || []}
+            sort={sort}
+          />
+        </Suspense>
+        <Suspense>
+          <SearchBar />
+        </Suspense>
+      </aside>
+      <div aria-live="polite" aria-busy={false}>
+        <Suspense key={JSON.stringify(query)} fallback={<SkeletonLayout />}>
+          <Catalog query={query} />
+        </Suspense>
+      </div>
     </>
   );
 }
