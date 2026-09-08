@@ -7,11 +7,11 @@
 - `pnpm dev` — dev server (localhost:3000)
 - `pnpm build` — production build
 - `pnpm typecheck` — `tsc --noEmit`
-- `pnpm test` — Vitest (tests in `lib/__tests__/`)
+- Tests: Vitest (tests in `lib/__tests__/`). No `test` script is wired in package.json — run `pnpm exec vitest run` for all tests.
 
 No ESLint: it was uninstalled due to conflicts with other packages. There is no `pnpm lint` script — do not run it or reinstall ESLint without asking first.
 
-No single-test-file shortcut is configured; run `pnpm test` for all.
+No single-test-file shortcut is configured; run `pnpm exec vitest run` for all.
 
 ## Architecture
 
@@ -55,3 +55,55 @@ Next.js 16 App Router with React 19, TypeScript, Tailwind CSS, and MongoDB via M
 - Catalog URL params use Spanish display values (e.g., `sort=Precio ascendente`). Translation to internal keys happens only inside `lib/catalog-query.ts`.
 - Never pass unknown URL params to MongoDB. `parseSearchParams` is an allowlist; unknown params are silently dropped.
 - `force-dynamic` is used where inventory freshness matters. Do not add static generation for catalog or offer pages.
+
+## Accessibility (a11y)
+
+Target **WCAG 2.2 AA**. Load the **accessibility** skill before any a11y audit or a11y-sensitive change. Load **frontend-design** for visual changes and follow **shadcn** component conventions (Radix primitives for Accordion/Sheet/Slider/Checkbox). Keep every fix idiomatic: prefer native elements and ARIA only when needed — do not over-engineer.
+
+### Global invariants
+- `lang="es-VE"` is set on `<html>` (`app/layout.tsx`). Never change it to `es` or remove the language, the `main#main` landmark, or the skip link (`Saltar al contenido principal`).
+- Spanish `aria-label`s. All user-facing/complementary strings that reach assistive tech must be Spanish (es-VE): e.g. `aria-label="Abrir menú"`, `aria-label="Ir a la página N"`, `aria-label="Foto siguiente"`.
+- Focus must be visible everywhere. Use `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background` on interactive controls (Button already does this).
+- `globals.css` already ships: `:focus-visible { scroll-margin-top: 7rem }` (clears the sticky navbar + fixed SectionBanner), a global `prefers-reduced-motion: reduce` flatten rule, and a `forced-colors: active` block (Windows HCM). Do not remove these.
+
+### Images & icons
+- Every `<img>`/`<Image>` needs `alt`. Decorative imagery uses `alt=""`; hero background images that repeat the H1 content are decorative.
+- Do not use placeholder alts (`tcp-logo`, `logo`, `office-N`, `no-results`, `Hero Background`, `App screenshot`, `office-1`). Use descriptive Spanish alts; the brand logo is `TUCARROPROPIO` / `TUCARROPROPIO - Ir al inicio`.
+- All Lucide icons and decorative inline SVGs next to visible text/labels get `aria-hidden="true"` (e.g. Search, ListFilter, Menu/X, step/value/service icons). Brand logo SVGs that carry meaning get `role="img"` + a Spanish `aria-label`.
+- Source of truth for icons: `lib/svgs.tsx` (brand marks) and `lucide-react` (UI icons). `WhatsAppIcon` is decorative and already `aria-hidden`.
+
+### Semantic structure
+- Landmarks: `<header>`/`<nav>`/`<main id="main">`/`<footer>`. The catalog filter rail + SearchBar live in `<aside aria-label="Filtros del catálogo">`; Pagination is a `<nav aria-label="Paginación del catálogo">` with an `<ul>`; repeated card grids use `<section aria-labelledby>` their `<h2>` heading id.
+- Heading hierarchy: one `h1` per page; use `h2`/`h3` in order (vehicle detail: `h1` title → `h2` InfoBlocks). Do not skip levels.
+- List-based content uses real lists (`<ul>/<li>`, `<ol>`); `dl`/`dt`/`dd` for spec pairs (`components/ui/SpecList.tsx`); form filter groups use `<fieldset>` + `<legend>` (legend may be `sr-only` with a visible sibling). Avoid `mt-*`/`space-*` alignment hacks in favor of real layout.
+- `VehiclesLayout` uses `useId()` for the section `aria-labelledby`. `SpecList`/`InfoBlock` are semantic already.
+
+### Forms & inputs
+- Every input has a programmatically associated `<label>`/`aria-label`/`<legend>`. No field relies on `placeholder` alone.
+- `components/ui/SearchBar.tsx` wraps in `<form role="search" onSubmit>` with `Input type="search"`—submit works via Enter. Keep it a form.
+- Radix `Slider` (PriceRange) gets `aria-label`; the live price readout uses `aria-live="polite"`.
+- `components/ui/Input.tsx` placeholder gets overridden to a readable tone at call sites (`placeholder:text-zinc-300`).
+
+### Color / contrast
+- Page background is very dark (`zinc-900`/`background`). Normal body text is `zinc-100`/`zinc-200`; secondary text `zinc-300`/`zinc-400`. Do **not** use `text-zinc-500` for readable text on the dark background (fails 4.5:1); reserve `-500` for decorative-only content (and mark it `aria-hidden`).
+- CTA text on `graffiti-500` (yellow) buttons is dark (`text-zinc-800`/`text-zinc-900`) for contrast. Brand yellow is used for `--ring`/`--primary` and focus rings.
+
+### Dialogs / overlays / navigation
+- The filter Sheet (`components/ui/Sheet.tsx`) is Radix Dialog: it traps focus, has a `SheetTitle`, and provides the close button. Need at least a Title for a11y.
+- The mobile menu (`components/ui/Navbar.tsx`) is custom: `aria-expanded`/`aria-controls` on the toggle, `role="dialog"`+`aria-modal`+`aria-label` on the panel, focus moves to the first link on open and back to the toggle on close, and `Escape` closes it. Preserve this behavior; a bottom `SectionBanner` is `fixed top-16` (below the sticky navbar) so focus cannot be obscured.
+- `aria-modal` dialog content must not be focusable behind it.
+
+### VehicleCard (grid cards)
+- Layout is a two-column header + square image area, wrapped in a single `<Link>` (whole card is one focusable target). The `<Link>` carries a descriptive `aria-label` (`<brand> <model> <version>, <year>, $<price>`), the image is `alt=""`.
+- Header left column MUST be `min-w-0 flex-1` and the title MUST be `truncate`; the right column (`Nuevo`, km, transmission) is `shrink-0 whitespace-nowrap`. This is what keeps all cards equal height and prevents a long title from squeezing the right column.
+- The "Nuevo" line is always rendered — `text-primary` when `condition` is true, else `text-transparent` — to reserve stable space and avoid vertical-shift hacks.
+- The image area is `relative aspect-square w-full overflow-hidden` with an `absolute inset-0 h-full w-full object-cover` `<img>` so image aspect ratio never changes card height. The skeleton (`components/ui/SkeletonCard.tsx`) mirrors this (`aspect-square` bone) so the loading swap is imperceptible.
+- Keep these invariants when editing VehicleCard / SkeletonCard.
+
+### Status / live regions
+- Catalog results are wrapped in `aria-live="polite"` so filter/page changes are announced; `Pagination` restores focus to the active page button after a change.
+- Loading skeletons use `role="status"` + `aria-busy="true"` + `sr-only` label and are `motion-reduce:animate-none`.
+
+### Verification
+- `pnpm typecheck` and `pnpm exec vitest run` (no `pnpm test` script; vitest runs via `pnpm exec`).
+- Manual keyboard pass before shipping a11y changes: Tab order, skip link, focus rings, Sheet focus trap, mobile menu open/Esc/return-focus, filter `fieldset` groups announced, and equal-height cards on `/catalogo`.
