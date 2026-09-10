@@ -11,8 +11,11 @@ export default function Navbar() {
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   const firstMenuLinkRef = useRef<HTMLAnchorElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  const openedByKeyboard = useRef(false);
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // detail === 0 indica activación por teclado/asistencia (no por toque).
+    openedByKeyboard.current = event.detail === 0;
     setIsMenuOpen((open) => !open);
   };
 
@@ -26,7 +29,12 @@ export default function Navbar() {
   // devolverlo al botón. Esc cierra el menú desde cualquier parte.
   useEffect(() => {
     if (isMenuOpen) {
-      firstMenuLinkRef.current?.focus({ preventScroll: true });
+      // Solo mover el foco si el menú se abrió por teclado o asistencia.
+      // En pantallas táctiles no se enfoca el primer enlace, evitando que
+      // el navegador muestre el anillo de :focus-visible tras un simple toque.
+      if (openedByKeyboard.current) {
+        firstMenuLinkRef.current?.focus({ preventScroll: true });
+      }
     } else {
       toggleButtonRef.current?.focus({ preventScroll: true });
     }
@@ -53,7 +61,7 @@ export default function Navbar() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
           onClick={handleMenuToggle}
-          className="flex h-full w-6 items-center justify-center sm:hidden"
+          className="flex h-full w-6 items-center justify-center rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:hidden"
         >
           {isMenuOpen ? (
             <X aria-hidden="true" className="text-graffiti-500" />
@@ -80,7 +88,7 @@ export default function Navbar() {
           {navbarItems.map((item, index) => (
             <Link
               key={`${item.text}-${index}`}
-              className="whitespace-nowrap text-graffiti-500 text-lg"
+              className="whitespace-nowrap rounded-lg text-graffiti-500 text-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               href={item.route}
             >
               {item.text}
@@ -103,7 +111,7 @@ export default function Navbar() {
             <Link
               key={`${item.text}-${index}`}
               ref={index === 0 ? firstMenuLinkRef : null}
-              className="w-full py-2 text-lg text-graffiti-500"
+              className="w-full rounded-lg py-2 text-lg text-graffiti-500 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               href={item.route}
               onClick={handleLinkClick}
             >
