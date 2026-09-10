@@ -17,9 +17,6 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/acerca-de-nosotros",
-    languages: {
-      "es-VE": "/es-VE",
-    },
   },
   openGraph: {
     images: SEO_IMAGE,
@@ -44,7 +41,7 @@ export default function About() {
             alt="Captura de pantalla de iPhone mostrando una conversación de WhatsApp para recibir asesoría personalizada"
             width={1800}
             height={2000}
-            loading="eager"
+            loading="lazy"
           />
         }
         link={

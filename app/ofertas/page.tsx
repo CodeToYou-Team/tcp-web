@@ -15,9 +15,6 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/ofertas",
-    languages: {
-      "es-VE": "/es-VE",
-    },
   },
   openGraph: {
     images: SEO_IMAGE,

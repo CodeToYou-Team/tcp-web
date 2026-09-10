@@ -218,6 +218,23 @@ export const getCar = cache(
   }
 );
 
+// Proyección mínima para el sitemap: evita traer el documento completo.
+export const getSitemapCars = async (): Promise<
+  { _id: string; updatedAt?: string }[]
+> => {
+  try {
+    await connectMongo();
+
+    const items = await InventoryDB.find({ enabled: true })
+      .select("_id updatedAt")
+      .lean();
+
+    return JSON.parse(JSON.stringify(items));
+  } catch {
+    return [];
+  }
+};
+
 export const getLatestCars = async (): Promise<ListResult<Vehicle>> => {
   try {
     await connectMongo();

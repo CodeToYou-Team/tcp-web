@@ -13,12 +13,12 @@ const Hero = () => {
         <div className="absolute inset-0 z-0">
           <Image
             alt=""
-            priority
             width={1080}
             height={720}
             src="https://res.cloudinary.com/dkokeszcd/image/upload/v1788308790/4ea2dc77-5cc0-4ede-a22d-e210db994fa4_n4npyc.jpg"
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager"
+            fetchPriority="high"
           />
 
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-background/20" />

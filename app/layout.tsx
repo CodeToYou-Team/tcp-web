@@ -30,9 +30,6 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
-    languages: {
-      "es-VE": "/es-VE",
-    },
   },
   openGraph: {
     images: SEO_IMAGE,
@@ -42,19 +39,6 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es-VE">
-      <head>
-        <Script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        ></Script>
-        <Script id="google-analytics">
-          {`   window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
-               gtag('config', '${GA_MEASUREMENT_ID}');
-          `}
-        </Script>
-      </head>
       <body
         className={`${poppins.className} ${anton.variable} ${plexMono.variable} antialiased`}
       >
@@ -69,6 +53,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Providers>{children}</Providers>
         </main>
         <Footer />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="lazyOnload"
+        />
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );

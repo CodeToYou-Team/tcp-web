@@ -107,3 +107,17 @@ Target **WCAG 2.2 AA**. Load the **accessibility** skill before any a11y audit o
 ### Verification
 - `pnpm typecheck` and `pnpm exec vitest run` (no `pnpm test` script; vitest runs via `pnpm exec`).
 - Manual keyboard pass before shipping a11y changes: Tab order, skip link, focus rings, Sheet focus trap, mobile menu open/Esc/return-focus, filter `fieldset` groups announced, and equal-height cards on `/catalogo`.
+
+## Performance / Lighthouse
+
+Build targets are pinned in `package.json` (`browserslist`: `chrome/edge/firefox >= 111`, `safari >= 16.4`). This matches Next.js's own "modern" target and minimizes transpilation of app + dependency code. Keep it in sync if browser support changes.
+
+The **Legacy JavaScript** insight (`Array.prototype.at`, `flat`, `flatMap`, `Object.fromEntries`, `Object.hasOwn`, `String.prototype.trimEnd/trimStart`) is an **accepted framework artifact**, not app code. It comes from `next/dist/build/polyfills/polyfill-module.js`, imported unconditionally by `next/dist/client/app-globals.js`; there is no supported config to remove it (browserslist does not affect it). The audit is **unscored** (Lighthouse weight 0), so do not chase it — do not `pnpm patch` Next to strip the polyfills. Focus performance work on LCP/FCP and image caching instead.
+
+**Render-blocking CSS** (`1j0xbg-fssxoh.css`, the single global Tailwind stylesheet) is an **accepted tradeoff**. `experimental.inlineCss: true` was measured on a production build: it cleared the "Render-blocking requests" insight, but LCP was unchanged (8.2s → 8.2s), total bytes rose slightly (~16.9 KB → 17.4 KB brotli), and the HTML grew 48 KB → 200 KB because the CSS is duplicated ~3× (SSR `<style>` + RSC payload). Kept as an external, separately-cacheable stylesheet. Do not re-enable `inlineCss` without field data showing a first-load win.
+
+### LCP / image loading
+- Only the **hero image** (the LCP element) gets `loading="eager"` + `fetchPriority="high"`. In Next.js 16 `priority` is **deprecated** — prefer `loading`/`fetchPriority` (or `preload`). Because every eager `next/image` emits a `<link rel="preload" as="image">`, mark everything below the fold `loading="lazy"` (or omit it): steps, footer logo, about grids, CTA mockups, and `VehicleCard`'s raw `<img>`.
+- GA is loaded with `strategy="lazyOnload"` at the end of `<body>` (not preloaded in `<head>`). Loading it eagerly previously competed with the hero image and blocked the main thread.
+
+Measured on `/` (localhost, mobile throttling): eager-image + GA changes took LCP 8.6s → 4.2s, FCP 2.4s → 1.7s, TBT 1150ms → 500ms, perf 0.48 → 0.73. Headroom remains in the ~71 KB framework chunk (unused JS) and the `/_next/image` optimizer round-trip for already-CDN-hosted Cloudinary/ImageKit images.

@@ -9,12 +9,12 @@ export default function SellHero() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Vehículo en venta"
-          priority
           width={1080}
           height={720}
           src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727228986/tcp-web/e0cd017f-983d-4206-8843-7072c6f94a1c_mvsg3e.jpg"
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
           loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
       </div>

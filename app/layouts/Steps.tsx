@@ -78,7 +78,6 @@ export default function Steps() {
                     alt={step.alt}
                     className="h-full w-full object-cover"
                     src={step.image}
-                    loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
                   <span

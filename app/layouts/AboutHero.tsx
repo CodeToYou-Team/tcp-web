@@ -9,12 +9,12 @@ export default function AboutHero() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Showroom TUCARROPROPIO"
-          priority
           width={1080}
           height={720}
           src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727228641/tcp-web/0694f89d-a97e-4d4d-99d5-1d6038900b94_wbupkw.jpg"
           className="absolute inset-0 h-full w-full object-cover"
           loading="eager"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
       </div>

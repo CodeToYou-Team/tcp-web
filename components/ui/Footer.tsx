@@ -18,7 +18,7 @@ const Footer = () => {
             alt="TUCARROPROPIO - Ir al inicio"
             width={180}
             height={50}
-            loading="eager"
+            loading="lazy"
           />
         </Link>
         <span className="text-sm flex text-center sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">

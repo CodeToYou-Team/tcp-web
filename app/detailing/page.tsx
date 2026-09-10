@@ -7,21 +7,18 @@ import CTA from "../layouts/CTA";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { detailingWhatsappLink } from "@/lib/data";
+import { SEO_IMAGE, SITE_URL } from "@/lib/site-config";
 
 export const metadata = {
   title: "Tu Carro Propio - Detailing",
   description:
     "Detailing profesional en Caracas: corrección de pintura, limpieza profunda de interiores, acondicionamiento de motor, lavado y papel ahumado 3M Nanocerámico y Wellstar.",
-  metadataBase: new URL("https://www.tucarropropiove.com"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/detailing",
-    languages: {
-      "es-VE": "/es-VE",
-    },
   },
   openGraph: {
-    images:
-      "https://res.cloudinary.com/dkokeszcd/image/upload/v1707453262/portada-seo-static_dkqvwv.png",
+    images: SEO_IMAGE,
   },
 };
 
@@ -42,7 +39,7 @@ export default function Detailing() {
             alt="Captura de pantalla de iPhone mostrando una conversación de WhatsApp para cotizar el servicio de detailing"
             width={1335}
             height={2000}
-            loading="eager"
+            loading="lazy"
           />
         }
         link={

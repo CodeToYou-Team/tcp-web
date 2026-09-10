@@ -77,6 +77,8 @@ export default function VehicleCard({ vehicles }: VehicleCardProps) {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   alt=""
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover transition-all group-hover:scale-110"
                   src={`${vehicle?.images?.[0]}`}
                 />

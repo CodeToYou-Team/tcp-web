@@ -25,16 +25,29 @@ export async function generateMetadata({ params }: { params: Params }) {
   const { id } = await params;
   const vehicle = (await getCar(id)).item as Vehicle;
 
+  if (!vehicle?._id || vehicle.enabled === false) return {};
+
+  const name = vehicleFullName(vehicle);
+  const pageUrl = `${SITE_URL}/catalogo/${vehicle._id}`;
+  const description = `${name} en venta en Caracas. Consulta precio y disponibilidad por WhatsApp con Tu Carro Propio.`;
+  const ogImage = `${vehicle.images?.[0]}?tr=w-1200,h-630,q-auto`;
+
   return {
-    title: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.version} ${vehicle?.year} - Tu Carro Propio`,
-    description: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.year} en inventario. Consulta precio y disponibilidad por WhatsApp con Tu Carro Propio.`,
+    title: name,
+    description,
+    alternates: { canonical: `/catalogo/${vehicle._id}` },
     openGraph: {
-      images: [
-        {
-          url: `${vehicle?.images?.[0]}?tr=w-640,h-640,q-100`,
-          alt: `${vehicle?.brand} ${vehicle?.model} ${vehicle?.year}`,
-        },
-      ],
+      type: "website",
+      url: pageUrl,
+      title: name,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: name,
+      description,
+      images: [ogImage],
     },
   };
 }
@@ -104,7 +117,9 @@ export default async function Product({ params }: { params: Params }) {
       <script
         type="application/ld+json"
         // Datos estructurados Product + BreadcrumbList para el catálogo indexado.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildStructuredData(vehicle)) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildStructuredData(vehicle)),
+        }}
       />
 
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
