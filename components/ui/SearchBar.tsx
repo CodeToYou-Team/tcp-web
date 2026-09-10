@@ -44,7 +44,7 @@ export default function SearchBar() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Buscar vehículo por marca o modelo"
-          className="truncate bg-zinc-800 pl-10 text-sm text-zinc-100 placeholder:text-zinc-300"
+          className="truncate border border-zinc-700 bg-zinc-800 pl-10 text-sm text-zinc-100 placeholder:text-zinc-300 hover:border-zinc-600 focus-visible:border-ring transition-[box-shadow,border-color,background-color,color] duration-200 ease-out"
         />
       </div>
       <Button
