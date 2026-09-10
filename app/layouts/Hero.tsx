@@ -13,8 +13,10 @@ const Hero = () => {
         <div className="absolute inset-0 z-0">
           <Image
             alt=""
-            width={1080}
-            height={720}
+            width={1280}
+            height={960}
+            sizes="100vw"
+            quality={60}
             src="https://res.cloudinary.com/dkokeszcd/image/upload/v1788308790/4ea2dc77-5cc0-4ede-a22d-e210db994fa4_n4npyc.jpg"
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager"

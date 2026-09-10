@@ -77,6 +77,7 @@ export default function Steps() {
                     height={457}
                     alt={step.alt}
                     className="h-full w-full object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     src={step.image}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />

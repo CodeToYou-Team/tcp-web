@@ -30,10 +30,11 @@ export default function Venta() {
         image={
           <Image
             className="mx-auto my-4 flex w-2/3 max-w-none md:w-5/12"
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1707316230/iphone-whatsapp-mockup_m06ztd.png"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/f_auto,q_auto,c_limit,w_1000/v1707316230/iphone-whatsapp-mockup_m06ztd.png"
             alt="Captura de pantalla de iPhone mostrando una conversación de WhatsApp para vender tu vehículo"
-            width={1335}
-            height={2000}
+            width={1000}
+            height={1498}
+            sizes="(max-width: 768px) 66vw, 40vw"
             loading="lazy"
           />
         }

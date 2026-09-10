@@ -9,9 +9,11 @@ export default function SellHero() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Vehículo en venta"
-          width={1080}
-          height={720}
-          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727228986/tcp-web/e0cd017f-983d-4206-8843-7072c6f94a1c_mvsg3e.jpg"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+          quality={60}
+          src="https://res.cloudinary.com/dkokeszcd/image/upload/c_fill,w_1920,h_1080,g_auto,f_auto,q_auto/v1727228986/tcp-web/e0cd017f-983d-4206-8843-7072c6f94a1c_mvsg3e.jpg"
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
           loading="eager"
           fetchPriority="high"

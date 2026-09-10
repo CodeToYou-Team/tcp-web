@@ -10,9 +10,11 @@ export default function DetailingHero() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Vehículo con acabado de detailing profesional"
-          width={1080}
-          height={720}
-          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727229180/tcp-web/2b264e1b-eabd-4b05-b8ff-583ebced3df9_cwlfpm.jpg"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+          quality={60}
+          src="https://res.cloudinary.com/dkokeszcd/image/upload/c_fill,w_1920,h_1080,g_auto,f_auto,q_auto/v1727229180/tcp-web/2b264e1b-eabd-4b05-b8ff-583ebced3df9_cwlfpm.jpg"
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
           loading="eager"
           fetchPriority="high"

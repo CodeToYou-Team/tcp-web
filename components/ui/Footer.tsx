@@ -14,10 +14,11 @@ const Footer = () => {
         >
           <Image
             className="w-full h-full"
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/w_360,h_80,c_fill/v1700552958/tcp-web/tcp-full-recolor_hc9iqb.png"
             alt="TUCARROPROPIO - Ir al inicio"
             width={180}
             height={50}
+            sizes="180px"
             loading="lazy"
           />
         </Link>

@@ -9,9 +9,11 @@ export default function AboutHero() {
       <div className="absolute inset-0 z-0">
         <Image
           alt="Showroom TUCARROPROPIO"
-          width={1080}
-          height={720}
-          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1727228641/tcp-web/0694f89d-a97e-4d4d-99d5-1d6038900b94_wbupkw.jpg"
+          width={1920}
+          height={1080}
+          sizes="100vw"
+          quality={60}
+          src="https://res.cloudinary.com/dkokeszcd/image/upload/c_fill,w_1920,h_1080,g_auto,f_auto,q_auto/v1727228641/tcp-web/0694f89d-a97e-4d4d-99d5-1d6038900b94_wbupkw.jpg"
           className="absolute inset-0 h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
