@@ -7,7 +7,7 @@ export const PAGE_SIZE = 9;
 
 export const PRICE_MIN_DEFAULT = 0;
 export const PRICE_SLIDER_MAX = 80000;
-export const PRICE_OPEN_WIRE_MAX = 1000000;
+export const PRICE_OPEN_WIRE_MAX = 2000000;
 
 const SORT_WIRE_TO_KEY: Record<string, SortKey> = {
   "Agregado recientemente": "reciente",
@@ -29,7 +29,12 @@ export const SORT_CRITERIA_OBJ: Record<SortKey, Record<string, 1 | -1>> = {
   ascendente: { price: 1, _id: -1 },
 };
 
-export type MultiFilterKey = "type" | "brand" | "model" | "transmission" | "condition";
+export type MultiFilterKey =
+  | "type"
+  | "brand"
+  | "model"
+  | "transmission"
+  | "condition";
 export type SingleFilterKey = "sort" | "search";
 
 const MULTI_KEYS: MultiFilterKey[] = [
@@ -65,16 +70,20 @@ function isSortKey(value: string): value is SortKey {
 export function parseSearchParams(input: RawParams): CarsQuery {
   const get = (key: string): string | undefined =>
     input instanceof URLSearchParams
-      ? input.get(key) ?? undefined
+      ? (input.get(key) ?? undefined)
       : firstValue(input[key]);
 
   const sortRaw = get("sort");
   const sort: SortKey = sortRaw
-    ? (SORT_WIRE_TO_KEY[sortRaw] ?? (isSortKey(sortRaw) ? sortRaw : DEFAULT_SORT))
+    ? (SORT_WIRE_TO_KEY[sortRaw] ??
+      (isSortKey(sortRaw) ? sortRaw : DEFAULT_SORT))
     : DEFAULT_SORT;
 
   const pageRaw = Number(get("page"));
-  const page = Number.isFinite(pageRaw) && pageRaw >= 1 ? Math.trunc(pageRaw) : DEFAULT_PAGE;
+  const page =
+    Number.isFinite(pageRaw) && pageRaw >= 1
+      ? Math.trunc(pageRaw)
+      : DEFAULT_PAGE;
 
   const minPriceRaw = Number(get("minPrice"));
   const maxPriceRaw = Number(get("maxPrice"));
@@ -107,7 +116,7 @@ function withoutPage(params: URLSearchParams): void {
 export function setMultiValues(
   params: URLSearchParams,
   key: MultiFilterKey,
-  values: string[]
+  values: string[],
 ): URLSearchParams {
   const next = new URLSearchParams(params);
   if (values.length > 0) {
@@ -122,7 +131,7 @@ export function setMultiValues(
 export function setSingleValue(
   params: URLSearchParams,
   key: SingleFilterKey,
-  value: string
+  value: string,
 ): URLSearchParams {
   const next = new URLSearchParams(params);
   if (value !== "") {
@@ -137,7 +146,7 @@ export function setSingleValue(
 export function setPriceRange(
   params: URLSearchParams,
   min: number,
-  max: number
+  max: number,
 ): URLSearchParams {
   const next = new URLSearchParams(params);
   const wireMax = max >= PRICE_SLIDER_MAX ? PRICE_OPEN_WIRE_MAX : max;
@@ -149,7 +158,7 @@ export function setPriceRange(
 
 export function setPage(
   params: URLSearchParams,
-  page: number
+  page: number,
 ): URLSearchParams {
   const next = new URLSearchParams(params);
   next.set("page", String(page));

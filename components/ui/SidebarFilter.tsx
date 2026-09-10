@@ -2,7 +2,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -11,9 +10,10 @@ import {
 import { Button } from "@/components/ui/Button";
 import Accordion from "./Accordion";
 import PriceRange from "./PriceRange";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ListFilter } from "lucide-react";
 import SectionBanner from "./SectionBanner";
+import { parseSearchParams } from "@/lib/catalog-query";
 import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface SidebarFilterProps {
@@ -33,6 +33,16 @@ const SidebarFilter = ({
 }: SidebarFilterProps) => {
   const { replace } = useRouter();
   const pathName = usePathname();
+  const searchParams = useSearchParams();
+
+  const query = parseSearchParams(searchParams);
+  const activeCount =
+    (query.type?.length ?? 0) +
+    (query.brand?.length ?? 0) +
+    (query.model?.length ?? 0) +
+    (query.condition?.length ?? 0) +
+    (query.transmission?.length ?? 0) +
+    (searchParams.get("minPrice") || searchParams.get("maxPrice") ? 1 : 0);
 
   const CleanFilter = () => {
     replace(`${pathName}`);
@@ -53,15 +63,26 @@ const SidebarFilter = ({
                   className="text-graffiti-500 scale-85"
                 />
                 Filtrar
+                {activeCount > 0 && (
+                  <span className="ml-1 inline-flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-red-500 px-1 font-data text-[10px] font-semibold leading-none text-background">
+                    {activeCount}
+                    <span className="sr-only"> filtros activos</span>
+                  </span>
+                )}
               </Button>
             </SheetTrigger>
           </SectionBanner>
 
-          <SheetContent className="bg-zinc-900 overflow-auto" side="left">
-            <SheetHeader>
-              <SheetTitle>Filtra tu búsqueda</SheetTitle>
+          <SheetContent
+            className="flex flex-col gap-0 overflow-hidden bg-zinc-900 p-0"
+            side="left"
+          >
+            <SheetHeader className="shrink-0 space-y-1 px-6 py-4 text-left">
+              <SheetTitle className="text-xl font-semibold text-zinc-100">
+                Filtra tu búsqueda
+              </SheetTitle>
             </SheetHeader>
-            <div className="grid gap-4 py-4">
+            <div className="grid min-h-0 flex-1 content-start gap-2 overflow-auto px-6 py-4">
               <Accordion
                 brands={brands}
                 vehicleType={vehicleType}
@@ -71,9 +92,10 @@ const SidebarFilter = ({
               />
               <PriceRange />
             </div>
-            <SheetFooter>
+            <SheetFooter className="shrink-0  border-zinc-800 px-6 py-4">
               <Button
-                className="bg-graffiti-500 text-zinc-800 font-medium my-6 text-sm"
+                variant="outline"
+                className="w-full border-graffiti-500 bg-transparent text-graffiti-500 hover:bg-graffiti-500/10 hover:text-graffiti-500"
                 onClick={CleanFilter}
               >
                 Limpiar búsqueda

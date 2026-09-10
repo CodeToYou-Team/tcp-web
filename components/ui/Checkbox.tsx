@@ -89,15 +89,15 @@ export default function Checkbox({
         <legend className="sr-only">
           {FILTER_LABELS[filterType] ?? "Filtro"}
         </legend>
-        <span aria-hidden="true" className="text-muted-foreground">
-          {FILTER_LABELS[filterType] ?? ""}
-        </span>
-        <div className="flex flex-col flex-wrap gap-2">
+        <div className="flex flex-col flex-wrap gap-1">
           {options.map((option, key) => {
             const id = `${filterType}-${key}`;
             const checked = selected.includes(option.name);
             return (
-              <div key={key} className="flex items-center gap-2">
+              <div
+                key={key}
+                className="-mx-2 flex items-center gap-2 rounded-lg px-2 py-2 transition-colors"
+              >
                 <CheckboxPrimitive
                   id={id}
                   checked={checked}
@@ -105,7 +105,12 @@ export default function Checkbox({
                     handleCheckedChange(option.name, value === true)
                   }
                 />
-                <Label htmlFor={id} className="cursor-pointer font-normal">
+                <Label
+                  htmlFor={id}
+                  className={`flex-1 cursor-pointer text-sm font-normal ${
+                    checked ? "text-zinc-100" : "text-zinc-200"
+                  }`}
+                >
                   {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
                 </Label>
               </div>

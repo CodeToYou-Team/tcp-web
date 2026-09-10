@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Accordion as AccordionRoot,
   AccordionItem,
@@ -8,6 +10,7 @@ import {
 } from "./accordion-primitive";
 import Checkbox from "./Checkbox";
 import { condition } from "@/lib/data";
+import { parseSearchParams } from "@/lib/catalog-query";
 import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface AccordionProps {
@@ -27,6 +30,42 @@ function AccordionIndicator() {
   );
 }
 
+function FilterBadge({ count }: { count: number }) {
+  if (count <= 0) return null;
+  return (
+    <span className="inline-flex h-4 min-w-[1rem] items-center justify-center self-start rounded-full bg-red-500 px-1 font-data text-[10px] font-semibold leading-none text-background">
+      {count}
+      <span className="sr-only"> seleccionados</span>
+    </span>
+  );
+}
+
+function FilterTitle({
+  children,
+  count,
+}: {
+  children: ReactNode;
+  count: number;
+}) {
+  const active = count > 0;
+  return (
+    <span
+      className={`flex items-center gap-2 border-l-2 pl-2 ${
+        active ? "border-graffiti-500" : "border-transparent"
+      }`}
+    >
+      <p
+        className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${
+          active ? "text-graffiti-500" : "text-zinc-400"
+        }`}
+      >
+        {children}
+      </p>
+      <FilterBadge count={count} />
+    </span>
+  );
+}
+
 export default function Accordion({
   brands,
   vehicleType,
@@ -34,11 +73,25 @@ export default function Accordion({
   models,
   sort,
 }: AccordionProps) {
+  const searchParams = useSearchParams();
+  const query = parseSearchParams(searchParams);
+
+  const counts = {
+    type: query.type?.length ?? 0,
+    brand: query.brand?.length ?? 0,
+    model: query.model?.length ?? 0,
+    condition: query.condition?.length ?? 0,
+    transmission: query.transmission?.length ?? 0,
+  };
+
   return (
-    <AccordionRoot type="multiple" className="w-full text-xs">
+    <AccordionRoot
+      type="multiple"
+      className="w-full divide-y divide-zinc-800 text-xs"
+    >
       <AccordionItem value="type">
         <AccordionTrigger className="hover:no-underline">
-          <p className="text-graffiti-500 text-lg">Tipo de vehículo</p>
+          <FilterTitle count={counts.type}>Tipo de vehículo</FilterTitle>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -48,7 +101,7 @@ export default function Accordion({
 
       <AccordionItem value="brand">
         <AccordionTrigger className="hover:no-underline">
-          <p className="text-graffiti-500 text-lg">Marcas</p>
+          <FilterTitle count={counts.brand}>Marcas</FilterTitle>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -59,7 +112,7 @@ export default function Accordion({
       {models.length !== 0 ? (
         <AccordionItem value="model">
           <AccordionTrigger className="hover:no-underline">
-            <p className="text-graffiti-500 text-lg">Modelos</p>
+            <FilterTitle count={counts.model}>Modelos</FilterTitle>
             <AccordionIndicator />
           </AccordionTrigger>
           <AccordionContent>
@@ -70,7 +123,7 @@ export default function Accordion({
 
       <AccordionItem value="condition">
         <AccordionTrigger className="hover:no-underline">
-          <p className="text-graffiti-500 text-lg">Condición</p>
+          <FilterTitle count={counts.condition}>Condición</FilterTitle>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -80,7 +133,7 @@ export default function Accordion({
 
       <AccordionItem value="transmission">
         <AccordionTrigger className="hover:no-underline">
-          <p className="text-graffiti-500 text-lg">Transmisión</p>
+          <FilterTitle count={counts.transmission}>Transmisión</FilterTitle>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>
@@ -90,7 +143,7 @@ export default function Accordion({
 
       <AccordionItem value="sort">
         <AccordionTrigger className="hover:no-underline">
-          <p className="text-graffiti-500 text-lg">Ordenar</p>
+          <FilterTitle count={0}>Ordenar</FilterTitle>
           <AccordionIndicator />
         </AccordionTrigger>
         <AccordionContent>

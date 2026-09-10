@@ -5,6 +5,7 @@ import { Slider } from "@/components/ui/slider-primitive";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import {
+  PRICE_MIN_DEFAULT,
   PRICE_SLIDER_MAX,
   readPriceRange,
   setPriceRange,
@@ -33,13 +34,28 @@ export default function PriceRange() {
 
   const handleChange = (e: number[]) => {
     setValue(e);
-    const params = setPriceRange(new URLSearchParams(searchParams), e[0], e[1]);
+    const base = new URLSearchParams(searchParams);
+    const isFullRange = e[0] <= PRICE_MIN_DEFAULT && e[1] >= PRICE_SLIDER_MAX;
+
+    // Rango completo (mínimo a máximo): no se escribe filtro de precio,
+    // se limpian minPrice/maxPrice de la URL.
+    if (isFullRange) {
+      base.delete("minPrice");
+      base.delete("maxPrice");
+      base.delete("page");
+      debouncedReplace(`${pathName}?${base.toString()}`);
+      return;
+    }
+
+    const params = setPriceRange(base, e[0], e[1]);
     debouncedReplace(`${pathName}?${params.toString()}`);
   };
 
   return (
-    <fieldset className="flex w-full max-w-md flex-col items-start justify-center gap-2 border-0 p-0 my-2">
-      <legend className="text-sm text-zinc-200 my-4">Rango de precios</legend>
+    <fieldset className="flex w-full max-w-md flex-col items-start gap-2 border-0 p-0 my-10">
+      <legend className="text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-200 m-0 p-0 mb-2">
+        Rango de precios
+      </legend>
       <Slider
         step={500}
         max={PRICE_SLIDER_MAX}
@@ -47,11 +63,11 @@ export default function PriceRange() {
         value={value}
         onValueChange={(e) => handleChange(e)}
         aria-label="Rango de precios"
-        className="max-w-md"
+        className="max-w-md cursor-pointer"
       />
       <p
         aria-live="polite"
-        className="text-zinc-300 font-medium text-xs mt-2 self-end"
+        className="text-zinc-300 font-medium text-xs self-end"
       >
         {Array.isArray(value) &&
           value
