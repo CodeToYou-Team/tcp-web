@@ -45,6 +45,61 @@ export const getBrands = async (): Promise<ListResult<Brand>> => {
   }
 };
 
+export const getAvailableBrands = async (): Promise<ListResult<Brand>> => {
+  try {
+    await connectMongo();
+
+    const available = await InventoryDB.distinct("brand", { enabled: true });
+
+    const items = await BrandDB.find({
+      enabled: true,
+      name: { $in: available },
+    }).sort("name");
+
+    return { ok: true, items: JSON.parse(JSON.stringify(items)) };
+  } catch (error: any) {
+    return {
+      ok: false,
+      items: [],
+      message: toActionError(error),
+    };
+  }
+};
+
+export const getAvailableModels = async (query?: {
+  brand?: string;
+}): Promise<ListResult<VehicleModel>> => {
+  try {
+    await connectMongo();
+
+    const inventoryFilter: { enabled: boolean; brand?: string } = {
+      enabled: true,
+    };
+    if (query?.brand !== undefined) {
+      inventoryFilter.brand = query.brand;
+    }
+
+    const available = await InventoryDB.distinct("model", inventoryFilter);
+
+    let queryDB: { enabled: boolean; brand?: string; name?: { $in: string[] } } =
+      { enabled: true, name: { $in: available } };
+
+    if (query?.brand !== undefined) {
+      queryDB.brand = query.brand;
+    }
+
+    const items = await ModelDB.find(queryDB).sort("name");
+
+    return { ok: true, items: JSON.parse(JSON.stringify(items)) };
+  } catch (error: any) {
+    return {
+      ok: false,
+      items: [],
+      message: toActionError(error),
+    };
+  }
+};
+
 export const getModels = async (query?: {
   brand?: string;
 }): Promise<ListResult<VehicleModel>> => {

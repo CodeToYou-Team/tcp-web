@@ -1,5 +1,5 @@
 import SidebarFilter from "@/components/ui/SidebarFilter";
-import { getBrands, getModels } from "@/app/lib/actions";
+import { getAvailableBrands, getAvailableModels } from "@/app/lib/actions";
 import { vehicleType, transmission, sort } from "@/lib/data";
 import { parseSearchParams } from "@/lib/catalog-query";
 import Catalog from "@/app/layouts/Catalog";
@@ -36,8 +36,8 @@ export default async function Catalogo({
   // Por request: las marcas cambian en el inventario y no deben cachearse a
   // nivel de proceso (antes se resolvían al importar el módulo).
   const [brands, models] = await Promise.all([
-    getBrands(),
-    getModels({ brand: searchParams["brand"] as string }),
+    getAvailableBrands(),
+    getAvailableModels({ brand: searchParams["brand"] as string }),
   ]);
 
   const query = parseSearchParams(searchParams);

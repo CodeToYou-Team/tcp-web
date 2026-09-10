@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { Checkbox as CheckboxPrimitive } from "@/components/ui/checkbox-primitive";
 import { Label } from "@/components/ui/Label";
 import {
@@ -68,15 +68,19 @@ export default function Checkbox({
     );
   };
 
-  if (dependency && isMulti) {
+  useEffect(() => {
+    if (!(dependency && isMulti)) return;
     const params = new URLSearchParams(searchParams);
-    if (params.has(filterType)) {
-      const values = options.map((x) => x.name);
-      const key = filterType as MultiFilterKey;
-      const pruned = (query[key] ?? []).filter((x) => values.includes(x));
-      replaceWith(setMultiValues(params, key, pruned));
+    if (!params.has(filterType)) return;
+
+    const values = options.map((x) => x.name);
+    const key = filterType as MultiFilterKey;
+    const pruned = (query[key] ?? []).filter((x) => values.includes(x));
+    const next = setMultiValues(params, key, pruned).toString();
+    if (next !== params.toString()) {
+      replace(`${pathName}?${next}`);
     }
-  }
+  }, [dependency, filterType, searchParams, query, options, pathName, replace]);
 
   return (
     <Suspense key={searchParams.toString()}>
