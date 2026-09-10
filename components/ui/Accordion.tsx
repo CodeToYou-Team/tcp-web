@@ -7,6 +7,7 @@ import {
   AccordionContent,
 } from "./accordion-primitive";
 import Checkbox from "./Checkbox";
+import { condition } from "@/lib/data";
 import type { Brand, FilterOption, VehicleModel } from "@/lib/types";
 
 interface AccordionProps {
@@ -66,6 +67,16 @@ export default function Accordion({
           </AccordionContent>
         </AccordionItem>
       ) : null}
+
+      <AccordionItem value="condition">
+        <AccordionTrigger className="hover:no-underline">
+          <p className="text-graffiti-500 text-lg">Condición</p>
+          <AccordionIndicator />
+        </AccordionTrigger>
+        <AccordionContent>
+          <Checkbox options={condition} filterType={"condition"} />
+        </AccordionContent>
+      </AccordionItem>
 
       <AccordionItem value="transmission">
         <AccordionTrigger className="hover:no-underline">

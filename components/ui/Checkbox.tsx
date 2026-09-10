@@ -24,6 +24,7 @@ const FILTER_LABELS: Record<string, string> = {
   type: "Selecciona un tipo de vehículo",
   model: "Selecciona un modelo",
   transmission: "Selecciona la transmisión",
+  condition: "Selecciona la condición",
 };
 
 export default function Checkbox({

@@ -24,6 +24,11 @@ export const transmission: FilterOption[] = [
   { name: "Sincrónico" },
 ];
 
+export const condition: FilterOption[] = [
+  { name: "Nuevo" },
+  { name: "Usado" },
+];
+
 export const sort: FilterOption[] = [
   { name: "Agregado recientemente" },
   { name: "Precio ascendente" },

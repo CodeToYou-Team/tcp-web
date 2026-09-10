@@ -44,6 +44,11 @@ describe("parseSearchParams", () => {
     expect(q.type).toEqual(["Carro"]);
   });
 
+  it("parsea la condición como lista", () => {
+    const q = parseSearchParams(new URLSearchParams("condition=Nuevo,Usado"));
+    expect(q.condition).toEqual(["Nuevo", "Usado"]);
+  });
+
   it("convierte precios y página a números", () => {
     const q = parseSearchParams(
       new URLSearchParams("minPrice=5000&maxPrice=1000000&page=3")
@@ -189,6 +194,24 @@ describe("buildCarFilter", () => {
       maxPrice: 20000,
     });
     expect(filter.$and).toEqual([{ price: { $lte: 20000 } }]);
+  });
+
+  it("traduce la condición a booleanos", () => {
+    const filter = buildCarFilter({
+      page: 1,
+      sort: "reciente",
+      condition: ["Nuevo", "Usado"],
+    });
+    expect(filter.$and).toEqual([{ condition: { $in: [true, false] } }]);
+  });
+
+  it("solo Nuevo filtra condition true", () => {
+    const filter = buildCarFilter({
+      page: 1,
+      sort: "reciente",
+      condition: ["Nuevo"],
+    });
+    expect(filter.$and).toEqual([{ condition: { $in: [true] } }]);
   });
 
   it("omite cláusulas de listas vacías", () => {

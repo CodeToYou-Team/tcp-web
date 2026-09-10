@@ -48,7 +48,10 @@ const SidebarFilter = ({
                 radius="sm"
                 className="flex  w-auto mt-6 font-semibold text-md bg-transparent text-graffiti-500"
               >
-                <ListFilter aria-hidden="true" className="text-graffiti-500 scale-85" />
+                <ListFilter
+                  aria-hidden="true"
+                  className="text-graffiti-500 scale-85"
+                />
                 Filtrar
               </Button>
             </SheetTrigger>
@@ -57,9 +60,6 @@ const SidebarFilter = ({
           <SheetContent className="bg-zinc-900 overflow-auto" side="left">
             <SheetHeader>
               <SheetTitle>Filtra tu búsqueda</SheetTitle>
-              <SheetDescription>
-                Ingresa los parámetros de filtrado
-              </SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">
               <Accordion

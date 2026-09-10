@@ -81,6 +81,7 @@ export interface CarsQuery {
   brand?: string[];
   model?: string[];
   transmission?: string[];
+  condition?: string[];
   minPrice?: number;
   maxPrice?: number;
 }

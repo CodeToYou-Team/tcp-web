@@ -29,7 +29,7 @@ export const SORT_CRITERIA_OBJ: Record<SortKey, Record<string, 1 | -1>> = {
   ascendente: { price: 1, _id: -1 },
 };
 
-export type MultiFilterKey = "type" | "brand" | "model" | "transmission";
+export type MultiFilterKey = "type" | "brand" | "model" | "transmission" | "condition";
 export type SingleFilterKey = "sort" | "search";
 
 const MULTI_KEYS: MultiFilterKey[] = [
@@ -37,6 +37,7 @@ const MULTI_KEYS: MultiFilterKey[] = [
   "brand",
   "model",
   "transmission",
+  "condition",
 ];
 
 type RawParams =
@@ -178,11 +179,26 @@ export function buildCarFilter(query: CarsQuery): FilterQuery<Vehicle> {
     ["brand", query.brand],
     ["model", query.model],
     ["transmission", query.transmission],
+    ["condition", query.condition],
   ];
 
   for (const [field, values] of facets) {
     if (values && values.length > 0) {
-      clauses.push({ [field]: { $in: values } });
+      if (field === "condition") {
+        const booleans = values
+          .map((v) => {
+            const value = v.toLowerCase();
+            if (value === "nuevo") return true;
+            if (value === "usado") return false;
+            return undefined;
+          })
+          .filter((v): v is boolean => v !== undefined);
+        if (booleans.length > 0) {
+          clauses.push({ condition: { $in: booleans } });
+        }
+      } else {
+        clauses.push({ [field]: { $in: values } });
+      }
     }
   }
 
