@@ -7,14 +7,14 @@ export default function DetailingHero() {
   return (
     <div className="relative px-4 py-28 sm:px-6 lg:flex lg:min-h-[80vh] lg:items-center lg:px-8">
       {/* Imagen de fondo */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 ml-48">
         <Image
           alt="Vehículo con acabado de detailing profesional"
-          width={1920}
-          height={1080}
+          width={1280}
+          height={720}
           sizes="100vw"
-          quality={60}
-          src="https://res.cloudinary.com/dkokeszcd/image/upload/c_fill,w_1920,h_1080,g_auto,f_auto,q_auto/v1727229180/tcp-web/2b264e1b-eabd-4b05-b8ff-583ebced3df9_cwlfpm.jpg"
+          quality={75}
+          src="https://res.cloudinary.com/dkokeszcd/image/upload/v1789131895/fe37591a-a729-4179-801d-936f92926cb9_c52ric.jpg"
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
           loading="eager"
           fetchPriority="high"

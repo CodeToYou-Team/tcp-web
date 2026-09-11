@@ -14,10 +14,10 @@ const Hero = () => {
           <Image
             alt=""
             width={1280}
-            height={960}
+            height={720}
             sizes="100vw"
-            quality={60}
-            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1788308790/4ea2dc77-5cc0-4ede-a22d-e210db994fa4_n4npyc.jpg"
+            quality={75}
+            src="https://res.cloudinary.com/dkokeszcd/image/upload/v1789131885/97afc1db-9dc0-479f-a6bb-a3d320b5b1ff_qmeu5i.jpg"
             className="absolute inset-0 w-full h-full object-cover"
             loading="eager"
             fetchPriority="high"
