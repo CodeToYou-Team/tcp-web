@@ -99,6 +99,16 @@ export default function Accordion({
         </AccordionContent>
       </AccordionItem>
 
+      <AccordionItem value="condition">
+        <AccordionTrigger className="hover:no-underline">
+          <FilterTitle count={counts.condition}>Condición</FilterTitle>
+          <AccordionIndicator />
+        </AccordionTrigger>
+        <AccordionContent>
+          <Checkbox options={condition} filterType={"condition"} />
+        </AccordionContent>
+      </AccordionItem>
+
       <AccordionItem value="brand">
         <AccordionTrigger className="hover:no-underline">
           <FilterTitle count={counts.brand}>Marcas</FilterTitle>
@@ -120,16 +130,6 @@ export default function Accordion({
           </AccordionContent>
         </AccordionItem>
       ) : null}
-
-      <AccordionItem value="condition">
-        <AccordionTrigger className="hover:no-underline">
-          <FilterTitle count={counts.condition}>Condición</FilterTitle>
-          <AccordionIndicator />
-        </AccordionTrigger>
-        <AccordionContent>
-          <Checkbox options={condition} filterType={"condition"} />
-        </AccordionContent>
-      </AccordionItem>
 
       <AccordionItem value="transmission">
         <AccordionTrigger className="hover:no-underline">
